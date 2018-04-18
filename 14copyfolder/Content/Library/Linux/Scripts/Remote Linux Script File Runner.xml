@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="6d8f5640-774b-484e-9227-b4ede8487a84">
+  <descriptionCdata><![CDATA[6d8f5640-774b-484e-9227-b4ede8487a84.1fae579b-86f9-4df1-b064-365203215379.prompt=Script file
+6d8f5640-774b-484e-9227-b4ede8487a84.665c91b0-c43f-4933-af3f-2b035f0bd019.prompt=Target Host
+6d8f5640-774b-484e-9227-b4ede8487a84.75b855e2-bd26-441b-af33-100f0ec91294.prompt=Target Host Password
+6d8f5640-774b-484e-9227-b4ede8487a84.c9ec4845-8024-4044-ad99-cf9eee7edb14.prompt=Target Host User name
+6d8f5640-774b-484e-9227-b4ede8487a84.description=<pre>\nThis operation allows you to execute a script file on a remote Linux machine. \n\nInputs\: \n    targetHost - Target host in which the file resides and on which it should to be executed. \n    scriptFile - File to be executed, which reside on remote host.\n    targetHostUserName - Target host user name. \n    targetHostPassword - Target host password. \n    timeout - Time in milliseconds to wait for the command to complete.\nDefault value\: 90000 ( 90 seconds ). \n\nResults\:\n    returnResult - This is the primary output. It contains the STDERR of the command if something went wrong or STDOUT otherwise. \n    returnCode - It contains the value 0 if the operation successfully completed or the value -1 otherwise.\n\nResponses\:\n    success - The script file was executed successfully and its output was retrieved.\n    failure - The script file could not be executed\n</pre>\n
+]]></descriptionCdata>
+  <annotation>6d8f5640-774b-484e-9227-b4ede8487a84.description</annotation>
+  <name>Remote Linux Script File Runner</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="665c91b0-c43f-4933-af3f-2b035f0bd019">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHost</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d8f5640-774b-484e-9227-b4ede8487a84.665c91b0-c43f-4933-af3f-2b035f0bd019.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c9ec4845-8024-4044-ad99-cf9eee7edb14">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHostUserName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d8f5640-774b-484e-9227-b4ede8487a84.c9ec4845-8024-4044-ad99-cf9eee7edb14.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="75b855e2-bd26-441b-af33-100f0ec91294">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHostPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d8f5640-774b-484e-9227-b4ede8487a84.75b855e2-bd26-441b-af33-100f0ec91294.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1fae579b-86f9-4df1-b064-365203215379">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>scriptFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d8f5640-774b-484e-9227-b4ede8487a84.1fae579b-86f9-4df1-b064-365203215379.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="caa84feb-9714-4bec-9f2c-beb3d3a1df61">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="cf850018-6949-46ad-b11f-e246192d6546">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="f897536c-8322-41b6-9c66-712de8e53359">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7b2b2666-75d7-481c-84b4-a3060de6c9a1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3decc4f7-f479-420e-99ad-675d7e10bc6e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="2a0039f0-42b3-49b0-9bb7-6ddba9f8a421">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="b3ce6cda-0ff7-4626-96c9-02ce7b48426c">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="3e0a14b0-2a17-463d-b177-78876dc7f7a0">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="418fe830-e8f9-46da-8a0a-6ef480c00228">
+    <baseIcon>unix_server.png</baseIcon>
+    <basePath>Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.linuxScriptRunner.RemoteLinuxScriptFileRunner</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

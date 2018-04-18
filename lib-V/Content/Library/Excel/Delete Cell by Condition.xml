@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="c6754441-16fe-4659-a303-5ff89c5618b7">
+  <descriptionCdata><![CDATA[c6754441-16fe-4659-a303-5ff89c5618b7.126067ab-1964-4fb8-8a4f-8c2786bd2b62.prompt=worksheetName\:
+c6754441-16fe-4659-a303-5ff89c5618b7.1891b274-640a-4126-a943-3c5babadc171.prompt=value\:
+c6754441-16fe-4659-a303-5ff89c5618b7.1c6ab53a-ec0a-4eeb-b25a-3571020a2580.prompt=value\:
+c6754441-16fe-4659-a303-5ff89c5618b7.29153cf0-c773-4c87-bcee-4ab1778a1ae0.prompt=ExcelFileName\:
+c6754441-16fe-4659-a303-5ff89c5618b7.32f99858-4d3e-4bcb-b8dc-8fc636c39646.prompt=columnIndextoDelete\:
+c6754441-16fe-4659-a303-5ff89c5618b7.340810ba-187f-4830-a88f-1af604cfbc19.prompt=excelFileName\:
+c6754441-16fe-4659-a303-5ff89c5618b7.3f372495-c9a9-4710-9ee9-619858a8403e.prompt=columnIndextoQuery\:
+c6754441-16fe-4659-a303-5ff89c5618b7.595a57dc-c361-4100-aa32-c1a8bd39415b.prompt=columnIndextoQuery\:
+c6754441-16fe-4659-a303-5ff89c5618b7.68d4cdc6-a5ef-47d2-b440-42f09a6abd33.description=<pre>\nRetrieves row indexes if the row satisfies the specified condition in an Excel document.\nXLS, XLSX and XLSM formats are supported.  \n\nInputs\: \n    excelFileName - The absolute path to the new Excel document.\nExamples\: c\:\\temp\\test.xls\n    worksheetName - The name of Excel worksheet.\nDefault value\: Sheet1\n    hasHeader - If Yes, then the first row of the document is expected to be the header row.\nValid values\: yes, no\nDefault value\: yes\n    firstRowIndex - The index of the first row in the Excel worksheet, including the header row.\nDefault value\: 0\n    columnIndextoQuery - The column index to search in.\n    operator - The math operators. \nValid values\: \=\=, \!\= for string comparison; \=\=, \!\=, <,<\=,>,>\= for numeric comparison.\nDefault vaue\: \=\=\n    value - The value to search in the specified column. If left blank, it means an empty value.\n\nResults\: \n    returnResult - This is the primary result. Return a list of row indexes that satisfied the specified condition.\n    rowsCount - The number of the row indexes returned.\n\nResponses\: \n    success - The row indexes were retrieved successfully. \n    failure - Failed to retrieve the row indexes.\n\nNotes\:\n1. All the index inputs are 0 based.\n2. Observed that in some Excel worksheet, the first couple of rows are used for title. So added firstRowIndex input.\n3. Value in date type has to be in the format of "YYYY/MM/DD", "YYYY/DD/MM HH\:MM\:SS" or "YYYY/MM/DD HH\:MM".\n4. Value in time type has to be in the format of "HH\:MM\:SS" or "HH\:MM".\n5. If there's any merged region existed in the worksheet, the cells in the merged region are not considered except the top left cell.\n</pre>
+c6754441-16fe-4659-a303-5ff89c5618b7.69ac46bb-cc20-455e-83e6-26eeb2e619c4.description=<pre>Checks if a number or word is greater than another number or word. Word comparison is case-sensitive in alphabetical order.\n\nInputs\:\nvalue1 - The first value.\nvalue2 - The second value.\n\nReturns\:\nvalue1 > value2\n\nResponses\:\nsuccess - The boolean operation was evaluated to true.\nfailure - Something went wrong or the boolean operation returned false.\n</pre>
+c6754441-16fe-4659-a303-5ff89c5618b7.71236f5d-def4-4bc8-b4c0-a3316372aa78.prompt=Enter a value for value1
+c6754441-16fe-4659-a303-5ff89c5618b7.80606e86-dcfe-4ee2-b821-e7e746612d77.prompt=firstRowIndex\:
+c6754441-16fe-4659-a303-5ff89c5618b7.9966e4ba-0d26-4e1d-a943-09cf6101140b.prompt=excelFileName\:
+c6754441-16fe-4659-a303-5ff89c5618b7.a2f99b9a-f1ce-4943-8feb-cad45746428b.prompt=worksheetName\:
+c6754441-16fe-4659-a303-5ff89c5618b7.aded1f5d-00c0-47bb-ad53-6e643506a69f.prompt=firstRowIndex\:
+c6754441-16fe-4659-a303-5ff89c5618b7.b721d2fe-b552-4c09-9294-a392f70c0910.prompt=operator\:
+c6754441-16fe-4659-a303-5ff89c5618b7.cf5d0496-952a-444e-8aca-c76434010653.prompt=hasHeader\:
+c6754441-16fe-4659-a303-5ff89c5618b7.d518bac9-598e-48bc-a52d-b844a649034d.prompt=rowIndex\:
+c6754441-16fe-4659-a303-5ff89c5618b7.d5266fe5-b319-4dc5-b85d-07d198c3819c.description=<pre>\nDeletes the cell with specified row index and column index in an Excel document. \nXLS, XLSX and XLSM formats are supported. \n\nInputs\:\n    excelFileName - The absolute path to the new Excel document.\nExamples\: c\:\\temp\\test.xls\n    worksheetName - The name of Excel worksheet. \nDefault value\: Sheet1 \n    rowIndex - A list of row indexes.\nExamples\: 1\:3, 10, 15\:20,25\nDefault value\: from the index of the first row to the index of the last row of the Excel worksheet.\n    columnIndex - A list of column indexes\nExamples\: 1\:3, 10, 15\:20,25\nDefault value\: from 0 to the index of the last column in the Excel worksheet.\n\nResults\:\n    returnResult - This is the primary output. Returns the number of rows that were affected.\n\nResponses\:\n    success - The cell data specified was deleted successfully.\n    failure - Failed to delete the cell data specified.\n\nNotes\:\n1. All the index inputs are 0 based.\n2. For the indexes in rowIndex input that is less than the first data row index or greater than the last row index in the worksheet, the operation trims those row indexes.\n3. For the indexes in columnIndex input that is less than 0 or greater than the last column index in a row, the operation trims those column indexes.\n4. If there's any change in the worksheet, all values of formula type cells are updated.\n</pre>
+c6754441-16fe-4659-a303-5ff89c5618b7.description=<pre>\nDeletes cell data if the cells satisfies the specified condition in an Excel document.\nXLS, XLSX and XLSM formats are supported. \n\nInputs\: \n    excelFileName - The absolute path to the new Excel document.\nExamples\: c\:\\temp\\test.xls\n    worksheetName - The name of Excel worksheet. \nDefault value\: Sheet1\n    hasHeader - If Yes, then the first row of the document is expected to be the header row. \nValid values\: yes, no\nDefault value\: Yes\n    firstRowIndex - The index of the first row in the Excel worksheet, including the header row.\nDefault value\: 0\n    columnIndextoQuery - The column index to search in.\n    operator - The math operators. \nValid values\: \=\=, \!\= for string values; \=\=, \!\=, <,<\=,>,>\= for numeric values.\nDefault value\: \=\=\n    value - The value to search in the specified column. If left blank, it means an empty value.\n    columnIndextoDelete - A list of column indexes to delete cell data.\nExamples\: 1\:3, 10, 15\:20,25\nDefault value\: from 0 to the index of the last column in the Excel worksheet.\n\nResponses\:\n    success - The flow completed successfully.\n    failure - The flow completed unsuccessfully.\n    no row index returned - No cell satisfies the specified condtion. \n\nNotes\:\n1. If there's any change in the worksheet, all values of formula type cells are updated.\n2. Here is a complete example for the operation in the case to delete cells in column index 0 in those rows that satisfy the condition\: column index 1\= 1\nexcelFileName\: c\:\\test.xls\nworksheetName\:\nhasHeader\:\nfirstRowIndex\:\ncolumnIndextoQuery\: 1\noperator\: \=\=\nvalue\: 1\ncolumnIndextoDelete\: 0\n</pre>   
+c6754441-16fe-4659-a303-5ff89c5618b7.df922f84-59aa-4672-956b-6462b913cdc1.prompt=hasHeader\:
+c6754441-16fe-4659-a303-5ff89c5618b7.ead78026-732f-4d07-b305-0da61aa28115.prompt=operator\:
+]]></descriptionCdata>
+  <annotation>c6754441-16fe-4659-a303-5ff89c5618b7.description</annotation>
+  <name>Delete Cell by Condition</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="340810ba-187f-4830-a88f-1af604cfbc19">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>excelFileName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.340810ba-187f-4830-a88f-1af604cfbc19.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a2f99b9a-f1ce-4943-8feb-cad45746428b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>worksheetName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.a2f99b9a-f1ce-4943-8feb-cad45746428b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cf5d0496-952a-444e-8aca-c76434010653">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>hasHeader</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.cf5d0496-952a-444e-8aca-c76434010653.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>209c1838-2205-48b1-b47a-a99adccb775b</refId>
+        <refName>Yes No</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aded1f5d-00c0-47bb-ad53-6e643506a69f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>firstRowIndex</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.aded1f5d-00c0-47bb-ad53-6e643506a69f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="595a57dc-c361-4100-aa32-c1a8bd39415b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnIndextoQuery</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.595a57dc-c361-4100-aa32-c1a8bd39415b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b721d2fe-b552-4c09-9294-a392f70c0910">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>operator</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.b721d2fe-b552-4c09-9294-a392f70c0910.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>dc21cd71-622a-4be6-9a92-6ae1c40bcfb5</refId>
+        <refName>Math operator</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1891b274-640a-4126-a943-3c5babadc171">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>value</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.1891b274-640a-4126-a943-3c5babadc171.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="32f99858-4d3e-4bcb-b8dc-8fc636c39646">
+      <annotation></annotation>
+      <toContextKey>columnIndex</toContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnIndextoDelete</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.32f99858-4d3e-4bcb-b8dc-8fc636c39646.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="41666386-66bd-447f-9b9c-c70b2b4f69bf">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="806278b4-6228-4f67-8879-1e4251db0a18">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="af5f8201-c52f-43ad-8709-a46a3976260b">
+      <annotation></annotation>
+      <name>no row index returned</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="546cd639-210c-4347-ba64-1ddc2795448b">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="0e3f5a1d-742f-4238-8dab-88ae84ee612d">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="68d4cdc6-a5ef-47d2-b440-42f09a6abd33">
+      <annotation>c6754441-16fe-4659-a303-5ff89c5618b7.68d4cdc6-a5ef-47d2-b440-42f09a6abd33.description</annotation>
+      <name>Get Row Index by Condition</name>
+      <bounds>
+        <x>39.0</x>
+        <y>195.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="9966e4ba-0d26-4e1d-a943-09cf6101140b">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>excelFileName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.9966e4ba-0d26-4e1d-a943-09cf6101140b.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="126067ab-1964-4fb8-8a4f-8c2786bd2b62">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>worksheetName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.126067ab-1964-4fb8-8a4f-8c2786bd2b62.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="df922f84-59aa-4672-956b-6462b913cdc1">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>hasHeader</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.df922f84-59aa-4672-956b-6462b913cdc1.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <link>
+            <refId>209c1838-2205-48b1-b47a-a99adccb775b</refId>
+            <refName>Yes No</refName>
+          </link>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="80606e86-dcfe-4ee2-b821-e7e746612d77">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>firstRowIndex</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.80606e86-dcfe-4ee2-b821-e7e746612d77.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="3f372495-c9a9-4710-9ee9-619858a8403e">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>columnIndextoQuery</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.3f372495-c9a9-4710-9ee9-619858a8403e.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="ead78026-732f-4d07-b305-0da61aa28115">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>operator</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.ead78026-732f-4d07-b305-0da61aa28115.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <link>
+            <refId>dc21cd71-622a-4be6-9a92-6ae1c40bcfb5</refId>
+            <refName>Math operator</refName>
+          </link>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="1c6ab53a-ec0a-4eeb-b25a-3571020a2580">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>value</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.1c6ab53a-ec0a-4eeb-b25a-3571020a2580.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="3b393123-500c-4d8c-b66b-4db17aa7214b">
+          <annotation></annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5df34ec4-3e77-42c9-8395-61d4ca64bdd4</refId>
+          </destination>
+          <source>
+            <refId>68d4cdc6-a5ef-47d2-b440-42f09a6abd33</refId>
+          </source>
+          <positions>
+            <point>
+              <x>101.0</x>
+              <y>35.0</y>
+            </point>
+            <point>
+              <x>195.0</x>
+              <y>239.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="05f7594b-0ff4-4b23-90ab-fbb140aac321">
+          <annotation></annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>69ac46bb-cc20-455e-83e6-26eeb2e619c4</refId>
+          </destination>
+          <source>
+            <refId>68d4cdc6-a5ef-47d2-b440-42f09a6abd33</refId>
+          </source>
+          <positions>
+            <point>
+              <x>101.0</x>
+              <y>35.0</y>
+            </point>
+            <point>
+              <x>244.0</x>
+              <y>42.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>c7530353-4850-45f5-94f4-5217c5654a63</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="3f478249-02a4-4937-aae9-00b266980203">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>rowIndex</contextKey>
+          <expression id="f2d08735-eaea-4d46-bd16-91f25f8dc58b">
+            <annotation></annotation>
+            <name>Result Field: returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="74b7ea69-3faa-4e60-849b-717b6bc09663">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>rowsCount</contextKey>
+          <expression id="1ad6ca07-bff4-4935-a225-88bd76fb75b8">
+            <annotation></annotation>
+            <name>Result Field: rowsCount</name>
+            <fieldName>rowsCount</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="69ac46bb-cc20-455e-83e6-26eeb2e619c4">
+      <annotation>c6754441-16fe-4659-a303-5ff89c5618b7.69ac46bb-cc20-455e-83e6-26eeb2e619c4.description</annotation>
+      <name>Is rowsCount Greater Than 0</name>
+      <bounds>
+        <x>220.0</x>
+        <y>195.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="71236f5d-def4-4bc8-b4c0-a3316372aa78">
+          <annotation></annotation>
+          <fromContextKey>rowsCount</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>value1</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.71236f5d-def4-4bc8-b4c0-a3316372aa78.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="80949266-d25d-4c34-b97e-32a0c3b81d08">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>value2</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>0</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="b3d89bc3-e7e7-4036-8f2b-27a5d681a0ed">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>operation</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>&gt;</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="4bc3258f-a69d-4cc8-bfa8-e46a226daddb">
+          <annotation></annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d5266fe5-b319-4dc5-b85d-07d198c3819c</refId>
+          </destination>
+          <source>
+            <refId>69ac46bb-cc20-455e-83e6-26eeb2e619c4</refId>
+          </source>
+          <positions>
+            <point>
+              <x>244.0</x>
+              <y>42.0</y>
+            </point>
+            <point>
+              <x>437.0</x>
+              <y>48.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="34e3db5c-308b-4875-bfaf-5a4da5987c1d">
+          <annotation></annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>91c23198-7de0-4c52-875f-2d461a048a78</refId>
+          </destination>
+          <source>
+            <refId>69ac46bb-cc20-455e-83e6-26eeb2e619c4</refId>
+          </source>
+          <positions>
+            <point>
+              <x>282.0</x>
+              <y>229.0</y>
+            </point>
+            <point>
+              <x>270.0</x>
+              <y>438.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>6156c7f6-a5be-4045-be00-0f2fc778290e</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="d5266fe5-b319-4dc5-b85d-07d198c3819c">
+      <annotation>c6754441-16fe-4659-a303-5ff89c5618b7.d5266fe5-b319-4dc5-b85d-07d198c3819c.description</annotation>
+      <name>Delete Cell</name>
+      <bounds>
+        <x>436.0</x>
+        <y>195.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="29153cf0-c773-4c87-bcee-4ab1778a1ae0">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>excelFileName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.29153cf0-c773-4c87-bcee-4ab1778a1ae0.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="a4eb4515-1c74-4dbd-aff3-b02a35cb5e41">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>worksheetName</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="d518bac9-598e-48bc-a52d-b844a649034d">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>rowIndex</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>c6754441-16fe-4659-a303-5ff89c5618b7.d518bac9-598e-48bc-a52d-b844a649034d.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="bdd50620-daf3-4d3d-91d9-71d4d4dd2368">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>columnIndex</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="0edff4bc-c62d-4a1f-b512-2f592f4a42f5">
+          <annotation></annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>9d1feda7-fcc7-4f41-96a3-35f8fc255c65</refId>
+          </destination>
+          <source>
+            <refId>d5266fe5-b319-4dc5-b85d-07d198c3819c</refId>
+          </source>
+          <positions>
+            <point>
+              <x>304.0</x>
+              <y>42.0</y>
+            </point>
+            <point>
+              <x>514.0</x>
+              <y>38.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="cd311c83-56ce-4c5e-9e54-927ac6c94d71">
+          <annotation></annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5df34ec4-3e77-42c9-8395-61d4ca64bdd4</refId>
+          </destination>
+          <source>
+            <refId>d5266fe5-b319-4dc5-b85d-07d198c3819c</refId>
+          </source>
+          <positions>
+            <point>
+              <x>442.0</x>
+              <y>196.0</y>
+            </point>
+            <point>
+              <x>319.0</x>
+              <y>55.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>cb289c55-249d-49b4-9236-a9d936e859f2</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="91c23198-7de0-4c52-875f-2d461a048a78">
+      <annotation></annotation>
+      <name>Resolved : no row index returned</name>
+      <bounds>
+        <x>220.0</x>
+        <y>404.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="260fe519-e207-40e4-a512-ada8cd701f95">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>no row index returned</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>91c23198-7de0-4c52-875f-2d461a048a78</refId>
+          </destination>
+          <source>
+            <refId>91c23198-7de0-4c52-875f-2d461a048a78</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="9d1feda7-fcc7-4f41-96a3-35f8fc255c65">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>436.0</x>
+        <y>404.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="564eb1d1-0b73-4b8b-88dc-edb1e6e3ff61">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>9d1feda7-fcc7-4f41-96a3-35f8fc255c65</refId>
+          </destination>
+          <source>
+            <refId>9d1feda7-fcc7-4f41-96a3-35f8fc255c65</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="5df34ec4-3e77-42c9-8395-61d4ca64bdd4">
+      <annotation></annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>220.0</x>
+        <y>7.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="afd8ad53-ec1d-4f39-b916-2f6696b2b127">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5df34ec4-3e77-42c9-8395-61d4ca64bdd4</refId>
+          </destination>
+          <source>
+            <refId>5df34ec4-3e77-42c9-8395-61d4ca64bdd4</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>68d4cdc6-a5ef-47d2-b440-42f09a6abd33</startSteps>
+</flow>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1">
+  <descriptionCdata><![CDATA[c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.86d7d91a-34f0-4968-99ce-8ab3d30dc4c9.prompt=Source\:
+c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.c5183aac-50c0-4c02-89fd-23b705b15022.prompt=Destination\:
+c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.description=<pre>Copies a file or directory\n\nNote\: If executed on a Windows RAS the timestamp of the source file will not be preserved on the destination file.  This operation will behave like a Unix file system copy.  If you need the timestamp of the file retained during a copy, please use the Windows Only/FS Copy operation.\n\nInput Parameters\:\nsource - source file or directory\ndestination - destination file or directory\noverwrite - if false the operation will fail if a file with the same name already exists in the destination path\n\nResponses\:\nsuccess - copied successfully\nfailure - failed to copy\n</pre>
+]]></descriptionCdata>
+  <annotation>c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.description</annotation>
+  <name>FS Copy</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="86d7d91a-34f0-4968-99ce-8ab3d30dc4c9">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.86d7d91a-34f0-4968-99ce-8ab3d30dc4c9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c5183aac-50c0-4c02-89fd-23b705b15022">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>destination</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c53ce2bf-0b7d-415b-abe3-85e1d3ea81a1.c5183aac-50c0-4c02-89fd-23b705b15022.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c47ddfc8-e1ad-4134-a8d3-6d9ba6cf8e8e">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>overwrite</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>362bc113-e130-45d5-be90-832d5de87730</refId>
+        <refName>Boolean</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="433f82e1-c305-495a-ae4b-befa6890c3dd">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="aebb8733-d2c9-4190-b961-1accaec599b6">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3d9408cf-4c73-4245-80a3-d58029108577">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3e127458-620c-41f6-8516-22c8e40a3bf7">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="4bb6e851-2f37-43cd-ba56-f6f01022c781">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c95f5d83-4891-42ff-aa99-b6a94e60522b">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a67f2df1-ff18-4473-ac2d-229acb294500">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="475b6146-e49a-462e-a57c-461f05b6ca7b">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="478aa782-cc02-4ab4-8ffa-12749cdd457f">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-fs-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.filesystem.FSCopy</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

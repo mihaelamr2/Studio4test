@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="f97e04b1-2cd5-40fe-b855-aeb1ff24d3cf">
+  <descriptionCdata><![CDATA[f97e04b1-2cd5-40fe-b855-aeb1ff24d3cf.description=<pre>This operation is used to retrieve a value from a list. When the index of an element from a list is known, this operation can be used to extract the element.\n\nInputs\:\n    list - A list to get the value from.\n    delimiter - The delimiter that separates values in the list.\nDefault value\: ','\n    index - The index of the value (starting at 0) to retrieve from the list.\nValid values\: an integer, end (for the last element), end-1 (for the second to last element)\n\nResults\:\n    returnResult - This is the primary output. It contains the value found at the specified index in the list, if the value specified for the "index" input field is positive and less than the size of the list. Otherwise, it contains the value specified for "index".\n\nResponses\:\n     success - The operation completed as stated in the description.\n     failure - The operation completed unsuccessfully.\n</pre>
+]]></descriptionCdata>
+  <annotation>f97e04b1-2cd5-40fe-b855-aeb1ff24d3cf.description</annotation>
+  <name>List Item Grabber</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="dc7989b7-ad1c-4ce2-921b-207ace5a596e">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="63732cf2-81ea-4c87-8cd9-e6268db2999c">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="6f94feee-aa49-4ce3-8bce-795425c42344">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>index</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="0e7a0723-e828-4f70-985e-d2e07d96655c">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="b1974273-cbe2-4688-beed-453ec904d4c3">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="901c71e4-6342-4e19-b0ae-171715be05f9">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="b6be6c41-f898-4664-9def-959cf9176a84">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="87f965e8-1d9c-4522-8903-03b521aee284">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="744624c2-03de-49f2-b8d1-9ba6fca6ab6c">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="cd83af21-e6ef-41cc-a97d-dc1009349b61">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="bab06c78-6729-4102-8b57-bb9afd62877f">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="9df3c405-8811-471e-a998-162422e1f4bb">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>score-actions-base-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>List Item Grabber</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

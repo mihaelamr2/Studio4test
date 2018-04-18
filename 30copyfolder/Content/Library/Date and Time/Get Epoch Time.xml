@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="8491c3c0-7c46-4e51-8d4e-c58826975a4b">
+  <descriptionCdata><![CDATA[8491c3c0-7c46-4e51-8d4e-c58826975a4b.description=<pre>\nChecks the current date and time, and returns its representation as an Epoch (Unix) timestamp.\n\nResults\:\n    returnResult - Current date and time in timestamp format.\n\nResponses\:\n    success - Date/time retrieved successfully.\n    failure - Date/time could not be retrieved.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>8491c3c0-7c46-4e51-8d4e-c58826975a4b.description</annotation>
+  <name>Get Epoch Time</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="59de61ac-1498-4fba-983a-e767792b7de5">
+    <annotation></annotation>
+    <name>Operation Get Epoch Time (9f84255c-6a12-4b59-8971-49a3771cad48)</name>
+    <script>scriptletResponse = &quot;failure&quot;;
+try
+{
+    var currentDateAndTime = new java.util.Date();
+    var unixTimestamp = Math.floor(currentDateAndTime.getTime() / 1000);
+    scriptletResult = &quot;&quot; + unixTimestamp;
+    scriptletResponse = &quot;success&quot;;
+} catch (e) {
+    scriptletResult = &quot;&quot; + e;
+    scriptletResponse = &quot;failure&quot;;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d2d14cc2-568d-44e8-aaec-a8170fc5d9ca">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="99414df3-fdad-4207-8c75-b9cae88926ce">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="9282976f-10e1-4e50-a2f5-c6ad99293937">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="50713522-c935-44d9-bf67-f62c112cd826">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="445a3cfa-2e1f-4654-a45a-85570b3f94b6">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

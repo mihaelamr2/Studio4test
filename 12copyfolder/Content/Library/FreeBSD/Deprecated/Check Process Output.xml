@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="42ec7ab6-893b-4eea-a5bd-f0d778bca9ed">
+  <descriptionCdata><![CDATA[42ec7ab6-893b-4eea-a5bd-f0d778bca9ed.description=<pre>\nChecks to see if all elements of one list are contained in another. Used for checking if all processes in a given list are running.\n\nInputs\:\n\nlist\: processes that are running, the output of Get Process List\nnecessary\: processes that should be running.\n\n\nResponses\:\n\nall running\: All required processes are running.\none or more missing\: one or more required processes are not running.\nfailure - something went wrong.\n      \nResult\:\n\n   A human readable message about what processes are missing.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>42ec7ab6-893b-4eea-a5bd-f0d778bca9ed.description</annotation>
+  <name>Check Process Output</name>
+  <categories>
+    <category>
+      <refId>7e07e230-3a26-4cab-8e4f-9c20427f3f3d</refId>
+      <refName>Linux OS</refName>
+    </category>
+  </categories>
+  <inputs>
+    <userInputBinding id="0a332c60-2a5f-40ad-a406-8b1b278e257d">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a5ff0278-2b9a-4ab4-94be-2777b661cc67">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>necessary</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3d4d0e99-ca8a-46d3-ae14-6a5e0d6be87e">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${list}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="fda3b18f-f112-4b0a-8c0e-7594708123a8">
+    <annotation></annotation>
+    <name>Operation Check Process Output (4e7c0454-cb1c-4b6d-bb17-191f1e05181f)</name>
+    <script>// set up defaults
+scriptletResponse = &quot;all running&quot;;
+scriptletResult = &quot;&quot;;
+
+if (necessary != null) {
+
+   // assume list is delimited by comma, pipe, space or newline
+   processes = necessary.split(/,|\||\s|\n/);
+   if (processes != null) {
+      for (i = 0; i &lt; 10000; i++) {
+
+         if (processes[i] == null) break;
+         try {
+         if (list.match(processes[i]) == null) {
+            // we have a missing process
+            scriptletResponse = &quot;one or more missing&quot;;
+            scriptletResult += processes[i] + &quot; is missing\n&quot;; 		
+         }  
+         }
+         catch(e){
+	 scriptletResponse = &quot;failure&quot;;
+	 scriptletResult = e; 	
+         }			
+      }
+   }
+ }
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="04bdcd00-8f0a-4f45-adc5-eecd4bb883c7">
+      <annotation></annotation>
+      <name>all running</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="f087f10b-c496-485a-bf92-9e4e7755e69c">
+      <annotation></annotation>
+      <name>one or more missing</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="68eb6c21-3531-4cdf-ac74-0564b98da435">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="495ccb38-cd37-497c-be5c-38a965510330">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="dc861315-162d-43a0-bba1-8d9ca267655d">
+    <baseIcon>thread.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="fe426a42-0fb1-4c7b-99d1-30dba4856975">
+        <baseIcon>send.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

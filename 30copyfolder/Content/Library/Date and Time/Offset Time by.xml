@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="5aedbd5f-5621-4151-8f73-d0da9392a2c7">
+  <descriptionCdata><![CDATA[5aedbd5f-5621-4151-8f73-d0da9392a2c7.description=<pre>\nChanges the time represented by a date by the specified number of seconds. If locale is specified, it will return the date and time string based on the locale. Otherwise, default locale will be used.\n\nInputs\:\n    date - The date and time to modify, formatted as provided by Get Current Date and Time.\n    offset - The number of seconds to change date by.\n    localeLang - The locale language for date and time string. \nExamples\:  en, ja, unix.\n    localeCountry - The locale country for date and time string. For example, US or JP. If localeLang is not specified, this input will be ingored.\n\nreturns\:\n    A new date and time, formatted the same as the input.\n\nResponses\:\n    success - The operation completed successfully.\n    failure - Something went wrong.\n\nNotes.\n    1. If you need to offset a UNIX date, use the value 'unix' for localeLang. In this case, the localeCountry input will be ignored and the result of the operation will be in UNIX format.\n</pre>
+]]></descriptionCdata>
+  <annotation>5aedbd5f-5621-4151-8f73-d0da9392a2c7.description</annotation>
+  <name>Offset Time by</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c114573b-6342-48fe-87cc-dacefdf7e33b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>date</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ca291e41-100d-4cd5-9822-249d4dd710fa">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>offset</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6a0fcb07-fe8d-4057-bbf5-66f37a229317">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>localeLang</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c0b142e2-6cd5-4838-be6b-79628e853dfe">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>localeCountry</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="206094cc-9a41-4bd1-ad16-8abf1f0e0ca3">
+    <annotation></annotation>
+    <name>Operation Offset Time by (75876803-1a33-4e8b-aa67-4008c6b24c02)</name>
+    <script>try{
+	var dateFormatter;// = java.text.DateFormat.getDateTimeInstance()
+	var numFormatter = java.text.NumberFormat.getInstance()
+	var time;// = dateFormatter.parse(date);
+	var ioffset = numFormatter.parse(offset);
+	
+	if(typeof localeLang != &apos;undefined&apos; &amp;&amp; null != localeLang &amp;&amp; localeLang.toLowerCase() == &quot;unix&quot;) {
+		var unixTimestamp = parseInt(date);
+		if(!isNaN(unixTimestamp)) {
+			var offsetValue = parseInt(offset);
+			var offsetTimestamp = unixTimestamp + offsetValue;
+			scriptletResult = &quot;&quot; + offsetTimestamp; 
+			scriptletResponse = &quot;success&quot;;
+		}
+		else {
+		throw &quot;The provided value for the &apos;date&apos; input is not valid!&quot;;
+		}
+	}
+	else 
+	{
+		if(typeof localeLang != &apos;undefined&apos; &amp;&amp; null != localeLang &amp;&amp; localeLang.length &gt;0)
+		{
+			 if(typeof localeCountry != &apos;undefined&apos; &amp;&amp; null != localeCountry &amp;&amp; localeCountry.length &gt;0)
+			 {
+				  oLocale = new java.util.Locale(localeLang, localeCountry); //for exsample US or JP
+			 }
+			 else //only has language, no country
+			 {
+				  oLocale = new java.util.Locale(localeLang);//for example en or ja
+			 }
+			 dateFormatter = new java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.DEFAULT, java.text.DateFormat.DEFAULT, oLocale);
+		}
+		else //use whatever default is
+		{
+			 dateFormatter = new java.text.DateFormat.getDateTimeInstance();
+		}
+		
+		time = dateFormatter.parse(date);
+		ioffset *= 1000;
+		time.setTime(time.getTime()+ioffset);
+		scriptletResult = &quot;&quot;+dateFormatter.format(time); 
+		scriptletResponse = &quot;success&quot;;
+	}
+}
+catch (e){
+scriptletResult=&quot;&quot;+e.toString();
+scriptletResponse=&quot;failure&quot;;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="ddb26532-fc2f-4baa-b638-5d9668a4b691">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="73195231-68d4-4d43-8b4d-8939464f5188">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a5cfd289-75dd-4f6e-b702-0c37ba21e450">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="eff7a7b2-c6de-4579-ac0a-2112c82c6dc3">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="7b14a989-ba11-430d-90c2-c7a6ab528c7d">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

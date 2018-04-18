@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="fcbcd3dc-f19b-42f9-bd33-55337926f098">
+  <descriptionCdata><![CDATA[fcbcd3dc-f19b-42f9-bd33-55337926f098.036a2ab1-2a2a-4c4e-aaa0-df0afa925005.prompt=Number of entries to retrieve\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.64b375d1-21fb-4728-a6b4-8265cc5cc3f3.prompt=Severity of the event\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.8bf58707-ce99-4d15-a170-9452965d4c36.prompt=Log message\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.9154e556-4700-43ee-9134-eec7b17e4bff.prompt=Use SSL?
+fcbcd3dc-f19b-42f9-bd33-55337926f098.a43b4af1-f599-47ab-bcb8-94e275e64018.prompt=Host\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.c9ef64ab-ca9b-4c87-9bbf-8c5902e606d5.prompt=Username\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.cb3e842a-bbf9-4ae2-9145-18daccd8f52f.prompt=Name of the application\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.d1b59778-897b-416b-9c10-cfd42e80a636.prompt=Output Format\: 
+fcbcd3dc-f19b-42f9-bd33-55337926f098.de04d4ab-3710-44e7-b6a7-10f2d7b61344.prompt=Password\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.description=<pre>Queries the event log entries in the target Windows computer by type, event id, source, severity or message. This operation works only on classic event logs.\n\nRemoting must be configured on a remote computer before executing the operation on the remote computer. Go to http\://technet.microsoft.com/en-us/magazine/ff700227.aspx for instructions on how to enable remoting on a Windows computer. \n\nInputs\:\nhost\t- The host name or the IP address of the target Windows computer.\nusername \t- Username to use to connect to the target computer. \npassword \t- Password of the user.\ntype\t- The type of event log (Application, System etc).\nnumber\t- The number of entries to retrieve from the event log.\nid\t- Id of the event.\nsource    \t- Name of the application/service that created the log.\nseverity \t- Level of log severity, usually Error, Information or Warning. It can also be SecurityAudit or FailureAudit for Security logs.\nmessage \t- The filter that is applied over the result of the query. \nssl         \t- Whether SSL should be used while invoking the script remotely. This input defaults to false, and is ignored for local script execution. If SSL is not available on the port used for the operation, the operation will fail.\noutputFormat   - The format for the output. Valid values \: table, list, custom, wide, table -autosize, table -wrap, table -autosize -wrap.\n\nResponses\:\nsuccess\t - Operation completed successfully.\nfailure\t - Something went wrong.\n\nResult\:\nThe return code of the operation.\n\nExtra Results\:\nreturnResult\t- The raw result of the operation.\nexception\t- The error message if something went wrong.\n\nNOTE\: \n1. When inputs for 'number' and 'message' are given, the operation first retrieves the 'number' of log entries and then applies 'message' filter on the query result. This operation does not retrieve the 'number' of log entries that contains the value of 'message' in the log entry.\n\n2. If the target computer is not present in the list of Trusted Hosts in WS-Management of the RAS host, the operation may fail when using the target computer's system account as user credentials.\n</pre>
+fcbcd3dc-f19b-42f9-bd33-55337926f098.f60ac33f-30c8-493d-8023-97912f517c04.prompt=Type of event log\:
+fcbcd3dc-f19b-42f9-bd33-55337926f098.fb52f7b1-6275-4779-9675-ca63bc57acf6.prompt=Event id\:
+]]></descriptionCdata>
+  <annotation>fcbcd3dc-f19b-42f9-bd33-55337926f098.description</annotation>
+  <name>Get Event Log</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a43b4af1-f599-47ab-bcb8-94e275e64018">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.a43b4af1-f599-47ab-bcb8-94e275e64018.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c9ef64ab-ca9b-4c87-9bbf-8c5902e606d5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.c9ef64ab-ca9b-4c87-9bbf-8c5902e606d5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="de04d4ab-3710-44e7-b6a7-10f2d7b61344">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.de04d4ab-3710-44e7-b6a7-10f2d7b61344.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f60ac33f-30c8-493d-8023-97912f517c04">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>type</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.f60ac33f-30c8-493d-8023-97912f517c04.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="036a2ab1-2a2a-4c4e-aaa0-df0afa925005">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>number</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.036a2ab1-2a2a-4c4e-aaa0-df0afa925005.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="fb52f7b1-6275-4779-9675-ca63bc57acf6">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>id</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.fb52f7b1-6275-4779-9675-ca63bc57acf6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cb3e842a-bbf9-4ae2-9145-18daccd8f52f">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.cb3e842a-bbf9-4ae2-9145-18daccd8f52f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="64b375d1-21fb-4728-a6b4-8265cc5cc3f3">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>severity</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.64b375d1-21fb-4728-a6b4-8265cc5cc3f3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8bf58707-ce99-4d15-a170-9452965d4c36">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>message</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.8bf58707-ce99-4d15-a170-9452965d4c36.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9154e556-4700-43ee-9134-eec7b17e4bff">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>ssl</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.9154e556-4700-43ee-9134-eec7b17e4bff.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d1b59778-897b-416b-9c10-cfd42e80a636">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outputFormat</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>fcbcd3dc-f19b-42f9-bd33-55337926f098.d1b59778-897b-416b-9c10-cfd42e80a636.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>0a9e4785-0b65-4b8c-a92f-6719e7a78bb4</refId>
+        <refName>Event Log Output Format</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="8e86d1f3-b589-4445-bd24-8eb92e61a0b1">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c5fa1e4d-7ecb-4bce-93d8-b57757991399">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="11bf70f4-62b4-4351-80ac-e5e1d4ee2fa0">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8d675255-c6c0-42e6-9883-b40d2b9cdccd">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="dea5be13-93e9-4120-b913-739264f93f61">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="1e0624d0-5258-4d3c-8c9b-00549bdf495a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c1a2e754-8b0e-4a6e-8c0b-d96565ad95b2">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="01c51632-fb74-40b5-90b6-163ee38287a1">
+    <baseIcon>windows_event_log.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="237fab6b-ec5d-44ac-90fc-ad09e777ce73">
+        <baseIcon>receive.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.GetEventLog</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

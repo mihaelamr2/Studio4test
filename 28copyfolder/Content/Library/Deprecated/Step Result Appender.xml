@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="2f695202-63a7-4448-82e2-8bce14091b4d">
+  <descriptionCdata><![CDATA[2f695202-63a7-4448-82e2-8bce14091b4d.75644158-ced4-431e-9bef-5f8a4d2dff3b.prompt=Text\:
+2f695202-63a7-4448-82e2-8bce14091b4d.description=<pre>Useful Op to keep a running results.\nTakes a string input (resultText) and appends this to a global context key of "runningResults".\n\nDeprecated in favor of List Appender\n\nInput Parameters\:\nresultText - string input to append\n\nResponses\:\nsuccess - assigned the context variable\n\nContext\:\nrunningResults\n\nScriptlet Example\:\ncurrentResults \= scriptletContext.get("runningResults");\n\nif (currentResults \=\= null) {\n   currentResults \= resultText;\n} else {\n   currentResults +\= resultText;\n}\n\n\nscriptletContext.putGlobal("runningResults", currentResults);</pre>
+]]></descriptionCdata>
+  <annotation>2f695202-63a7-4448-82e2-8bce14091b4d.description</annotation>
+  <name>Step Result Appender</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="75644158-ced4-431e-9bef-5f8a4d2dff3b">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resultText</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2f695202-63a7-4448-82e2-8bce14091b4d.75644158-ced4-431e-9bef-5f8a4d2dff3b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="8d66f8bf-5cd1-476e-a9d2-6b83b126906d">
+    <annotation></annotation>
+    <name>Operation Step Result Appender (60f8a8a8-f712-4488-a5d5-5ccd81e23a14)</name>
+    <script>
+
+currentResults = scriptletContext.get(&quot;runningResults&quot;);
+
+if (currentResults == null) {
+   currentResults = resultText;
+} else {
+   currentResults += resultText;
+}
+
+
+scriptletContext.putGlobal(&quot;runningResults&quot;, currentResults);
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="03714e04-d015-4628-ae29-3cd909e7d9ee">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d351e7f7-533b-4b4b-b6e7-1cfeaa0af658">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="cdd14efb-c710-4670-b2ec-ce2fa3651e11">
+    <baseIcon>war.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="1b22cd02-8c83-4e34-8129-3cb72352c811">
+        <baseIcon>add.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

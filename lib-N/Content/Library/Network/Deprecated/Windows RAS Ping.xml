@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="74e452ac-6127-4666-a006-bd88995f11a6">
+  <descriptionCdata><![CDATA[74e452ac-6127-4666-a006-bd88995f11a6.c4a18172-5166-4d6f-a9f9-a039efd80b96.prompt=HostName\:
+74e452ac-6127-4666-a006-bd88995f11a6.description=<pre>Pings the requested machine from the Web Services machine\n\nInput Parameters\:\nhost - hostname or IP address of the target host\n\nResponses\:\npassed - a successful connection was made\nfailure - unable to make a connection\nhost not found - could not resolve hostname to a valid IP address\n\nExtra Results\:\noutput - raw output of the results\naddresses - list of addresses returned from DNS\naliases - list of aliases returned from DNS\naddresspinged - actual IP address pinged\n% Packet Loss - The percentage of packets that now ping reply was received for.\nAverage Latency - The average ping response time in milliseconds.\nmax latency - The maximum response time of all the pings (in milliseconds).\nmin latency - the minimum number of milliseconds it took to receive a ping response.\n</pre>
+]]></descriptionCdata>
+  <annotation>74e452ac-6127-4666-a006-bd88995f11a6.description</annotation>
+  <name>Windows RAS Ping</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c4a18172-5166-4d6f-a9f9-a039efd80b96">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>74e452ac-6127-4666-a006-bd88995f11a6.c4a18172-5166-4d6f-a9f9-a039efd80b96.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="c94885b5-b510-4d9f-b549-82beead644d3">
+    <annotation></annotation>
+    <name>Operation Windows RAS Ping (4b893eba-c149-4576-ac0f-857320c666a6)</name>
+    <script>
+            scriptletContext.put(&quot;output&quot;, scriptletRawResult[&apos;output&apos;]);
+            scriptletContext.put(&quot;addresses&quot;, scriptletRawResult[&apos;addresses&apos;]);
+            scriptletContext.put(&quot;aliases&quot;, scriptletRawResult[&apos;aliases&apos;]);
+            scriptletContext.put(&quot;addresspinged&quot;, scriptletRawResult[&apos;addresspinged&apos;]);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="43b984e7-848d-40f8-8a80-5e3fc91d45e8">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="b098ae80-8494-4c25-a5e0-898326009fea">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="75ceaff4-faff-4bf8-81b8-0de1e2227c37">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ba142a89-645f-4d52-bf3a-0dc12e0eb9ad">
+      <annotation></annotation>
+      <name>host not found</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4be85e6d-9025-48b0-90d1-1f4770785376">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="492a3baa-1dd4-48a4-9c13-35c75215c2d7">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>10</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="cdeff9b8-d9f0-4308-abf1-6b4e2d6e7174">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="85582ed5-5ce5-44c7-a65e-0e10635afa7f">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="fc0800d9-a010-4dfa-a4f4-f13b534cf1d2">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="ac4e9246-102a-459e-bd27-27b49cd64617">
+      <annotation></annotation>
+      <name>min latency</name>
+      <fieldName>output</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <stripTrailingFilter id="f409148d-8ea3-469c-a307-32c16ab258ac">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>Minimum =</strip>
+          <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+        </stripTrailingFilter>
+        <stripTrailingFilter id="9646773d-d854-4790-b52c-08af59e4d45f">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>ms</strip>
+          <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+        </stripTrailingFilter>
+      </filters>
+    </expression>
+    <expression id="c6d6f893-9a5c-46fc-b531-40361e72667e">
+      <annotation></annotation>
+      <name>Average Latency</name>
+      <fieldName>output</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <selectLineFilter id="2eb87143-6c5e-4d22-87f4-d0b7118c7d0e">
+          <annotation></annotation>
+          <name>Select Line</name>
+          <text>Average</text>
+          <type>FIRST_LINE_CONTAINING</type>
+          <autoSelectLineEnding>false</autoSelectLineEnding>
+          <windowsLineEnding>false</windowsLineEnding>
+          <unixLineEnding>true</unixLineEnding>
+        </selectLineFilter>
+        <stripTrailingFilter id="da19186a-18ff-4d62-8b56-de721c5bb9dc">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>e =</strip>
+          <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+        </stripTrailingFilter>
+        <stripTrailingFilter id="7685394c-561b-4c76-a9f2-f742499bf1cf">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>ms</strip>
+          <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+        </stripTrailingFilter>
+      </filters>
+    </expression>
+    <expression id="e8443be9-9697-49e9-bca7-a6401c80a89e">
+      <annotation></annotation>
+      <name>max latency</name>
+      <fieldName>output</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <selectLineFilter id="c8cd1f40-62f2-43aa-a7e9-6e128e06a6fd">
+          <annotation></annotation>
+          <name>Select Line</name>
+          <text>Maximum</text>
+          <type>FIRST_LINE_CONTAINING</type>
+          <autoSelectLineEnding>false</autoSelectLineEnding>
+          <windowsLineEnding>false</windowsLineEnding>
+          <unixLineEnding>true</unixLineEnding>
+        </selectLineFilter>
+        <stripTrailingFilter id="74518f5c-743e-4373-8c19-e2d1fb7258b9">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>Maximum =</strip>
+          <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+        </stripTrailingFilter>
+        <stripTrailingFilter id="9a62a468-de79-44c2-b467-63fe9388267e">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>ms</strip>
+          <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+        </stripTrailingFilter>
+      </filters>
+    </expression>
+    <expression id="6858e681-53db-4a5e-9a13-10aec8ed6f6a">
+      <annotation></annotation>
+      <name>% Packet Loss</name>
+      <fieldName>output</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <selectLineFilter id="0adbf870-d5fa-4c14-8444-13cec200dd8e">
+          <annotation></annotation>
+          <name>Select Line</name>
+          <text>Packets:</text>
+          <type>FIRST_LINE_CONTAINING</type>
+          <autoSelectLineEnding>false</autoSelectLineEnding>
+          <windowsLineEnding>false</windowsLineEnding>
+          <unixLineEnding>true</unixLineEnding>
+        </selectLineFilter>
+        <stripTrailingFilter id="284fd3b8-8359-4791-95a2-84f06f2ab4a4">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>(</strip>
+          <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+        </stripTrailingFilter>
+        <stripTrailingFilter id="fcb36aea-63a2-49ed-ad39-626468c07d5c">
+          <annotation></annotation>
+          <name>Strip</name>
+          <strip>)</strip>
+          <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+        </stripTrailingFilter>
+      </filters>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="dc2be185-9df1-4723-9665-41d09961fcd4">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="b7e22018-6cac-44e6-9ea7-3cdeafaa3053">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="9d66dd6a-99c4-433b-81c2-ed976c4cdb0c">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Network.Ping</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

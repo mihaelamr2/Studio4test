@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="9c00b75a-dd31-4398-b6e9-a67ed80ac945">
+  <descriptionCdata><![CDATA[9c00b75a-dd31-4398-b6e9-a67ed80ac945.010a395a-f1fa-4525-9b63-7abbe6144a0a.prompt=Input the web service URL\:
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.1e4f09a3-4f3b-4325-91c2-b8cfd425f37f.prompt=Input username\:
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.b233ae2a-2b3c-45d7-a79c-f81715e8ecab.prompt=Input the resource URI to be used\:
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.b73b5e43-9992-40b8-9b16-72f62d192b03.prompt=Input the maximum number of items to be retrieved\:
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.c0828239-770b-4398-8327-d7a0997ff01c.prompt=Input the enumeration context\:
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.description=<pre>\n    Calls the Pull method of a WS-Management compliant web service, method used to retrieve a set of resources. A Pull operation MUST be executed after an Enumerate operation which creates an enumeration context from which the resources will be retrieved. Every context expires after a period of time and you should clarify with the web service provider which is that time frame. If you try to pull resources from a context that has expired or has been released (using Release) the operation will fail. If you pull the last resource from an enumeration context the context will be automaticaly released and you no longer have to call the Release operation. \n \nInputs\: \n    webServiceURL - The URL of the web service where the  request message will be sent. If input webServiceURL does not contain https, the https related inputs are ignored.\nExamples\: http\://localhost\:8080/myservice/, http\://192.168.1.2\:5985/wsman/, https\://192.168.1.2\:5986/wsman .\n    keystore - The path to the repository of security certificates. If left empty, the operation will use the default 'cacerts' file found in OO installation directory 'OO_HOME\\java\\lib\\security\\cacerts'.\nExamples\: c\:\\mycerts\\keystore.jks, c\:\\Program Files\\Java\\jdk1.7.0_60\\jre\\lib\\security\\cacerts\n    keystorePassword - The password for the keystore file.\n    trustAllRoots - States whether the client will validate the server's certificate in the local keystore or will trust any received certificate.Default value is false.\nExamples\: true, false.\n    resourceURI - The resource URI used to identify the type of resource that will be retrieved. This is usually provided in the web service WSDL.\nExamples\: urn\:resources.wiseman.dev.java.net/traffic/1/light or http\://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/*.\n    username - The username used to authenticate to the web service. If necessary, this should be supplied by the web service provider.\n    password - The password used to authenticate to the web service. If necessary, this should be supplied by the web service provider.\n    context - The enumeration context from which the resources will be retrieved. This is returned by the Enumerate operation and its format depends on the web service implementation.\n    noOfItems - The number of items to be retrieved by the operation. If this number is too large the response may be trimmed to the maximum number of characters that can be returned by the web service.\nDefault value\: 1.\n\nResponses\:\n    failure - The web service method could not be called or returned an error.\n    more items - There are more items in the enumeration context that can be retrieved with a new pull request. \n    no more items - There are no more items in the enumeration context and the context has been released.\n\nReturns\:\n    returnResult - The resources that have been pulled from the enumeration context in XML format. The actual XML structure depends on the web service implementation. If the operation fails this result will contain the exception message. \n    context - New enumeration context. Some pull implementations may return a new enumeration context to be used in the future pull requests.\n\nNote\:\n    1. Usually when given access to a web service you will receive a web service WSDL which contains details about the web service . In the WSDL you will find the webServiceURL and resourceURI. For example, in the following WSDL fragment  the "wsa\:Address" tag specifies the webServiceURL and the "wsman\:ResourceURI" tag the resourceURI\:\n<wsa\:EndpointReference>\n\t<wsa\:Address>http\://localhost\:8080/myservice/</wsa\:Address>\n\t<wsa\:ReferenceParameters>\n\t\t<wsman\:ResourceURI>urn\:resources.wiseman.dev.java.net/traffic/1/light</wsman\:ResourceURI>\n\t</wsa\:ReferenceParameters>\n</wsa\:EndpointReference>\n    2. Check the 'WS-Management' folder description for instructions on server and client SSL configuration.\n\n</pre>
+9c00b75a-dd31-4398-b6e9-a67ed80ac945.df4e7016-5294-4d82-b1b8-5e93ab3bad09.prompt=Input password\:
+]]></descriptionCdata>
+  <annotation>9c00b75a-dd31-4398-b6e9-a67ed80ac945.description</annotation>
+  <name>Pull</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="010a395a-f1fa-4525-9b63-7abbe6144a0a">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>webServiceURL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.010a395a-f1fa-4525-9b63-7abbe6144a0a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6ec7ec1c-7834-4e3f-bb3f-fc6814a06a76">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="3805e004-ec15-44b7-8dbd-e705e0ee2a64">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="86857197-b243-4bb3-9632-049062981abe">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="b233ae2a-2b3c-45d7-a79c-f81715e8ecab">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resourceURI</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.b233ae2a-2b3c-45d7-a79c-f81715e8ecab.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1e4f09a3-4f3b-4325-91c2-b8cfd425f37f">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.1e4f09a3-4f3b-4325-91c2-b8cfd425f37f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="df4e7016-5294-4d82-b1b8-5e93ab3bad09">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.df4e7016-5294-4d82-b1b8-5e93ab3bad09.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c0828239-770b-4398-8327-d7a0997ff01c">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>context</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.c0828239-770b-4398-8327-d7a0997ff01c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b73b5e43-9992-40b8-9b16-72f62d192b03">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>noOfItems</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9c00b75a-dd31-4398-b6e9-a67ed80ac945.b73b5e43-9992-40b8-9b16-72f62d192b03.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="04b17b0b-e70f-47ed-9a24-b710c04d1e53">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="0ed772fd-253c-4143-821a-c14497d69917">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d818eaa8-6180-4005-9bb0-db245e05cb1b">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ce8ed0c6-a2de-48c3-b9f3-e2e9a48c1cdb">
+      <annotation></annotation>
+      <name>more items</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="7a134ce7-a9f4-4169-9d27-0dcb055300d7">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3073f6bd-d811-4ec3-b877-9ea66c3a267c">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>2</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="be3d1e16-e087-4abe-b868-156a3b4a6e45">
+      <annotation></annotation>
+      <name>no more items</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="471cb1e1-1e7f-4e11-ae06-66ad2404cdd7">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="5ff84bb5-cc6c-4227-98f1-bf7e8062fdb5">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>3</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6c642a78-4bf6-42c1-ab5e-79db1ea07790">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e9861cab-9437-4b8a-9f4f-f52656e5aac6">
+    <baseIcon>components.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="fa252447-b080-4542-b368-f4b1f5984516">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-wsmanagement-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.WSManagement.operations.Pull</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="f19123f9-8410-42c2-9563-b53cf7910a25">
+  <descriptionCdata><![CDATA[f19123f9-8410-42c2-9563-b53cf7910a25.description=A simple register. It branches based on the value of the 'memory' input. it outputs the value input. If you store the output in a context variable, and give that context variable as the memory input, than this operation will return the new value, and have its response be the previous value. This is useful for remembering whether a flow has failed when it should continue beyond a failed point, but the flow as a whole should fail because of the earlier fail.\n\nDeprecated in favor of set context value, check null, and evaluate expression\n\nvalid inputs are\: true false\n\nResponses\:\nalready failed - A failure already occurred.\nfirst fail stored - No previous failure has stored, but this failure has been.
+]]></descriptionCdata>
+  <annotation>f19123f9-8410-42c2-9563-b53cf7910a25.description</annotation>
+  <name>Fail Memory</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="e070d9ca-9aed-4f22-9f8d-4c54822230dc">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${memory}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f2247f70-875a-4f22-96fb-6b8ef23a69d9">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${newVal}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="aef2f3c3-a2e8-4fda-bbed-c24bc21ac432">
+    <annotation></annotation>
+    <name>Operation Fail Memory (ad4e7408-4210-47b2-b0cc-6fa1f5e25c49)</name>
+    <script>var LocalFailedMemory = scriptletContext.get(&quot;LocalFailedMemory&quot;); 
+if (LocalFailedMemory == &quot;true&quot;)
+	scriptletResponse = &quot;already failed&quot;; 
+else
+	scriptletResponse = &quot;first fail stored&quot;; 
+ 
+// To set the result of the operation 
+scriptletResult = &quot;LocalFailedMemory&quot;; 
+
+scriptletContext.put(&quot;LocalFailedMemory&quot;,&quot;true&quot;);</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="35b33c05-df68-4272-9086-a63e49c64920">
+      <annotation></annotation>
+      <name>already failed</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="2b203b39-b8eb-4acf-9115-009dd32f9015">
+      <annotation></annotation>
+      <name>first fail stored</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="cd596b23-9925-4c7c-8fc2-120899ee5d57">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="83cbf6dc-280d-47e8-9d0b-58a172c36138">
+    <baseIcon>text_code_javascript.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

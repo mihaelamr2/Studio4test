@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d1783b38-135d-4e3e-bc2f-c5d23964fd03">
+  <descriptionCdata><![CDATA[d1783b38-135d-4e3e-bc2f-c5d23964fd03.description=<pre>\nThis operation encodes a clear string into a Base64-encoded string.\n\nInputs\:\n    data - The data string that need to be encoded in base64 encoding. \nExamples\: \u30D5\u30A1\u30A4\u30EB\u8AAD\u3080\u66F8\u304F, hello. \n\n    characterSet - The character encoding used for the data string. If you do not specify a value for this input, it uses the system's default character encoding which depends on the RAS system.\nExamples\: UTF-8, ISO-8859-1, US-ASCII or Shift_JIS.\n\nResults\:\n    returnResult - The encoded data string in Base64 encoding.  For example,  44OV44Kh44Kk44Or6Kqt44KA5pu444GP, aGVsbG8\= which corresponds to the data input examples.  \n\nResponses\:\n    success - The operation completed successfully. \n    failure - The operation failed. \n\n</pre>
+]]></descriptionCdata>
+  <annotation>d1783b38-135d-4e3e-bc2f-c5d23964fd03.description</annotation>
+  <name>Base64 Encoder</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="cbed6f0a-08ae-4590-9f8f-043374bf68f2">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>data</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="21b560d4-c6b6-4fe2-88eb-7cd34a9a6a82">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="802dad91-8c1e-4006-9b2c-2f36289c94f8">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="49103349-342e-4cf6-896a-d78789cac717">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="b839df0d-6f2f-4be0-922b-c784fd63fa40">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="579e4dc4-cce9-4703-bc11-a15fec2d17d8">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="24084719-7e62-4d61-9868-f48c219b6839">
+          <annotation></annotation>
+          <name>returnResult</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7dd35c6c-e464-4f8d-8c0a-4235ff5f5b53">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ba7b5e15-411c-4800-aed0-f777562b3ffe">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="482aa514-fa0f-4e23-89f3-48528c4f2300">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>/Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>eef89d3d-4f93-4058-8ab5-d996f853abd0</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

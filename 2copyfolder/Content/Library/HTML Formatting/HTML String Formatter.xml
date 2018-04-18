@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="640b5ddb-a0f6-484c-ba6f-ddcf3805271e">
+  <descriptionCdata><![CDATA[640b5ddb-a0f6-484c-ba6f-ddcf3805271e.description=<pre>\nFormats a string using html. This string can then be inserted into a webpage. If an input is not specified, or has an invalid input, it will be ignored.\n\nInputs\:\ntoFormat - The string to format.\nstyle - The style to format the string using (italic, bold, underline).\ncolor - The color to format the string using (red, yellow, blue, black, white or a hexidecimal RGB value [Example \#FF00FF for purple]).\nsize - +n or -n where n is the number of points to increase/decrease the font size by relative to the browser default.\n\nResponses\:\nsuccess - The operation completed successfully.\n\nreturns\:\nThe html formatted string.\n</pre>
+]]></descriptionCdata>
+  <annotation>640b5ddb-a0f6-484c-ba6f-ddcf3805271e.description</annotation>
+  <name>HTML String Formatter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f148299e-00fb-489f-91a4-e76a520872f6">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>toFormat</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bc826407-3231-47c3-9ed3-6d8f2f5e91a7">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>style</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aaedf7c6-7d04-4c7c-a5ed-7bd7682e403d">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>color</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5699478a-3cee-4c81-8a07-ef205a4bb7fd">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>size</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="fb59677e-a2b3-4953-a8ee-956cfda0b4f4">
+    <annotation></annotation>
+    <name>Operation HTML String Formatter (e4efc7ee-d43e-4dc8-bafd-8c60aa900109)</name>
+    <script>var formatted = toFormat;
+if (typeof style != &apos;undefined&apos; &amp;&amp; style != null &amp;&amp; style !=&quot;&quot;){
+	if (style.toLowerCase().indexOf(&quot;italic&quot;) &gt;=0)
+		formatted = &quot;&lt;I&gt;&quot;+formatted+&quot;&lt;/I&gt;&quot;;
+	if (style.toLowerCase().indexOf(&quot;bold&quot;) &gt;=0)
+		formatted = &quot;&lt;B&gt;&quot;+formatted+&quot;&lt;/B&gt;&quot;;
+	if (style.toLowerCase().indexOf(&quot;underline&quot;) &gt;=0)
+		formatted = &quot;&lt;U&gt;&quot;+formatted+&quot;&lt;/U&gt;&quot;;
+}
+var colorFlag = &quot;&quot;;
+if (typeof color == &apos;undefined&apos; || color == null || color ==&quot;&quot;)
+	colorFlag = &quot;&quot;;
+else
+	colorFlag = color;
+var sizeFlag = &quot;&quot;;
+if (typeof size == &apos;undefined&apos; || size == null || size ==&quot;&quot;)
+	sizeFlag = &quot;&quot;;
+else
+	sizeFlag = size;
+
+var fontFlag = &quot;&quot;;
+if (sizeFlag != &quot;&quot;)
+	fontFlag += &quot;SIZE=&quot;+sizeFlag;
+if (colorFlag != &quot;&quot;)
+	if (fontFlag != &quot;&quot;)
+		fontFlag += &quot; COLOR=&quot;+colorFlag;
+	else
+		fontFlag += &quot;COLOR=&quot;+colorFlag;
+
+if (fontFlag != &quot;&quot;)
+	formatted = &quot;&lt;FONT &quot;+fontFlag+&quot;&gt;&quot;+formatted+&quot;&lt;/FONT&gt;&quot;;
+scriptletResult = &quot;&quot;+formatted;
+
+
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="0965b826-9338-46ba-b4cd-c02aad1f40ef">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="56539772-b125-4f4c-bc1b-7a3c0b903e0d">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4b8833d2-2b96-4100-b137-ec1b3b051e02">
+    <baseIcon>website.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="a16e7166-4da9-4ca4-8e0e-426c651e1c0a">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

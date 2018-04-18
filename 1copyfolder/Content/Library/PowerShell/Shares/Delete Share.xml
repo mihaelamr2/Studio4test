@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="9b37549d-926e-4c10-9918-c28896ff4f1c">
+  <descriptionCdata><![CDATA[9b37549d-926e-4c10-9918-c28896ff4f1c.54d89c6e-2b4f-469f-ba70-2149ade85906.prompt=Share name\:
+9b37549d-926e-4c10-9918-c28896ff4f1c.description=<pre>Deletes a directory share in the local Windows computer.\n\nInputs\:\nshareName \t- Name of the share to delete.\n\nResponses\:\nsuccess \t- Operation completed successfully\nfailure \t- Something went wrong\n\nResult\:\nOperation return code.\n\nExtra Results\:\nexception \t- if something went wrong, the error message\n</pre>
+]]></descriptionCdata>
+  <annotation>9b37549d-926e-4c10-9918-c28896ff4f1c.description</annotation>
+  <name>Delete Share</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="54d89c6e-2b4f-469f-ba70-2149ade85906">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>shareName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9b37549d-926e-4c10-9918-c28896ff4f1c.54d89c6e-2b4f-469f-ba70-2149ade85906.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="6cf6ba48-08a5-4a5c-b224-80a0d3f63361">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="b6327809-6344-4a74-84a1-6c8d6ec58256">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="9da1df01-5dd9-4c7c-9369-25833f985fe6">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="36255116-72c0-4900-b6ba-14606856851e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="892f42a1-4d10-4691-9424-2975fe82b037">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="d6c015e8-c578-44de-b59c-1516c0e9325a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="061db65c-151c-4d3d-ab3f-19bbdbfb9323">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="9caf8771-fe88-4f69-8323-2667c238a948">
+    <baseIcon>folder.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="a63b257f-7a12-4ba0-8ae9-c5fe98dd823f">
+        <baseIcon>offline.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.DeleteShare</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

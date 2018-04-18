@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="99f045b7-616f-44b0-959d-5e166190141b">
+  <descriptionCdata><![CDATA[99f045b7-616f-44b0-959d-5e166190141b.d982bf64-afe1-4512-9aa1-67241e6715da.prompt=Enter the Host Name \:
+99f045b7-616f-44b0-959d-5e166190141b.description=<pre>\nGet the IP Address of a Host\n\n Inputs\:\n 1. hostname \t- The hostname to perform a lookup on.\n 2. dnsServer - (optional) dns server to perform lookup against.\n\nResult \:\n 1. ipaddress\t\t- Returns the IP address.\n \n Responses\:\n 2. success \t\t- The operation completed successfully.\n 3. failure\t\t- The operation failed.\n</pre>
+]]></descriptionCdata>
+  <annotation>99f045b7-616f-44b0-959d-5e166190141b.description</annotation>
+  <name>DNS Lookup New (1)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d982bf64-afe1-4512-9aa1-67241e6715da">
+      <annotation></annotation>
+      <toContextKey>hostname</toContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>hostname</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>99f045b7-616f-44b0-959d-5e166190141b.d982bf64-afe1-4512-9aa1-67241e6715da.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6f7f1a0b-e3ee-44e3-947b-f938c3cb82b8">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="74f7fbbc-a8a0-49bf-8743-d55286b76f9b">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2bc5f1a3-8b48-41df-bbbf-e2303e9b9fb2">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="770eeba1-e2b5-47df-9218-d7585a4e11ec">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="7300f473-cf08-4564-b990-102beca81c6a">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="a4a2aacb-4aa4-4d59-b0ff-ac20f6a38f0b">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="a1e03fc1-ca43-4317-b6d6-9edf5e6b78a6">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="08640663-17e4-4795-a352-386b221daa0d">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>ipaddress</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="a32348d2-669d-4c6f-97cf-cfdbd5307b62">
+    <baseIcon>client_server_app.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="ecc2dc38-1d93-430d-b195-53197eef1b39">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>95cd949a-457f-439a-ad35-9289a5d93933</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

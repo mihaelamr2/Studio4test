@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="84e60fac-e856-4904-af76-d6df930baff5">
+  <descriptionCdata><![CDATA[84e60fac-e856-4904-af76-d6df930baff5.description=<pre>\nConverts an Active Directory Time Stamp (Integer8) to a string date time\n\nInput Parameters\: \nadTimeStamp - string representation of the time stamp returned by ad\n\nResponses\:\nsuccess - converted successfully (value is op result)\nfailure - failed to convert\n</pre>\n
+84e60fac-e856-4904-af76-d6df930baff5.f30b80a9-bc5f-40db-a668-82bd9e9f722c.prompt=Active Directory TimeStamp Value\:
+]]></descriptionCdata>
+  <annotation>84e60fac-e856-4904-af76-d6df930baff5.description</annotation>
+  <name>AD Time Stamp To Date</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f30b80a9-bc5f-40db-a668-82bd9e9f722c">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>adTimeStamp</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>84e60fac-e856-4904-af76-d6df930baff5.f30b80a9-bc5f-40db-a668-82bd9e9f722c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="3ed77c4c-5760-46e7-8553-4209ab5da07d">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="3b56413d-877a-4156-a3bb-e2238e04aecc">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="f5306491-6a6f-4bb1-9a03-639a0d12748e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="21e8c243-729d-4eee-812a-53dfc9960be5">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="3c4f107e-4262-4e5c-b7d4-1eaa54e1c097">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="64326b09-bf17-4d9c-9a51-e52654a708bd">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="4d049b1c-d01d-469f-926c-5a80f835a8f6">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="14360017-fff5-47af-9849-4150737c6dd6">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3b01136c-e1a4-4b72-8b8d-09dd9f14690d">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADTimeStampToDate</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

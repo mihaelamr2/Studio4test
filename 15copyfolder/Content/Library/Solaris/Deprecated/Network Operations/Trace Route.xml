@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="5a8b285e-980d-4ff6-b716-a76ceb7fd247">
+  <descriptionCdata><![CDATA[5a8b285e-980d-4ff6-b716-a76ceb7fd247.description=This flow traces the route from a solaris host to a target host.\n\ninputs\:\nhost - The host to traceroute from.\nusername - credentials for host.\npassword - credentials for host.\ntarget - The host to traceroute to.\nmax_hops - The maximum number of hops to traceroute over.\n\nresponses\:\nsuccess - The traceroute completed\nUnknown Target - target could not be resolved to an ip address.\nConnection Error - An error occurred while connecting to host.\n\nExtra Results\:\naddress - The actual ip address trace-routed to\nhops - The hops along the route.\ntimes - The response time (in milliseconds) of each hop.
+]]></descriptionCdata>
+  <annotation>5a8b285e-980d-4ff6-b716-a76ceb7fd247.description</annotation>
+  <name>Trace Route</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f99c942a-ca35-4aaf-bfa1-04233353ffb5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="acf41da3-79f5-409f-a47e-bdbecbb8a2b5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>OBJECT</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7cae7f28-29f2-467e-a865-a2fe0005ec3f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="38b8a480-fb92-4b8f-b2ba-acf384b643cf">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>target</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="9394f12a-ad17-4905-bc7d-0b55885c675c">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>max_hops</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>30</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="dc6a4968-60cd-47a9-a608-824b30169b20">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Environment</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="5a19bb55-8fce-4d73-96ea-f51734ac9d0a">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>User</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${username}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e1cd88fe-72a0-4151-b3f5-e7b752a7d56f">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Command</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>/usr/sbin/traceroute</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="48e2894c-96b3-4efc-a8c4-a6197b0c9d71">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Argument</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>-m ${max_hops} ${target}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="c24ba10a-e9be-4d41-b053-916fb3ca9672">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Host</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${host}</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="11c486c3-0a99-42d5-bf37-495f8346b30b">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Private_Key_File</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="456e1c50-9e2a-4e64-8954-30de3f0d9bb7">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Password</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>{OBFUSCATED}SqstnSxglAP4D4gm72ILRw==</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="955a086d-66fc-4312-8405-cdeb02ee1b73">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Pty</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="f4a26f35-278e-449b-b32f-49e0e9a30caf">
+      <annotation></annotation>
+      <name>Unknown Target</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="97200f41-885b-4ba1-8c59-cdbce55b816b">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>Error String</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="bad4746a-3401-4385-8a37-670ff48dc1f3">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>unknown host</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>CONTAINS</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="9a8a3234-488f-4cde-8906-c16813ea45c9">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="96bbf7b3-6ba1-45d8-92ca-e74fefeb0a80">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>Output String</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <regexEvaluator id="1ac8bf8a-9175-4efd-bb9a-64823e83b113">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <entireString>true</entireString>
+            <expression>\s*\d+\s+.+</expression>
+            <ignoreCase>false</ignoreCase>
+            <multiLine>false</multiLine>
+            <regType>PERL5</regType>
+          </regexEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6788f684-75b3-42c7-9458-16b505ca9e8a">
+      <annotation></annotation>
+      <name>Connection Error</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="aad2b330-8591-4300-9cc4-aa57f2d43b20">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>Code</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="53530620-3858-423f-a6b7-c3bea4fdd570">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="805544f9-29d4-4c21-851b-bbcece08f717">
+      <annotation></annotation>
+      <name>address</name>
+      <fieldName>Error String</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <regexFilter id="6bf0b845-570f-43c2-a038-ced0882f0573">
+          <annotation></annotation>
+          <name>RegularExpression</name>
+          <expression>\d+\.\d+\.\d+\.\d+</expression>
+          <ignoreCase>false</ignoreCase>
+          <regType>JAVA</regType>
+          <entireString>true</entireString>
+          <multiLine>false</multiLine>
+        </regexFilter>
+      </filters>
+    </expression>
+    <expression id="f8b5594d-4a10-4413-bd99-9117f430eb6e">
+      <annotation></annotation>
+      <name>times</name>
+      <fieldName>Output String</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <regexFilter id="73c73082-7234-4525-9c90-e8d2223de9f8">
+          <annotation></annotation>
+          <name>RegularExpression</name>
+          <expression>(\d+\.\d+\s*ms\s*)+</expression>
+          <ignoreCase>false</ignoreCase>
+          <regType>JAVA</regType>
+          <entireString>false</entireString>
+          <multiLine>true</multiLine>
+        </regexFilter>
+        <replaceAllFilter id="3bf485d2-4c46-42b5-8bf1-549734edfb62">
+          <annotation></annotation>
+          <name>Replace All</name>
+          <ignoreCase>false</ignoreCase>
+          <searchString>ms</searchString>
+          <replaceString>,</replaceString>
+          <replaceType>ALL</replaceType>
+        </replaceAllFilter>
+        <replaceAllFilter id="c04da935-7ce6-48d6-a2e5-b5fc6f647145">
+          <annotation></annotation>
+          <name>Replace All</name>
+          <ignoreCase>false</ignoreCase>
+          <searchString> </searchString>
+          <replaceType>ALL</replaceType>
+        </replaceAllFilter>
+        <replaceAllFilter id="2569b1d9-5a71-4cd6-801b-90f976c30f0c">
+          <annotation></annotation>
+          <name>Replace All</name>
+          <ignoreCase>false</ignoreCase>
+          <searchString>,
+</searchString>
+          <replaceString>;</replaceString>
+          <replaceType>ALL</replaceType>
+        </replaceAllFilter>
+        <regexFilter id="cee04228-bf20-48f2-96c0-999b3c5bef61">
+          <annotation></annotation>
+          <name>RegularExpression</name>
+          <expression>.+\d</expression>
+          <ignoreCase>false</ignoreCase>
+          <regType>JAVA</regType>
+          <entireString>true</entireString>
+          <multiLine>false</multiLine>
+        </regexFilter>
+      </filters>
+    </expression>
+    <expression id="5f57c0fa-4e52-4f1c-a0cc-0aa54e1d0e56">
+      <annotation></annotation>
+      <name>hops</name>
+      <fieldName>Output String</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters>
+        <regexFilter id="47fb0d0d-60ce-4a32-8c18-298ea3f5c83a">
+          <annotation></annotation>
+          <name>RegularExpression</name>
+          <expression>\d+\.\d+\.\d+\.\d+</expression>
+          <ignoreCase>false</ignoreCase>
+          <regType>JAVA</regType>
+          <entireString>false</entireString>
+          <multiLine>true</multiLine>
+        </regexFilter>
+        <replaceAllFilter id="3c806b63-4512-410d-b619-de5db8190f10">
+          <annotation></annotation>
+          <name>Replace All</name>
+          <ignoreCase>false</ignoreCase>
+          <searchString>
+</searchString>
+          <replaceString>,</replaceString>
+          <replaceType>ALL</replaceType>
+        </replaceAllFilter>
+      </filters>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="f8253de8-1a34-462b-90ee-8fa03cb6f7a7">
+    <annotation></annotation>
+    <name>Code</name>
+    <fieldName>Output String</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="68628c7d-fff8-44c2-84c8-29829734c09f">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>46c0f7ea-a981-4ddc-bcaf-d4faed7af0b6</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

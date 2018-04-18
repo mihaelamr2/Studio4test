@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="744a0315-9c73-4a29-a69e-66e952c775f2">
+  <descriptionCdata><![CDATA[744a0315-9c73-4a29-a69e-66e952c775f2.description=<pre>\nFinds the value for a specified parameter name in a list containing the parameter names and values of a form's <input> tag. \n\nInputs\:\n    htmlParamNames - The parameter names parsed from the form <input> tag.\n    htmlParamValues - The parameter values parsed from the form <input> tag.\n    paramName - The name of the parameter to find.\n\nResults\:\n    Result - The value of associated to <paramName>, or 'null' if no value is given.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully. The <htmlParamNames> and <htmlParamValues> do not contain the specified parameter.\n</pre>
+]]></descriptionCdata>
+  <annotation>744a0315-9c73-4a29-a69e-66e952c775f2.description</annotation>
+  <name>HTML Parameter Extractor</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9f728557-f900-40d0-aa4a-ff4b1c2d3b63">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>htmlParamNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ab394c55-f663-4e11-a47d-8e6137472013">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>htmlParamValues</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0b01f1fe-7772-487a-86a6-bd084956d0c0">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>paramName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="02599f69-0880-4e84-9ac1-f25a76772dbd">
+    <annotation></annotation>
+    <name>Operation HTML Parameter Extractor (9e033fbc-dac5-4dc8-87f1-ccfc3aa183d8)</name>
+    <script>scriptletResponse = &quot;success&quot;;
+var paramNames = htmlParamNames.split(&quot;,&quot;);
+var paramValues = htmlParamValues.split(&quot;,&quot;);
+
+for (count = 0; count &lt; paramNames.length; count++){
+    if (paramNames[count].toLowerCase().equals(paramName)){
+        scriptletResult = paramValues[count];
+        break;
+    }
+}
+if (count &gt;= paramNames.length){
+    scriptletResponse = &quot;failure&quot;;
+    scriptletResult = &quot;&quot;;
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="f08cc617-febb-4db1-b408-04de2bdaf848">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="b0911d52-002c-4aa1-9a9c-0e8fd67e3f57">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="817a394d-ff5d-478a-b140-c4ef3aac4d0b">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="40bbe57b-8920-41a5-96c5-fd435f04d1b5">
+    <baseIcon>website.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="341557dd-c822-40d4-a5ba-44ef0aa800ca">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="088a556b-6708-46b7-900c-d441bbf38dcf">
+  <descriptionCdata><![CDATA[088a556b-6708-46b7-900c-d441bbf38dcf.description=<pre>This operation performs a XSL Transformation on a RAS to transform a XML document into HTML. Runtime parameters can be specified using the "paramKey" and "paramValue" inputs.\n\nInputs\:\n    templateLocation - The location of the XSL stylesheet to use. Can be a local file path, an HTTP URL or the actual template as constant.\n    xmlLocation - The location of the XML document to transform. Can be a local file path, an HTTP URL or the actual xml to transform, as constant. This is optional as some stylesheets do not need an XML document and can create output based on runtime parameters.\n    outputFile - The local file to write the output of the transformation. If an output file is not specified the output of the transformation will be returned as returnResult.\n    paramKey - A list of parameter names delimited by "paramDelimiter".\n    paramValue - A list of parameter values delimited by "paramDelimiter".\n    paramDelimiter - List delimiter for "paramKey" and "paramValue" inputs.\nDefault value\: ','\n    parsingFeatures - The list of XML parsing features separated by new line (CRLF). The feature name - value must be separated by empty space. Setting specific features this field could be used to avoid XML security issues like "XML Entity Expansion injection" and "XML External Entity injection". To avoid aforementioned security issues we strongly recommend to set this input to the following values\: \nhttp\://apache.org/xml/features/disallow-doctype-decl true \nhttp\://xml.org/sax/features/external-general-entities false \nhttp\://xml.org/sax/features/external-parameter-entities false \nWhen the "http\://apache.org/xml/features/disallow-doctype-decl" feature is set to "true" the parser will throw a FATAL ERROR if the incoming document contains a DOCTYPE declaration.  \nWhen the "http\://xml.org/sax/features/external-general-entities" feature is set to "false" the parser will not include external general entities. \nWhen the "http\://xml.org/sax/features/external-parameter-entities" feature is set to "false" the parser will not include external parameter entities or the external DTD subset. \nIf any of the validations fails, the operation will fail with an error message describing the problem. \nDefault value\:\nhttp\://apache.org/xml/features/disallow-doctype-decl true\nhttp\://xml.org/sax/features/external-general-entities false\nhttp\://xml.org/sax/features/external-parameter-entities false\n\nResults\:\n    returnResult - The output of the transformation, if no output file is specified.\n\nResponses\:\n    success - The XSL transformation succeeded.\n    failure - The XSL transformation failed. See "returnResult" for failure reasons.\n\nNotes\:\n\nSpecifying parameters\:\nIf more than one parameter needs to be specified for a transformation, populate "paramKey" with a list of parameter names and "paramValue" with the respective parameter values.  The following example shows a simple stylesheet that has parameters "firstName", "lastName" and "color" (it does not transform an XML document)\:\n\n<?xml version\="1.0" encoding\="UTF-8"?>\n<xsl\:stylesheet version\="1.0" xmlns\:xsl\="http\://www.w3.org/1999/XSL/Transform">\n    <xsl\:param name\="firstName">OO</xsl\:param>\n    <xsl\:param name\="lastName">User</xsl\:param>\n    <xsl\:param name\="color">\#000000</xsl\:param>\n    <xsl\:template match\="/">\n        <html>\n            <body>\n                <h2>\n                    <font color\="{$color}">\n                    Hello <xsl\:value-of select\="$firstName"/><xsl\:text> </xsl\:text><xsl\:value-of select\="$lastName"/>\!\n                    </font>\n                </h2>\n            </body>\t\t\n        </html>\n    </xsl\:template>\n</xsl\:stylesheet>\n\nBy default (with no parameters specified) this creates an HTML document that contains "Hello OO User\!" in black text.  \n\nAfter applying the following "paramKey" and "paramValue" inputs\:\n\nparamKey\=firstName,lastName,color\nparamValue\=Valued,Customer,blue\nparamDelimiter\=,\n\nThe output is an HTML document that contains\: "Hello Valued Customer\!" in blue text.\n</pre>
+]]></descriptionCdata>
+  <annotation>088a556b-6708-46b7-900c-d441bbf38dcf.description</annotation>
+  <name>XSL Transformation</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="52ef9cd3-2f0e-454a-8332-67906b69821b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>templateLocation</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1be67183-b661-4e06-9a81-d200aa3e1e39">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xmlLocation</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f4762f08-cb33-47af-b3de-ebb20e133335">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outputFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4814bae7-b0a5-40ad-85b8-bd05bc41f417">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>paramKey</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6f40a7ab-6bda-495b-baf2-090de9c4b7df">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>paramValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="eff0f794-c34a-4ce9-acee-4e8fd266b1e2">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>paramDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="0db2da7c-9860-4540-8e1c-d7a2e1cf35f7">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>parsingFeatures</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>http://apache.org/xml/features/disallow-doctype-decl true
+http://xml.org/sax/features/external-general-entities false
+http://xml.org/sax/features/external-parameter-entities false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="766b335f-036d-4e17-9b42-bfa0bc92bf4a">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="b1e9037c-f3a6-4b25-b873-2f49c5936d6d">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="90f55d9a-4da4-4807-ad73-f807e41dddd7">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8d447ffe-938b-4fb2-8af8-3d577fbc57fe">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="3275d4f2-b3fe-4c16-ba34-e682d5a3669f">
+          <annotation></annotation>
+          <name>returnResult</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="75c8466d-2173-4efa-aabd-c03d673ceec6">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="4d47e769-eba7-433e-b211-438baf64251b">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="349e3fa1-4558-4b10-88ff-1a3c84e00cc5">
+    <baseIcon>document_xml.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="dfebec42-5c5e-4389-badd-38a35b5f9a8c">
+        <baseIcon>gear.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.xml.XSLTransformation</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

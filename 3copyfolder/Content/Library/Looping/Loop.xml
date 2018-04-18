@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="8d1d941f-c4d0-41ff-9c64-adf57263d1f3">
+  <descriptionCdata><![CDATA[8d1d941f-c4d0-41ff-9c64-adf57263d1f3.description=<pre>\nThis operation loops as many times as specified in the "count" input, counting from "1" to a greater number, incrementing it by "1" at each iteration.\n\nInputs\:\n    count - The number of loops to complete.\nValid values\: from 1 to 9223372036854775807\n    reset - Specifies whether the counter restarts counting from "1".\nValid values\: true, false\nDefault value\: false\n    to - The number to count to. It will take the value of the "count" input field. \n    from - The number to start counting at. For this operation, it is customized to "1".\n    incrementBy - The number to increment by while counting. For this operation, it is customized to "1".\n\nResults\:\n    resultString \u2013 This is the primary output. It contains the value of the number that was just counted.\n\nResponses\:\n    has more \u2013 The counting process is not complete. One or more iterations are pending.\n    no more \u2013 The counting process is complete.\n    failure - The operation completed unsuccessfully.\n\nNote\:\n1. It is recommended that you do not change the values of the "to", "from" or "incrementBy" input fields.\n2. The "from", "to" and "incrementBy" inputs are customized for this operation. Even though you can also customize them, if you need to specify the loop range borders and the increment value, use the "Counter" operation.\n\nExamples\:\n1. For a loop with 20 iterations, the following values should be provided for the input fields\:\n    count\: 20\n    reset\: false (this field can also be left blank, as "false" is the default value)\n2. For an infinite loop, the value of "count" should be at least "1" and the value of "reset" should be "true".\n</pre>
+8d1d941f-c4d0-41ff-9c64-adf57263d1f3.e900bd95-e207-4678-b8c0-583b2223679f.prompt=Number to count to.
+]]></descriptionCdata>
+  <annotation>8d1d941f-c4d0-41ff-9c64-adf57263d1f3.description</annotation>
+  <name>Loop</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="e900bd95-e207-4678-b8c0-583b2223679f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>count</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>8d1d941f-c4d0-41ff-9c64-adf57263d1f3.e900bd95-e207-4678-b8c0-583b2223679f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3f57f453-b4df-4911-a752-d06c4429c195">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>reset</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="77bd5819-a6af-4828-9a61-caafc455bb3f">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>to</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${count}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f2ce5ece-7f79-479a-b49a-9747d43bcebd">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>from</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>1</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="b1f0d5eb-c22f-493c-8f77-fa54bf556280">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>incrementBy</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>1</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="93af0325-45be-4eec-868f-1a7ba1af2aba">
+      <annotation></annotation>
+      <name>has more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="ca54863c-0658-4e79-9e32-0e1fda3a28fd">
+          <annotation></annotation>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="b9404cfa-f6b1-466c-b776-98a14c8b74fb">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>has more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="9dcb9275-7ef1-4a4b-b0cb-6619f690e08b">
+      <annotation></annotation>
+      <name>no more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="6f8b1666-2cd9-475a-b4f5-6dc4dd2ba34f">
+          <annotation></annotation>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="537b05c2-d077-4253-85ea-720c84a471ad">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>no more</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="8efccc11-c9a2-486c-a2cb-b0aa39dee8ba">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="9d1e0603-b3c5-45fd-a1fa-48cf34e8adac">
+          <annotation></annotation>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="0752bc56-9ddd-494c-a9f2-4b810d9c04a1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="1fae58d3-d89c-4e5c-8e4b-9a55873a6db7">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>resultString</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="f2ec5145-5078-4f7a-80db-baa18cc0d2d4">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="64472fa3-0e53-4df2-89ec-e83a5079a1b3">
+        <baseIcon>iterate.png</baseIcon>
+        <basePath>Annotations</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

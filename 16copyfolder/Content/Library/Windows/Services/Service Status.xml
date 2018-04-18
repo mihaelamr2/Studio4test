@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="5f967a0d-0799-481c-88b9-b045c3dd0a2a">
+  <descriptionCdata><![CDATA[5f967a0d-0799-481c-88b9-b045c3dd0a2a.216f361e-d732-4b38-811e-859a3dbb15b2.prompt=Service\:
+5f967a0d-0799-481c-88b9-b045c3dd0a2a.2aaab3a1-196a-4460-8ea0-dfcead0467ff.prompt=Alternate Credentials - UserName\:
+5f967a0d-0799-481c-88b9-b045c3dd0a2a.description=<pre>Get the current status of a Windows service.\n\nInputs\:\nhost - Hostname or ip address of the target machine.\nservice - Name of service to change.\nuser - Username to use for thread impersonation on the RAS host for this operation (can be left blank).\npassword - Password of the user.\n\nResponses\:\nservice paused - The service is currently paused.\nservice running - The service is currently running.\nservice stopped - The service is currently stopped.\nservice pending - The service is currently pending.\nfailure - There was a problem getting the state of the service.</pre>
+5f967a0d-0799-481c-88b9-b045c3dd0a2a.eff0c49b-815f-445b-aa4e-18461ac783ba.prompt=HostName\:
+5f967a0d-0799-481c-88b9-b045c3dd0a2a.fff69615-9733-4308-802a-532c81c7153a.prompt=Alternate Credentials - Password\:
+]]></descriptionCdata>
+  <annotation>5f967a0d-0799-481c-88b9-b045c3dd0a2a.description</annotation>
+  <name>Service Status</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="eff0c49b-815f-445b-aa4e-18461ac783ba">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5f967a0d-0799-481c-88b9-b045c3dd0a2a.eff0c49b-815f-445b-aa4e-18461ac783ba.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="216f361e-d732-4b38-811e-859a3dbb15b2">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>service</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5f967a0d-0799-481c-88b9-b045c3dd0a2a.216f361e-d732-4b38-811e-859a3dbb15b2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="2aaab3a1-196a-4460-8ea0-dfcead0467ff">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5f967a0d-0799-481c-88b9-b045c3dd0a2a.2aaab3a1-196a-4460-8ea0-dfcead0467ff.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="fff69615-9733-4308-802a-532c81c7153a">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>5f967a0d-0799-481c-88b9-b045c3dd0a2a.fff69615-9733-4308-802a-532c81c7153a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="ade30155-c66c-4a7d-8e37-64cb389e8aad">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="368f2c4c-cdfb-4d94-8ff4-dd4e1d2e78b0">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="afcc37b6-7e90-48cf-884b-aa1fc0ca5865">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="1c30823b-17f3-4d47-b8ff-555c6df3703c">
+      <annotation></annotation>
+      <name>service pending</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="dee94262-8fa9-45a7-b29d-ae2271fd24d6">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="74d2190c-8a75-4fd4-afdd-61d62d5e2f3c">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>5</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="72bced8f-3f7e-4339-b686-99db7fadbf39">
+      <annotation></annotation>
+      <name>service paused</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="46628415-3cf4-491e-ad67-cdb3dcceb345">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="16dd4bb2-7631-4b1b-a712-cbb900fad6ac">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>4</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="27cb5871-30a3-4ec6-aa4d-09887a68c2f0">
+      <annotation></annotation>
+      <name>service stopped</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="f6fd2a62-b103-4f83-83f5-59d8820d761b">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="774386fc-b4b3-4a0f-ab9c-27ec69061182">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>3</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6addb4ab-477a-4b42-b8dc-91f3174fa3cb">
+      <annotation></annotation>
+      <name>service running</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="57607855-f028-4d58-96df-1636acc78117">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="39e57c1e-eb09-42d6-a30f-bb8665320f90">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>2</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f8f9f328-d7a1-4519-a681-559a5e538c8d">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="7c9df37c-cdd8-4026-b152-7d9743548456">
+    <baseIcon>windows_service.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="b122a658-935b-4ef8-8288-0cb788f0e2c4">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Windows.ServiceStatus</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="e3733273-6a08-475a-84cf-fe2157c7a3b7">
+  <descriptionCdata><![CDATA[e3733273-6a08-475a-84cf-fe2157c7a3b7.description=<pre>\nScans for a specified HTML tag and returns the content found between that tag and its closing tag. \n\nInputs\:\n    html - The HTML to parse. This is the actual HTML, not the path to an HMTL file.\n    occurrenceNumber - Specifies which flagged section to return. A value of '1' indicates the first section, '2' the second and so on. A value of '0' indicates the return of the entire document.\n    startTag - The HTML tag to parse on. \nExample\: <table>\n    endTag - The closing HTML tag to parse on.\nExample\: </table>\n\nResults\:\n    Result - The information contained between the <startTag> and <endTag>. \n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully. The html does not have enough occurrences of tag.\n\nNote\:\nThis operation adds to the context two variables <htmlParamNames> and <htmlParamValues>. These two variables contain the names and the values of the HTML attributes present in the tag found by the operation. For example, if the tag that is found is something like \n    <table dir\="rtl" align\="center"> ... </table>\nthe two variables are\:\n    htmlParamNames\: dir,align\n    htmlParamValues\: rtl,center\nIn a flow containing an "HTML Parser" step, these two variables can be fetched from the context and used in subsequent steps.\n\nExample\:\nIf the tag is 'table', everything between <table> and </table> is returned. The function does support nested tables\:\n<table>\nfoo\n<table>\nbar\n</table>\n</table>\n<table>\nmoo\n</table>\nThe inner table ('bar') cannot be retrieved. \n'foo' or 'moo' can be retrieved. If 'foo' is retrieved, it contains the 'bar' sub-table.\n</pre>
+]]></descriptionCdata>
+  <annotation>e3733273-6a08-475a-84cf-fe2157c7a3b7.description</annotation>
+  <name>HTML Parser</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="79317419-cfb3-4672-9f54-472e4cb6ec87">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>html</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6989958e-39af-447c-bb80-40b585b42164">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>occurrenceNumber</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="17165a47-8abc-44db-868c-d622a63fc190">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>startTag</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f5ea0f37-7b9b-4746-bc5d-6e1f774ab0e6">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>endTag</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="e5b48bdf-9c64-402f-a920-6dfa0549418b">
+    <annotation></annotation>
+    <name>Operation HTML Parser (8134028a-5a26-4410-ac88-2c03b6daa823)</name>
+    <script>scriptletResponse = &quot;failure&quot;;
+try{
+var test = occurrenceNumber.replace(/0|([1-9][0-9]*)/, &quot;&quot;);
+if (test != null &amp;&amp; test != &quot;&quot;)
+    throw new java.lang.Exception(&quot;Invalid occurrenceNumber input: must be 0 or a valid positive integer&quot;);
+var index = parseInt(occurrenceNumber);
+var paramNames = &quot;&quot;;
+var paramVals = &quot;&quot;;
+var usedEndTag = &quot;&quot;;
+endTag = endTag.toLowerCase();
+startTag = startTag.toLowerCase();
+if (startTag.charAt(startTag.length-1) == &apos;&gt;&apos; &amp;&amp; startTag.indexOf(&apos; &apos;) == -1)
+    startTag = startTag.substring(0, startTag.length-1);
+
+var excText = &quot;Unable to find specified tag or occurrence of tag&quot;;
+if (occurrenceNumber &gt; countOccurrences(startTag, html))
+    throw new java.lang.Exception(excText);
+
+while (html.length &gt; 0 &amp;&amp; index &gt;0){
+
+	var htmlLC = html.toLowerCase();
+	var subStart = htmlLC.indexOf(startTag);//indexOfCaseless(html,startTag); 
+    if (subStart &lt; 0)
+		throw new java.lang.Exception(excText);
+	var accum = subStart;
+	var end = getEnd(subStart+1);
+	index --;	
+	if (index == 0){
+		var paramsEnd = getEndParamsIndex(subStart, html);
+		getParams(html.substring(subStart+startTag.length , paramsEnd));
+		subStart = getEndParamsIndex(subStart, html);
+		html = html.substring(subStart + 1 , end);
+	}
+	else
+		html = html.substring(end+(usedEndTag).length+1, html.length); 
+}
+scriptletContext.put(&quot;htmlParamNames&quot;, paramNames);
+scriptletContext.put(&quot;htmlParamValues&quot;, paramVals);
+scriptletResponse = &quot;success&quot;;
+scriptletResult = &quot;&quot;+html;
+}
+catch (e){
+scriptletResponse = &quot;failure&quot;;
+scriptletResult = &quot;&quot;+e;
+}
+
+function indexOfCaseless(container, toFind){
+	return indexOfCaselss(container,toFind,0);
+}
+
+function indexOfCaseless(container, toFind, offset){
+	return container.toLowerCase().indexOf(toFind.toLowerCase(), offset);
+}
+
+function getParams(info){
+	info = info.replace(/\s+&amp;/, &quot;&quot;);
+	info = info.replace(/^\s+/, &quot;&quot;);
+	var split = info.split(/^([^\s=]+)=*(&quot;[^&quot;]*&quot;|\S*)/);
+	while (split != null &amp;&amp; split.length &gt; 2){
+		if (paramNames != null &amp;&amp; paramNames.length &gt; 0)
+			paramNames +=&quot;,&quot;;
+		if (paramNames != null &amp;&amp; paramNames.length &gt; 0)
+			paramVals +=&quot;,&quot;;
+		paramNames += split[1];
+		if(split[2].indexOf(&quot;\&quot;&quot;)==0)
+			paramVals += split[2].substring(1, split[2].length-1);
+		else
+			paramVals += split[2];
+		if (split.length &gt; 3)
+			split = split[3].replace(/^\s+/, &quot;&quot;).split(/^([^\s=]+)=*(&quot;[^&quot;]*&quot;|\S*)/);
+		else
+			split = null
+	}
+}
+
+function trimGRLT(toTrim){
+	toTrim = toTrim.replace(/&lt;+&amp;/, &quot;&quot;);
+	toTrim = toTrim.replace(/^&lt;+/, &quot;&quot;);
+	toTrim = toTrim.replace(/&gt;+&amp;/, &quot;&quot;);
+	toTrim = toTrim.replace(/^&gt;+/, &quot;&quot;);
+	return toTrim;
+}
+
+function getEndParamsIndex(offset, toParse){
+	var quoteStart = html.indexOf(&quot;\&quot;&quot;, subStart);
+	var gtStart = html.indexOf(&quot;&gt;&quot;, subStart);
+	while (quoteStart &lt;gtStart &amp;&amp; quoteStart &gt;=0){
+		quoteStart = html.indexOf(&quot;\&quot;&quot;, quoteStart+1);
+		gtStart = html.indexOf(&quot;&gt;&quot;, quoteStart+1);
+		quoteStart = html.indexOf(&quot;\&quot;&quot;, quoteStart+1);
+	}
+	return gtStart;
+}
+
+function getEnd(offset) {
+	//var end = indexOfCaseless(html, endTag, offset);
+	var end = htmlLC.indexOf(endTag, offset);
+	var temp = html.substring(end, html.length);
+	if (endTag == &quot;&lt;&quot;){
+		var proposedEnd = &quot;&lt;/&quot;+trimGRLT(startTag)
+		if(temp.toLowerCase().indexOf(proposedEnd) == 0){
+		//if (indexOfCaseless(temp, proposedEnd)==0){
+			//end = indexOfCaseless(html, proposedEnd, offset);
+			end = htmlLC.indexOf(proposedEnd, offset);
+			usedEndTag = proposedEnd;
+		}
+	}
+	else
+		usedEndTag = endTag;
+	//var recCheck = indexOfCaseless(html, startTag, offset);
+	var recCheck = htmlLC.indexOf(startTag, offset);
+	while (recCheck &lt; end &amp;&amp; recCheck &gt;= 0 &amp;&amp; end &gt;=0){
+		if (recCheck &gt; end)
+			return end;
+		else
+			offset = getEnd(recCheck+1)+1; 
+		//recCheck = indexOfCaseless(html, startTag, offset);
+		recCheck = htmlLC.indexOf(startTag, offset);
+		//end = indexOfCaseless(html, endTag, offset);
+		end = htmlLC.indexOf(endTag, offset);
+	}
+	if (end &gt; 0)
+		return end
+	else
+		return html.length-1;
+}
+
+function countOccurrences(string, text) {
+	var count = -1;
+	var previous = text;
+	do {
+		count++;
+		previous = text;
+		text = text.replace(string, &quot;&quot;);
+	} while(previous != text);	
+	return count;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="7f3198f2-2015-4483-bfb0-13ca20556bbb">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="9c0901cb-25af-45e0-ba79-405aad0746ad">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b487eac4-4b0f-4492-9c25-0763a16e960a">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e3cf9f86-0006-463e-9e77-5910622328d9">
+    <baseIcon>website.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="f052f1e8-c9a2-4a93-b61d-70fce4ce943b">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="732439e5-3afa-454a-ab9a-b297792c0674">
+  <descriptionCdata><![CDATA[732439e5-3afa-454a-ab9a-b297792c0674.description=<pre>Turns linefeed delimited information into an HTML table.\n      \nInputs\: \nfmtData - The data to format.\n\nResponses\:\nsuccess - The data was formatted successfully.\n      \nReturns\:\nHTML format of the data.\n</pre>
+]]></descriptionCdata>
+  <annotation>732439e5-3afa-454a-ab9a-b297792c0674.description</annotation>
+  <name>Format Display Information</name>
+  <categories>
+    <category>
+      <refId>2d79a24d-6cca-41d8-b1af-1610d04d9e6f</refId>
+      <refName>Unix OS</refName>
+    </category>
+  </categories>
+  <inputs>
+    <userInputBinding id="aae101e9-a987-416c-9687-d1b225bb5cd0">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>fmtData</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="973fd760-682c-4c74-95b0-006c39ef6515">
+    <annotation></annotation>
+    <name>Operation Format Display Information (33f635ee-bf4d-4e75-9403-1c820afa77a0)</name>
+    <script>// This turns LF delmited lines into an HTML table
+output = &quot;&lt;table&gt;&quot;+&quot;\n&quot;;
+lines = fmtData.split(/\n/);
+for (i = 0; i &lt; 10000; i++) {
+   if (lines[i] != null) {
+      output += &quot;\t&quot; + &quot;&lt;tr&gt;&lt;td&gt;&quot; + lines[i] + &quot;&lt;/td&gt;&lt;/tr&gt;&quot; + &quot;\n&quot;;
+   }
+   else {
+      break;
+   }
+}
+output += &quot;&lt;/table&gt;&quot;;
+scriptletResult = output;</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="e34a5682-dd81-497c-85f2-4d5cc6cce7ac">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ae7a53dc-8993-4b83-af51-186329724f59">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="daa06555-8d0d-470e-b349-0950e111003b">
+    <baseIcon>window.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d5171e81-7b28-4abb-a8d6-27dfe144fd37">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

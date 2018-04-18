@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd">
+  <descriptionCdata><![CDATA[e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.08b2d5a6-d914-4dd9-a521-fc83c7e6e46d.prompt=The files checksum matches the given checksum.\n\nHere are the results you can use in your flows\:\n<pre>checksum</pre>the checksum of the specified file. Current value\:${checksum}
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.2d5c72c7-c8c4-4ff6-8483-60af345b55ae.prompt=The file's checksum was calculated, but did not match the given checksum, or  no checksum was provided to compare against.\n\nHere are is the flow variable you can use in your flows\:\n<pre>checksum</pre>the actual checksum of the specified file. Current value\:${checksum}
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.499ffc1b-1c20-4818-97d0-f312c11f7841.description=<pre>FSMD5Sum Calculates a file's checksum and compares it to a given checksum.\n\nInputs\:\n    source - The file to rename, including directory.\n    compareTo - The checksum to compare to.\n    user - Username to use for thread impersonation on the RAS host when reading.\n    password - Password for the user.\n\nResults\:\n    returnCode - This is the primary output. It is -1 for failure, 27 if the checksum matched the specified checksum and 0 if checksum did not matched the specified checksum.\n    checksum - The checksum calculated for the file.\n\nResponses\:\n    failure - The checksum calculations failed or the file did not exist.\n    success \: not equal - The checksum was calculated, but did not equal the given checksum.\n    success \: equal - The checksum was the same as the one compared to.\n\n</pre>\n
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.499ffc1b-1c20-4818-97d0-f312c11f7841.prompt=This sample will demonstrate how to use the FSMD5Sum operation.\nThis sample compares a files checksum to one you can specify.
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.8456ce7c-0e1c-4f0d-9b56-8db200faf590.prompt=Enter a value for source
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.951a5a4d-4325-4352-bd2f-5ec17c6bd0b0.description=Failure. The file probably does not exist.
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.951a5a4d-4325-4352-bd2f-5ec17c6bd0b0.prompt=An error occurred.
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.d18c212b-9d87-4d16-9ef8-2e9184296243.prompt=Enter a value for compareTo
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.description=<pre>\nDemonstrates the use of the FSMD5Sum operation, which calculates a file's checksum and compares it to a given checksum.\n\nInputs\:\n    source - The file to calculate the checksum for.\n    checksum - The checksum to compare to.\n    username - Username to use for thread impersonation on the RAS host when reading.\n    password - Password for the user.\n\nResponses\:\n    success \: Equal - The sample completed successfully. The checksum was the same as the one compared to.\n    success \: Not equal - The file's checksum was calculated, but did not match the specified checksum.\n    failure - The sample failed.\n</pre>
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.e3be5b41-2b8e-4139-8a86-c0b70c784fae.prompt=Enter a value for user
+e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.feac1452-3ce0-4d7e-8b42-cc6a0ad394e5.prompt=Enter a value for password
+]]></descriptionCdata>
+  <annotation>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.description</annotation>
+  <name>MD5 Sum Sample</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="95a355db-8e78-4a7e-a0c9-776b13fc3c88">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="06ce0435-d29b-4af7-ba15-e2c806923562">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e7e0f900-109f-4f58-85e1-f5775271cbc0">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>Value</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="af0164c5-f71d-448f-b912-bb23d09e9595">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="499ffc1b-1c20-4818-97d0-f312c11f7841">
+      <annotation>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.499ffc1b-1c20-4818-97d0-f312c11f7841.description</annotation>
+      <name>FS MD5 Sum</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.499ffc1b-1c20-4818-97d0-f312c11f7841.prompt</userPrompt>
+      <bindings>
+        <userInputBinding id="d18c212b-9d87-4d16-9ef8-2e9184296243">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>compareTo</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.d18c212b-9d87-4d16-9ef8-2e9184296243.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="8456ce7c-0e1c-4f0d-9b56-8db200faf590">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.8456ce7c-0e1c-4f0d-9b56-8db200faf590.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="e3be5b41-2b8e-4139-8a86-c0b70c784fae">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>user</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.e3be5b41-2b8e-4139-8a86-c0b70c784fae.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="feac1452-3ce0-4d7e-8b42-cc6a0ad394e5">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.feac1452-3ce0-4d7e-8b42-cc6a0ad394e5.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="c0f66be0-e772-45ef-8a4f-bccadaf4d6a2">
+          <annotation></annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>951a5a4d-4325-4352-bd2f-5ec17c6bd0b0</refId>
+          </destination>
+          <source>
+            <refId>499ffc1b-1c20-4818-97d0-f312c11f7841</refId>
+          </source>
+          <positions>
+            <point>
+              <x>57.0</x>
+              <y>37.0</y>
+            </point>
+            <point>
+              <x>50.0</x>
+              <y>184.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="7c553432-2560-4813-ac42-f19e75d7e759">
+          <annotation></annotation>
+          <name>success : not equal</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success : not equal</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2d5c72c7-c8c4-4ff6-8483-60af345b55ae</refId>
+          </destination>
+          <source>
+            <refId>499ffc1b-1c20-4818-97d0-f312c11f7841</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>34.0</y>
+            </point>
+            <point>
+              <x>229.0</x>
+              <y>184.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="3bf1abb3-1130-4a19-a416-0388f89c8267">
+          <annotation></annotation>
+          <name>success : equal</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success : equal</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>08b2d5a6-d914-4dd9-a521-fc83c7e6e46d</refId>
+          </destination>
+          <source>
+            <refId>499ffc1b-1c20-4818-97d0-f312c11f7841</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>34.0</y>
+            </point>
+            <point>
+              <x>255.0</x>
+              <y>34.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>1a400ded-d40d-43e0-89eb-03428bd934af</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="2d5c72c7-c8c4-4ff6-8483-60af345b55ae">
+      <annotation></annotation>
+      <name>Not equal : success</name>
+      <bounds>
+        <x>205.0</x>
+        <y>150.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.2d5c72c7-c8c4-4ff6-8483-60af345b55ae.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="fbbe62a1-f97c-467e-8063-dc28563f90d0">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>2d5c72c7-c8c4-4ff6-8483-60af345b55ae</refId>
+          </destination>
+          <source>
+            <refId>2d5c72c7-c8c4-4ff6-8483-60af345b55ae</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="b77fe964-01e6-4168-aad7-35566c456fb4">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>File checksum calculated</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="951a5a4d-4325-4352-bd2f-5ec17c6bd0b0">
+      <annotation>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.951a5a4d-4325-4352-bd2f-5ec17c6bd0b0.description</annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>0.0</x>
+        <y>150.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.951a5a4d-4325-4352-bd2f-5ec17c6bd0b0.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="11854658-603e-4676-a6cf-5f25be030d86">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>951a5a4d-4325-4352-bd2f-5ec17c6bd0b0</refId>
+          </destination>
+          <source>
+            <refId>951a5a4d-4325-4352-bd2f-5ec17c6bd0b0</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="1f409608-2724-476d-9f14-fca2ff9e2c2b">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>An error occurred.</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="a55fee6f-1159-4fdd-a3dc-f2d9da8bf75c">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="72fc8bc8-cbdf-400f-876d-85ead8e449e6">
+            <doubleValue>0.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="08b2d5a6-d914-4dd9-a521-fc83c7e6e46d">
+      <annotation></annotation>
+      <name>Equal : success</name>
+      <bounds>
+        <x>205.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>e09b5f40-d4ac-4242-a648-d0f9f3c8ffbd.08b2d5a6-d914-4dd9-a521-fc83c7e6e46d.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="ec689fcb-d848-45fd-8266-9313c2fa2d58">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>08b2d5a6-d914-4dd9-a521-fc83c7e6e46d</refId>
+          </destination>
+          <source>
+            <refId>08b2d5a6-d914-4dd9-a521-fc83c7e6e46d</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="cd298d85-59b9-4aa9-ab21-5b1799a08c67">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Checksums match</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>499ffc1b-1c20-4818-97d0-f312c11f7841</startSteps>
+</flow>

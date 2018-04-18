@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="29cd0873-93a1-4a2c-8888-394af8e414f4">
+  <descriptionCdata><![CDATA[29cd0873-93a1-4a2c-8888-394af8e414f4.description=<pre>\nChecks to see if a list contains every element in another list.\n\nInputs\:\nsublist -Tthe contained list.\ncontainer - The containing list.\ndelimiter - A delimiter separating elements in the two lists.\n\nResponses\:\nsuccess - sublist is contained in container.\nfailure - sublist is not contained in container.\n\nResults\:\nField 1 - All items contained in the sublist that are not in the container. \n</pre>    
+]]></descriptionCdata>
+  <annotation>29cd0873-93a1-4a2c-8888-394af8e414f4.description</annotation>
+  <name>Contains All</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c07fc856-c1f8-403e-81e2-d9d7bfcecb7d">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sublist</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0a046151-b92a-49dc-8e2c-cb952cad569b">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>container</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cde977ef-04ed-474c-82d5-da23f2d11a10">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="b2b2b0c2-3649-4267-9f9d-6fe6f8272586">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${sublist}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2e0da359-e015-48ab-aff7-f521534f059d">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${container}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2b931c74-506b-49dc-808d-dd6aa9d67cfc">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${delimiter}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="d4f69a2b-1ad3-4694-9c45-7c6619f29f35">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="1743f949-9bd4-44e6-b6bb-b806e1626e5e">
+    <annotation></annotation>
+    <name>Operation Contains All (5960219c-b246-4dbf-a1b3-d1d3c0675d29)</name>
+    <script>
+scriptletResponse = &quot;failure&quot;;
+scriptletResult = &quot;&quot;;
+
+try{
+if (delimiter != null)
+	limiter = delimiter;
+else
+	limiter = &quot;,&quot;;
+var sub = sublist.split(limiter);
+if (sub.length == 1){
+var index = container.indexOf(sub[0]);
+var found = false;
+while (index &gt;= 0 &amp;&amp; !found){
+	if (index == 0 || container.charAt(index-1) == limiter)
+		if (index+sub[0].length &gt;= container.length || container.charAt(index+sub[0].length) == limiter)
+	found = true;
+	index = container.indexOf(sublist, index+1);
+}
+if (found)
+	scriptletResponse = &quot;success&quot;;
+else
+	scriptletResult = sub[0];
+}
+else{
+var parent = container.split(limiter);
+missing = &quot;&quot;;
+
+if (sub==null || parent==null) {
+  scriptletResponse = &quot;failure&quot;;
+} else {
+	for (count = 0; count &lt; sub.length; count++){
+		var curr = sub[count];
+		if (!contains(parent, curr.toLowerCase())){
+			if (missing.length &gt;0){
+				missing += delimiter;
+				missing += curr;
+			}
+			else
+				missing = curr;
+		}
+	}
+}
+if (missing.length &gt; 0){
+	scriptletResponse = &quot;failure&quot;;
+	scriptletResult = missing;
+}
+else{
+	scriptletResponse = &quot;success&quot;;
+	scriptletResult = &quot;&quot;;
+}
+}
+}
+catch (e){
+  scriptletResponse = &quot;failure&quot;;
+  scriptletResult = &quot;&quot;+e;
+}
+
+function contains (parent, sub){
+	for (icount = 0; icount &lt; parent.length; icount++){
+		var p = parent[icount].toLowerCase();
+		var index = p.indexOf(&quot;&quot;+sub);
+		if (index&gt;=0||p==&quot;&quot;+sub)
+			return true;
+	}
+	return false;
+}
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d4e55704-396b-4cd0-87aa-eb946ae83c93">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="18637a4d-55a6-4274-8759-e445ecc2d4c7">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="013fdbec-4e56-47dc-b087-b60f07f40c44">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="1bdf2284-ed4f-459c-af1e-138b2b045deb">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

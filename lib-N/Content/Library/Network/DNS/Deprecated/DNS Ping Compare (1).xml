@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c96da882-818f-4451-ad7e-26049992e408">
+  <descriptionCdata><![CDATA[c96da882-818f-4451-ad7e-26049992e408.description=<pre>\nGet the Host Name on a IP Address.\nLooks up a machines IP Address, pings it, and verifies that the ip address that responds to the ping maps to the hostname given.\n\nInputs\:\nhostname - the host to verify the ip address of.\ndnsServer - (optional) dns server to perform lookup against.\n\nResult\:\nipaddress - the IP address\n\nResponses\:\nSuccess - The host name the responding IP address maps to is the entered host name. \nFailed - The responding hostname was not the same as the hostname pinged, or an error occurred.\n</pre>
+]]></descriptionCdata>
+  <annotation>c96da882-818f-4451-ad7e-26049992e408.description</annotation>
+  <name>DNS Ping Compare (1)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="250a3518-7668-4600-b60a-60e0934d8290">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>hostname</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3fa1c6c8-2c74-4073-8601-2539a66f3fbd">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dnsServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="6afafb85-a6b9-4c0b-adb1-ae92dc26f079">
+      <annotation></annotation>
+      <name>Failed</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4cf8beaa-9e3f-4144-b48a-a1f28db02173">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="cd2c5547-7652-4e77-8bcd-657fc25f3444">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ed623fc5-bfbe-4cfd-918d-61b3d56a7344">
+      <annotation></annotation>
+      <name>Success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="94732450-f017-48e8-8715-87c376f7381f">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="9453d9ed-058d-4565-a625-2b0e376e2dda">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="3e181e09-8432-4121-ab0a-0c5ef403f4da">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>ipaddress</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="cccbdb37-dd58-43a2-85be-33187e8b1f44">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>0a13e5b1-fdd6-4503-b09d-76ce3a48dc9c</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

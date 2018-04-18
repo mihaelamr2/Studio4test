@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="0e14b133-0411-40bc-b7b7-1060ee67fb65">
+  <descriptionCdata><![CDATA[0e14b133-0411-40bc-b7b7-1060ee67fb65.18a07fd9-c36f-43b5-8540-14cbf859d3ba.prompt=Input WMI query\:
+0e14b133-0411-40bc-b7b7-1060ee67fb65.46c41667-c0ca-4897-a1d7-273c50780c74.prompt=Input namespace\:
+0e14b133-0411-40bc-b7b7-1060ee67fb65.5128c2d5-52a9-4c94-bbb2-ca0da7efb09e.prompt=Input host\:
+0e14b133-0411-40bc-b7b7-1060ee67fb65.608be405-d3ea-483d-afa4-b1b97129c189.prompt=Input password\:
+0e14b133-0411-40bc-b7b7-1060ee67fb65.7bd51938-80ef-4ec2-9dca-c9c4902da1b2.prompt=Input username\:
+0e14b133-0411-40bc-b7b7-1060ee67fb65.description=<pre>\nThe operation runs a query against WMI and returns all the instances and properties in XML format.\n\nInputs\:\nhost - Host name or ip address of the system on which the WMI query will be run.\nusername - Username to use for WMI impersonation on the host for this operation. Allowed formats\: userName or domain\\userName. Example\: myuser or mydomain\\myuser.\npassword - Password for the given username.\nnamespace - The namespace to run the query against. Example\: root\\cimv2. If not provided, the root\\cimv2 namespace is used by default.\nquery - The query to execute. Example\: Select *  from win32_Service where Name like 'App%'.\n\nOutputs\:\nreturnResult - An xml representation of the instances returned by the query or an error message if the operation fails.\n\nResponses\:\nsuccess - The query returned successfully.\nfailure - Unable to execute query.\n\nNotes\:\nUse Library/Operations/WMI/Java/WMI Query Results Transformer operation  on the returned XML to convert to some other format.\nThis operation can be used on a Linux RAS to query WMI objects on a remote Windows machine. \nThe result xml has the following format\:\n<results>\n  <result>\n    <property>\n      <Name>...</Name>\n      <Type>...</Type>\n      <Value>...</Value>\n    </property>\n    <property>\n      ...\t\n    </property>\n  </result>\n  <result>\n     ...\t\n  </result>\n<results>\n\n</pre>\n
+]]></descriptionCdata>
+  <annotation>0e14b133-0411-40bc-b7b7-1060ee67fb65.description</annotation>
+  <name>WMI Query</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="5128c2d5-52a9-4c94-bbb2-ca0da7efb09e">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>0e14b133-0411-40bc-b7b7-1060ee67fb65.5128c2d5-52a9-4c94-bbb2-ca0da7efb09e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7bd51938-80ef-4ec2-9dca-c9c4902da1b2">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>0e14b133-0411-40bc-b7b7-1060ee67fb65.7bd51938-80ef-4ec2-9dca-c9c4902da1b2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="608be405-d3ea-483d-afa4-b1b97129c189">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>0e14b133-0411-40bc-b7b7-1060ee67fb65.608be405-d3ea-483d-afa4-b1b97129c189.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="46c41667-c0ca-4897-a1d7-273c50780c74">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>namespace</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>0e14b133-0411-40bc-b7b7-1060ee67fb65.46c41667-c0ca-4897-a1d7-273c50780c74.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="18a07fd9-c36f-43b5-8540-14cbf859d3ba">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>query</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>0e14b133-0411-40bc-b7b7-1060ee67fb65.18a07fd9-c36f-43b5-8540-14cbf859d3ba.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="7ee19777-7828-419a-aa48-6d3dcb385bd6">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="73ee6f9b-4de6-43d0-8dbf-ee00ca94fb13">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="2af45ee9-e4ff-4502-8f87-a672c3cdb9af">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="db3f6884-85a7-4fb2-bd8c-7d443870da14">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4cae391a-0fd0-4009-8ebe-3fcd24be2af7">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="8e7e20a2-e601-41f5-a593-3abb1e0cea57">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="5a32b865-8e4d-4441-9b8b-dfc4c3e092e2">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="3456406f-9b63-4a59-91ba-ed364f5defa0">
+    <baseIcon>windows_server.png</baseIcon>
+    <basePath>/Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="9420aa3d-7fef-4a71-bcd8-e016d0ea8d18">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-java-wmi-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.JavaWMI.operations.WMIQuery</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

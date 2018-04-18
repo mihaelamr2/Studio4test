@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="b3768243-2413-47a7-a879-495f22a58b16">
+  <descriptionCdata><![CDATA[b3768243-2413-47a7-a879-495f22a58b16.0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe.prompt=${host} was resolved to ${address} and pinged.\n\nPath to ${host} was ${hops}.
+b3768243-2413-47a7-a879-495f22a58b16.1e4d3932-1759-4d3d-9110-2475a85f868f.prompt=Maximum number of hops to trace over
+b3768243-2413-47a7-a879-495f22a58b16.322fe21f-bb58-4a3a-8e93-44e6f563f667.description=${host} could not be resolved to an ip address.
+b3768243-2413-47a7-a879-495f22a58b16.322fe21f-bb58-4a3a-8e93-44e6f563f667.prompt=${host} could not be resolved to an ip address.
+b3768243-2413-47a7-a879-495f22a58b16.beb5980e-e6cc-45e5-a26f-2d5a1c4ae6bd.prompt=Enter a value for host
+b3768243-2413-47a7-a879-495f22a58b16.description=<pre>\ndemonstrates how to run a tracert from the Web Services machine to the requested host.\n\nInput Parameters\:\nhost - hostname or IP address of the target host\nmaxHops - maximum amount of hops between Web Services machine and target host\n\nResponses\:\nsuccess - ran tracert\nhost not found - could not resolve hostname to a valid IP address\n\nExtra Results\:\noutput - raw output from tracert command\nnumhops - number of hops completed\nhops - comma separated list of hosts\nping times - A semicolon separated list of comma separated lists of pings to each hop.</pre>
+]]></descriptionCdata>
+  <annotation>b3768243-2413-47a7-a879-495f22a58b16.description</annotation>
+  <name>Traceroute Sample</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="ab9e26e1-91bd-40ba-b6db-c7b69719091e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="bb5a322e-accb-4ed5-bf64-be6839a33225">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="7a33de58-be6b-434c-b5ae-46090c3a0fdd">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="fe6403fb-db16-4112-8469-d492e59bb3db">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="95a4a822-9d01-4156-97a5-4770ba024b3a">
+      <annotation></annotation>
+      <name>traceroute</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="beb5980e-e6cc-45e5-a26f-2d5a1c4ae6bd">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>b3768243-2413-47a7-a879-495f22a58b16.beb5980e-e6cc-45e5-a26f-2d5a1c4ae6bd.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="1e4d3932-1759-4d3d-9110-2475a85f868f">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>hops</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>b3768243-2413-47a7-a879-495f22a58b16.1e4d3932-1759-4d3d-9110-2475a85f868f.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="ff6438c1-4fb0-4634-880c-a0c5b4b7abf9">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Command</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>tracert</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="920c9447-2494-482c-ba16-9d50115fee5a">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Working_Dir</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="d3d00978-e80f-4487-8618-51d33cc0932b">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Argument</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>-h ${hops} ${host}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="147fd4ce-3ed8-450b-b9ed-c5617a5b5e57">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Path</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5ed1357c-394a-45b2-81b0-2e2fb16be9d1">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Environment</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="c1b6c5ad-8e4c-4999-a481-a23335de1c23">
+          <annotation></annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>322fe21f-bb58-4a3a-8e93-44e6f563f667</refId>
+          </destination>
+          <source>
+            <refId>95a4a822-9d01-4156-97a5-4770ba024b3a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>121.0</x>
+              <y>35.97826086956522</y>
+            </point>
+            <point>
+              <x>521.0</x>
+              <y>35.97826086956522</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>450.0</x>
+            <y>-10.978260869565219</y>
+          </labelPosition>
+        </transition>
+        <transition id="13a3cf19-8a69-4928-b98e-3c28836a28ea">
+          <annotation></annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe</refId>
+          </destination>
+          <source>
+            <refId>95a4a822-9d01-4156-97a5-4770ba024b3a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>90.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>135.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>600.0</x>
+            <y>24.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>13f92217-b076-4d3e-9cfc-9e2174788599</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="b2c08da8-02b3-43f7-b6ae-1130705c359e">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>hops</contextKey>
+          <expression id="6fede8ef-ce64-471c-9dbd-91ae663150d5">
+            <annotation></annotation>
+            <name>Result: hops</name>
+            <fieldName>hops</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="9dc571a8-2e96-4ce3-9576-472569a74d4a">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>address</contextKey>
+          <expression id="b34a7fe2-7331-4b76-a28c-73ea953214e2">
+            <annotation></annotation>
+            <name>Result: address</name>
+            <fieldName>address</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="322fe21f-bb58-4a3a-8e93-44e6f563f667">
+      <annotation>b3768243-2413-47a7-a879-495f22a58b16.322fe21f-bb58-4a3a-8e93-44e6f563f667.description</annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>140.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>b3768243-2413-47a7-a879-495f22a58b16.322fe21f-bb58-4a3a-8e93-44e6f563f667.prompt</userPrompt>
+      <scriptlet id="df92090b-a30d-43bf-8a36-e6f26e7346c0">
+        <annotation></annotation>
+        <name>Step Error : failure in Flow Traceroute Sample (489dbefc-a2e8-4e9c-8926-266573e25a27)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="7387ac9f-0da1-497c-a473-1ac72d99f770">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>322fe21f-bb58-4a3a-8e93-44e6f563f667</refId>
+          </destination>
+          <source>
+            <refId>322fe21f-bb58-4a3a-8e93-44e6f563f667</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="56a0035c-28e3-4193-aaf4-b1518d69d75b">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Host not found</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>0.0</x>
+        <y>130.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>b3768243-2413-47a7-a879-495f22a58b16.0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe.prompt</userPrompt>
+      <scriptlet id="1bde0d19-7f7c-446d-a871-18e49b8f1431">
+        <annotation></annotation>
+        <name>Step Resolved : success in Flow Traceroute Sample (43200c92-4d66-4d61-96f1-1160cee0e04a)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="c24af21d-5537-4752-bc04-638eddada8f3">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe</refId>
+          </destination>
+          <source>
+            <refId>0ae757f5-fe2c-43e2-b89b-8c139d9f7cfe</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="8da1c996-a6fc-4d37-b223-a4f352e9365b">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Ping Results</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>95a4a822-9d01-4156-97a5-4770ba024b3a</startSteps>
+</flow>

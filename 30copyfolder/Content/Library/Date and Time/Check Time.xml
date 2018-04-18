@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d5298352-87a1-445b-bd71-95ca0b1f10ff">
+  <descriptionCdata><![CDATA[d5298352-87a1-445b-bd71-95ca0b1f10ff.description=<pre>\n    This operation makes a time based loop acording to how many seconds you specify in the input runLenghth and starting from time set in input timeStarted. If you want to let the operation set the timeStarted with the time when the execution starts, leave the input blank. After the operation goes to done, you can retrieve the timeStarted value.\n\nInputs\:\n    runLength - The number of seconds that this timer should loop for.\n    timeStarted - The time in UNIX format with which the operation will start. This time is automatically put into the timeStarted variable in global context after the first run, and should be left blank before the first run.\n\nResponses\:\n    continue - The timer loop is still running, do another operation in the loop.\n    done - The specified time has elapsed.\n\n</pre>
+]]></descriptionCdata>
+  <annotation>d5298352-87a1-445b-bd71-95ca0b1f10ff.description</annotation>
+  <name>Check Time</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="48b72fe1-5e70-4c73-b7f8-45dfa6010b5a">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>runLength</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a54d6225-dd75-44c8-aa27-ac1d0ba709bd">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeStarted</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="56fe0d46-ddf8-4aa7-ad67-44f1365cd363">
+    <annotation></annotation>
+    <name>Operation Check Time (0856992a-2367-40c1-aab0-1733f4f8c417)</name>
+    <script>var startTime;
+var initial = scriptletContext.get(&quot;in1&quot;);
+if (initial != null) {
+	scriptletResult = initial;
+} else {
+	scriptletResult = &quot;${in1}&quot;;
+}
+try{
+startTime = java.lang.Long.parseLong(timeStarted);
+}
+catch (e){
+startTime=0;
+}
+if (startTime == 0){
+	startTime = new Date().getTime();
+	scriptletContext.putGlobal(&quot;timeStarted&quot;,&quot;&quot;+startTime);
+}
+try {
+var len = java.lang.Long.parseLong(runLength);
+} catch (e) {
+  runLength = 0;
+}
+if ((new Date().getTime() - startTime) &gt;= (runLength*1000)){
+	scriptletResponse = &quot;done&quot;; 
+}
+else
+	scriptletResponse = &quot;continue&quot;; 
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="13258bce-461c-4070-9371-345428e87606">
+      <annotation></annotation>
+      <name>continue</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="106df34b-9cc4-48c1-8e42-8c5eeabce65b">
+      <annotation></annotation>
+      <name>done</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="1da2bbc5-199e-4605-9aad-ca20c1a57427">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4f0ea8c7-7415-4819-b686-5b081547ea6c">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3c476cfb-79dc-4a9d-81a3-789184548da6">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

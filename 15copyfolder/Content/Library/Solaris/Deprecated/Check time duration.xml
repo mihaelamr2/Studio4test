@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="f383c437-5380-4db2-9198-84614e58e0d1">
+  <descriptionCdata><![CDATA[f383c437-5380-4db2-9198-84614e58e0d1.description=\nChecks host long ago a given time occurred.\ninputs\:\nin1 - the date/time that occurred.\n\nresponses\:\nsuccess - Successfully converted date difference.\nfailure - something went wrong.\n\nreturns - The number of seconds between the specified date and now.\n      
+]]></descriptionCdata>
+  <annotation>f383c437-5380-4db2-9198-84614e58e0d1.description</annotation>
+  <name>Check time duration</name>
+  <categories/>
+  <inputs>
+    <resultBinding id="2e089683-6151-4e39-a763-99ba595b863a">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>in1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+    </resultBinding>
+    <staticBinding id="9d24a833-0daf-4773-8b19-c6773646a8cd">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in1}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2adf47dc-aa08-47c1-9e0d-422bdfe544b4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in2}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="46f4652b-6ec9-408b-97ea-7af124d5a255">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e5291bb1-6ef0-46ff-95f5-87cc0e868d3e">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="a10c44a6-7722-43e4-ad0f-c568afdcfe70">
+    <annotation></annotation>
+    <name>Operation Check time duration (b4fe8c0c-afa9-4b1a-8da8-80bded9df014)</name>
+    <script>months = [&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;];
+
+// get the current date
+now = new Date();
+
+// split the text date and turn it into a date object
+split = in1.match(/(\w*)(\s+)(\d*)(\s*)(\d*)(:)(\d*)(\:)(\d*)/);
+if (split != null) {
+   for (i = 0; i &lt; 12; i++) {
+      if (months[i] == split[1]) break;
+   }
+   month = i;
+   day = split[3];
+   hour = split[5];
+   minute = split[7];
+   seconds = split[9];
+   // assume the year is the same as the current year unless the month is less
+   year = now.getFullYear();
+   if (month == 11 &amp;&amp; now.getMonth() == 0) year--;
+
+   // create a date for the last log entry
+   then = new Date(year, month, day, hour, minute, seconds);
+   difference = now - then;
+
+   // difference is in millisecond, convert to minutes
+   difference /= 60000;
+   difference = java.lang.Math.floor(difference);
+   scriptletResult = difference.toString();
+   scriptletResponse = &quot;success&quot;;
+}
+else {
+   scriptletResult = &quot;-1&quot;;
+   scriptletResponse = &quot;failure&quot;;
+}
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="ede6b382-dbd2-427b-ae27-b9956ba8d3c7">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="561ffd43-88af-4187-9db9-c2d9e3643186">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b0eb201f-f86f-4f80-9667-a36d5dfbc6ed">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="b4db8aab-a0ba-4021-9e98-c78d8e0f37ef">
+    <baseIcon>stopwatch.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="5ed3aba3-2a36-43e9-81ba-bb3d638ee5ff">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

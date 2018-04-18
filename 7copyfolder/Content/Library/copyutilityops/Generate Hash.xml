@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="cf3c9c53-7f82-4930-8f3f-b22f1b8383e1">
+  <descriptionCdata><![CDATA[cf3c9c53-7f82-4930-8f3f-b22f1b8383e1.description=Computes a digest for the provided data or file using a specified hashing algorithm.\n\nInputs\n    data - Text value representing the data that will be hashed using the algorithm specified in the 'hashAlgorithm' input.\n    salt - Text value representing the data that will be concatenated with the data to be hashed prior to hashing. This input should be used especially when hashing a password or passphrase. The primary function of salts is to defend against dictionary attacks versus a list of password hashes and against pre-computed rainbow table attacks.\n    characterSet - Text value representing the character set that will be used to decode the data and salt before hashing.  \nDefault value\: UTF-8.\n    filePath - A local path to the file that will be hashed.\n    offset - The position in the file from where to start reading the data that will be hashed. This must be a positive integer, smaller than the actual file size.\nDefault value\: 0\n    length - The maximum number of bytes from the file that will be hashed. This should be a number between 1 and 104857600 (100 MB). If the length is 0 the entire file is read.\nDefault value\: 0\n    hashAlgorithm - Text value representing the hashing algorithm that will be used.\nExamples\: SHA-256, SHA-512. \nDefault value\: SHA-256.\n    iterations - The number of times the hashing function will be applied. The hashing function is applied at least once so this input is ignored for values that are less than 2. \nDefault value\: 1\n    resultEncoding - The encoding used for the operation's result. The result of a hash function is in a binary format that need to be encoded.\nValid values\: hex, base64\nDefault value\: hex\n\nResults\n   returnResults - The resulting hash value.   \n\nResponses\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n\nNotes\n    1. If the 'data' input is provided the 'filePath' input is ignored.\n    2. If both 'data' and 'filePath' inputs are left empty the operation returns the hash of empty string. In this case the 'salt' input is ignored.\n    3. The inputs 'offset' and 'length' specify that only one part of the file should be read.\n    4. If the 'offset' input is provided but the 'length' input is set to 0, the entire file will be read starting from that offset.\n    5. If the 'length' input is 0 the operation can read a file that may exceed 100 MB and all its data will be read.\n    6. The valid values for the 'hashAlgorithm' and 'characterSet' inputs depend on the version of the underlying Java platform.\n    7. For the 'hashAlgorithm' input the values 'MD5', 'SHA-1', 'SHA-256' are considered valid values, other values can also be valid depending on the version of the underlying Java platform. For example 'MD2', 'SHA-384', 'SHA-512' are considered valid for Java 7 (according to the official documentation http\://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html\#MessageDigest).\n    8. The hashing algorithms 'MD2', 'MD5' and 'SHA-1' are no longer cryptographically secure hashing algorithms and are considered deprecated. This algorithms should be avoided especially for hashing a password or passphrase. They may be still used only for checksum validations.
+]]></descriptionCdata>
+  <annotation>cf3c9c53-7f82-4930-8f3f-b22f1b8383e1.description</annotation>
+  <name>Generate Hash</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f51a5a7e-cbb7-4b04-b1c7-6a77961ce3e3">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>data</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="7a8de2d9-43f8-4925-a4c4-c60d93582732">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>salt</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2688fd0b-bb7b-4003-81ac-7684e1be7215">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>UTF-8</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="ff9d3c91-f52a-4900-9854-75e879337cc3">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>filePath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a491536c-9969-43d8-a3ba-7cf145439959">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>offset</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>0</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="da44aaea-be80-4c8e-9fe3-a18345130f44">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>length</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>0</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="281e5748-d15b-4d05-bbc1-3865b93820c1">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>hashAlgorithm</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>SHA-256</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="56915047-2543-4d8d-a16e-5ceb03fdeb08">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>iterations</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>1</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="c0f4ad83-ac05-44dc-92d5-2b9192ee2234">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resultEncoding</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>hex</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="757b11e5-6c63-4850-a449-8f49a13d4aa5">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="53349d7d-09dd-4143-b831-865ddd78a769">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="594f80c0-4efc-40a8-af65-4efcb69e8898">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6bbc1079-ffe2-4f58-8f1c-9d372de0b530">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="0aaa7f71-2aa0-423e-b6a7-26b7ec7ea36b">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="11da1665-e3d1-4b36-821e-2d05e0bd729b">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d8f033ba-d9b8-496a-afb5-6ca2f224c7cb">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="8b283373-e84b-4a96-89c0-d58f916fbb34">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>15d3f3df-1af9-4885-aa75-f78aff4cbd95</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

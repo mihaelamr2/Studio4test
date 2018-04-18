@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="ad6f4999-a6a5-4872-af83-dac3cf95129c">
+  <descriptionCdata><![CDATA[ad6f4999-a6a5-4872-af83-dac3cf95129c.description=This operator parses the output of a ping operation, and returns the percentage packet loss.
+]]></descriptionCdata>
+  <annotation>ad6f4999-a6a5-4872-af83-dac3cf95129c.description</annotation>
+  <name>Ping Loss</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="5df77a24-7474-4e84-8d90-31826c34422b">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>pingOutput</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6cd149ff-46c0-4ec3-b3e4-1960f204f1bc">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${pingOutput}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="96d3baec-3081-40d4-b5c4-d8276190019f">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="85474ff3-f8a6-4b4b-861b-4ee26a584629">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="96014281-d210-424e-9b24-fb13dac18029">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters>
+      <selectLineFilter id="210fd5a7-fbd2-4784-b5ec-b94a7becd7e0">
+        <annotation></annotation>
+        <name>Config Item</name>
+        <text>Packets: </text>
+        <type>FIRST_LINE_CONTAINING</type>
+        <autoSelectLineEnding>false</autoSelectLineEnding>
+        <windowsLineEnding>false</windowsLineEnding>
+        <unixLineEnding>true</unixLineEnding>
+      </selectLineFilter>
+      <stripTrailingFilter id="5969fbae-bb9d-4fd4-8a8c-85285d194217">
+        <annotation></annotation>
+        <name>Config Item</name>
+        <strip>(</strip>
+        <type>ALL_CHARACTERS_UP_TO_AND_INCLUDING</type>
+      </stripTrailingFilter>
+      <stripTrailingFilter id="aa8b73cf-7c66-4b28-aac8-e6a2b7dbc420">
+        <annotation></annotation>
+        <name>Config Item</name>
+        <strip>%</strip>
+        <type>ALL_CHARACTERS_AFTER_AND_INCLUDING</type>
+      </stripTrailingFilter>
+    </filters>
+  </resultExpression>
+  <iconSpec id="925b2bad-4e4f-47a6-af59-177467bea795">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="1fa86de9-ece5-45a2-8e76-975c7e4ee150">
+        <baseIcon>wrench.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="27464a9b-3635-40c3-8a79-bf993a728bbd">
+  <descriptionCdata><![CDATA[27464a9b-3635-40c3-8a79-bf993a728bbd.12ce2b5e-487d-4888-8bbc-540795504793.prompt=Target Host User name
+27464a9b-3635-40c3-8a79-bf993a728bbd.6d674cd5-f6ab-4629-88b7-59d960cb5081.prompt=Script File (absolute path)
+27464a9b-3635-40c3-8a79-bf993a728bbd.de4cf29d-627f-42a3-8310-d3a7b12a5737.prompt=Target Host
+27464a9b-3635-40c3-8a79-bf993a728bbd.description=<pre>Delete file from remote Linux host\n\n Inputs\: \n sourceFile - file(absolute path) to be deleted from remote host \n targetHost - Target host from which file to be deleted \n targetHostUserName - Target host user name \n targetHostPassword - target host password  \n\nResponses\:\n success - file was deleted successfully\n failure - file could not be deleted\n\nResult\:\n Success/Failure of  file deletion action\n</pre>\n
+27464a9b-3635-40c3-8a79-bf993a728bbd.f19e8924-217c-447f-a4a0-805e34ad02e2.prompt=Target Host Password
+]]></descriptionCdata>
+  <annotation>27464a9b-3635-40c3-8a79-bf993a728bbd.description</annotation>
+  <name>Remote Linux File Deleter</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="de4cf29d-627f-42a3-8310-d3a7b12a5737">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHost</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>27464a9b-3635-40c3-8a79-bf993a728bbd.de4cf29d-627f-42a3-8310-d3a7b12a5737.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="12ce2b5e-487d-4888-8bbc-540795504793">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHostUserName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>27464a9b-3635-40c3-8a79-bf993a728bbd.12ce2b5e-487d-4888-8bbc-540795504793.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f19e8924-217c-447f-a4a0-805e34ad02e2">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetHostPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>27464a9b-3635-40c3-8a79-bf993a728bbd.f19e8924-217c-447f-a4a0-805e34ad02e2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6d674cd5-f6ab-4629-88b7-59d960cb5081">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sourceFile</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>27464a9b-3635-40c3-8a79-bf993a728bbd.6d674cd5-f6ab-4629-88b7-59d960cb5081.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="6694659f-52b5-445e-8bd7-09502e43a559">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="054a36c5-a0e2-4bb5-8763-afa7e0f89f7e">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="f5aa7b94-772f-4f85-9261-ac28737fe59a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="53558a46-b536-4aeb-aa7c-acbd830d85df">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="e5d0d31c-0b86-4af5-8e99-98fc507b4598">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e2565284-7d10-4550-9309-188c0eefdd2a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="0ab23dbd-0e0f-4dd4-80b5-b00d2341a4fd">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="42407091-ec0e-4047-b2dc-ae3c0544a2c5">
+    <baseIcon>unix_linux_process.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.linuxScriptRunner.RemoteLinuxFileDeleter</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="6c721424-83fd-4ff2-a6dc-17cea1d843d6">
+  <descriptionCdata><![CDATA[6c721424-83fd-4ff2-a6dc-17cea1d843d6.dad42c6f-ebdf-4c86-8c30-5bc5559d3b22.prompt=Distinguished Name\:
+6c721424-83fd-4ff2-a6dc-17cea1d843d6.description=<pre>\nRetrieves the next value from the collection.  This collection is populated by the LDAPSearch operation.\n\nInput Parameters\:\nDN - The DN parameter used in the LDAPSearch operation.  This becomes the key used to find the result set.\n\nResponses\:\nvalue retrieved - The next value in the collection was retrieved and stored in the returnResult result.\nno more values - No more values remain in the collection. \n</pre>\n
+]]></descriptionCdata>
+  <annotation>6c721424-83fd-4ff2-a6dc-17cea1d843d6.description</annotation>
+  <name>LDAP Search Next Result</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="dad42c6f-ebdf-4c86-8c30-5bc5559d3b22">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6c721424-83fd-4ff2-a6dc-17cea1d843d6.dad42c6f-ebdf-4c86-8c30-5bc5559d3b22.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="868f94ac-33f5-482a-b64e-5da2f083ceb3">
+      <annotation></annotation>
+      <name>no more values</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="8d81da98-ab56-4a96-8c15-223ddf1858fe">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="614c81f0-ba6c-4935-838b-8945d309c28d">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="0bdacde3-8247-4156-87a6-6b0c46117bb2">
+      <annotation></annotation>
+      <name>value retrieved</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="75555d27-f6c5-498e-bb45-ccd7cf14d572">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="9dd7c10e-3a8c-42c4-963c-c4528123fc19">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="010160aa-75e4-4dbe-8fe6-1f3d90369b90">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="36eb9f53-2bc1-46e6-8263-cb565e699311">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.LDAPSearchNextResult</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

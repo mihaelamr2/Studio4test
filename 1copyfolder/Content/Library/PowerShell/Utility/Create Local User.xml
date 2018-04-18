@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="ff45dd5a-914d-4e5a-9d54-0d2980e863a4">
+  <descriptionCdata><![CDATA[ff45dd5a-914d-4e5a-9d54-0d2980e863a4.727302c4-e72e-4127-bc4b-30848f4e3061.prompt=Description of new local account\:
+ff45dd5a-914d-4e5a-9d54-0d2980e863a4.dc1e4dd4-db12-4885-ba74-ddba6f25ceec.prompt=Username for new local account\:
+ff45dd5a-914d-4e5a-9d54-0d2980e863a4.description=<pre>Creates a user account in the local Windows computer.\n\nInputs\:\nnewUsername\t- Name of the local user account.\nnewPassword\t - Password for the local user account.\nnewDescription\t - Description of the local user account.\n\nResponses\:\nsuccess\t - Operation completed successfully\nfailure\t - Something went wrong\n</pre>
+ff45dd5a-914d-4e5a-9d54-0d2980e863a4.df0d26a3-16be-4ac3-93c7-e37b915f66c7.prompt=Password for new local account\:
+]]></descriptionCdata>
+  <annotation>ff45dd5a-914d-4e5a-9d54-0d2980e863a4.description</annotation>
+  <name>Create Local User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="dc1e4dd4-db12-4885-ba74-ddba6f25ceec">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newUsername</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ff45dd5a-914d-4e5a-9d54-0d2980e863a4.dc1e4dd4-db12-4885-ba74-ddba6f25ceec.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="df0d26a3-16be-4ac3-93c7-e37b915f66c7">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ff45dd5a-914d-4e5a-9d54-0d2980e863a4.df0d26a3-16be-4ac3-93c7-e37b915f66c7.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="727302c4-e72e-4127-bc4b-30848f4e3061">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>newDescription</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ff45dd5a-914d-4e5a-9d54-0d2980e863a4.727302c4-e72e-4127-bc4b-30848f4e3061.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="9a9a1a1d-3b42-4bd7-ad41-a221b62032fb">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="ab034344-aca5-4fa6-9889-61eb25399586">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e97dac51-9e9b-4aba-9837-d97872103ceb">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="c46dd976-9999-468c-9a00-38741f203b3b">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="1c630e99-cee5-493a-b64e-63341ee61f02">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e56b090c-8ab3-487d-94af-980591d16da1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="65cc7cb8-2780-4e8c-b9b3-fdb3935eff5d">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="933dff29-a87c-4c2a-bfa1-33b339137fb3">
+    <baseIcon>user2.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="2b968465-5eb0-4c6c-ac9b-38c1e666e2fc">
+        <baseIcon>add.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.CreateLocalUser</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

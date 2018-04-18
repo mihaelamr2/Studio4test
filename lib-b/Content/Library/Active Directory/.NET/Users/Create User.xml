@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="98eca820-d37f-41e3-8d69-5e00f792c771">
+  <descriptionCdata><![CDATA[98eca820-d37f-41e3-8d69-5e00f792c771.description=<pre>\nCreates a new user in Active Directory.\n\nInputs\:\n    host - Domain controller.\n    OU - The OU (Organization Unit) or CN (Common Name) to add the user to.\nExample\: CN\=Users.\n    userFullName - Full name of user.\nExamples\: Bob Smith.\n    userPassword - Password for user. (Should respect the password restrictions imposed by AD)\n    sAMAccountName -  New user sAMAAccount name. This is the user logon name (pre-Windows 2000).\nExamples\: bsmith. \nThe complete user account name will look like this "DOMAINNAME\\bsmith".\n    altuser -  Username used to login on domain controller.\n    altpass - Password for altuser.\n    escapeChars - Add this input and set the value to 'true' if you want the operation to escape the special AD characters.\n\nResponses\:\n    success - Operation created new user in AD.\n    failure - Operation failed to create the user.\n\nResults\:\n    Operation return code.\n\nExtra Results\:\n    userDN - The distinguished name of the newly created user ('userFullName' input).\n\nNotes\:\n1. If the inputs contain special characters make sure you enter these inputs either with no special character escaped and set escapeChars to true, either with all the special characters escaped. The special AD characters are '\#','\=','"','<','>',',','+',';','\\','"''.\n2. If sAMAccountName input contains special characters these will be replaced with the "_" character. The following characters are considered special regarding sAMAccountName\: '"','\\','/','[',']','\:',';','|','\=',',','+','*','?','<','>'.\n\n</pre>
+]]></descriptionCdata>
+  <annotation>98eca820-d37f-41e3-8d69-5e00f792c771.description</annotation>
+  <name>Create User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="e5325b34-fbe2-401b-8a75-01739d4afbd7">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="344c528e-6cec-4391-9892-08876b1a2910">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0340bc1e-ee2e-49ee-876e-bc405f719c70">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userFullName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cee02221-86c2-4a41-86e8-bfed9036a807">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="03f4f5bf-e4b4-4cf7-8971-c9b9f10554e9">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sAMAccountName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="aa46c169-3db1-475a-8d34-1d7558c56647">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altuser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a5436bbe-1d1c-446f-a636-8ad9fa6e31b9">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>altpass</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="602f9053-c142-48db-b25c-64a90663a91a">
+    <annotation></annotation>
+    <name>Operation Create User (0b7086df-fca5-4841-83f6-934e8d3106f5)</name>
+    <script> 
+if (scriptletRawResult[&apos;userDN&apos;] != null)
+	scriptletContext.put(&quot;userDN&quot;, scriptletRawResult[&apos;userDN&apos;]);
+   	</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="60e1b537-4fe4-400c-9274-80281d26dfbe">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="e29b82ca-744b-4f02-83f8-e485da88d509">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3e93d4ca-42a9-4e76-8982-95fabd1a21b0">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="797ccc33-dcb4-487c-a5dc-ef76a255f001">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="16b342dd-05a1-4118-9ffb-dde4fe1a9b43">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="114eda3d-4d7c-482c-a203-9122246b9a5d">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="0cb145fa-3548-4cb9-bc22-63f9b8f0313c">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c0973618-44d7-4d69-8d74-fbed874394b8">
+    <baseIcon>user.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_LDAP.ADCreateUser</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

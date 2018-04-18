@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975">
+  <descriptionCdata><![CDATA[6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.1f512832-e95c-4cf6-a6de-089eb193233c.prompt=Alternate Credentials - UserName\:
+6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.392fe90f-d61f-4f8a-86a6-34bfd3734c1e.prompt=Alternate Credentials - Password\:
+6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.4ee4d7ca-6046-4614-a275-7740804a07dd.prompt=HostName\:
+6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.description=<pre>\nRetrieves the requested Windows Performance Counter Value.  Takes 5 samples in 1 second intervals and returns the average.\n\nInput Parameters\:\nhost - Hostname or ip address of the target machine.\nobject - The counter object (ex. Processor).\ncounter - The counter's name (ex. % Processor Time).\ninstance - The instance of the counter (if applicable) (ex. _Total).\nuser - Username to use for thread impersonation on the RAS host for this operation (can be left blank).\npassword - Password of the user.\n\nResponses\:\nsuccess - Retrieved the counter successfully.\nfailure - Failed to retrieve the counter.\n\nExtra Results\:\nVALUE - The actual value captured.\n\nNotes\:\nThis operation checks the value of a performance counter that must be running on the target windows host prior to flow execution\:\nPerformance Object\: physicaldisk\nPerformance Counter\: avg. disk sec/read\nThis performance counter can be enabled using PerfMon.exe on the target host.\n</pre>
+]]></descriptionCdata>
+  <annotation>6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.description</annotation>
+  <name>Get Average Seconds per Disk Read</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4ee4d7ca-6046-4614-a275-7740804a07dd">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.4ee4d7ca-6046-4614-a275-7740804a07dd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="3a1ec823-5522-4a59-8a0a-005a6c2dbcae">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>object</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>physicaldisk</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="b5ec87f7-66ea-452d-9d3a-b5af19763cac">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>counter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>avg. disk sec/read</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="83c7c56b-175e-4aa1-82ed-001ae6192695">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>instance</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>_total</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="1f512832-e95c-4cf6-a6de-089eb193233c">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.1f512832-e95c-4cf6-a6de-089eb193233c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="392fe90f-d61f-4f8a-86a6-34bfd3734c1e">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>6d2198ef-8a9d-4ccc-92eb-bfeb13a3c975.392fe90f-d61f-4f8a-86a6-34bfd3734c1e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a974ab7b-7e99-4f90-8362-df88c054ce96">
+    <annotation></annotation>
+    <name>Operation Get Average Seconds per Disk Read (2c5840dc-7124-4bcc-a9ac-ae49e387b9d5)</name>
+    <script>
+        	scriptletContext.put(&quot;VALUE&quot;, scriptletRawResult[&apos;VALUE&apos;]);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="823c8f59-a3c1-4bb6-aca9-2f0e9b1c8fa1">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="06f94486-9be7-4d94-be04-4a0ae7308e04">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ed154e7f-2ee6-4a56-a8c1-b73093238d47">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="24fee410-01a9-4cee-9feb-2272f57a0103">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="cab765e9-346d-4a98-b207-569e780194be">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c5fddcc5-d702-4a3c-ab59-6403f45943f8">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e0e99624-4eac-4913-991f-591886a9a247">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>VALUE</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="e54fa9eb-30ee-43fb-862d-5af872a163b5">
+    <baseIcon>document_pulse.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="6b299372-0d00-48d0-a947-7d7072723d26">
+        <baseIcon>harddisk.png</baseIcon>
+        <basePath>Operating System/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+      <iconSpec id="e47b2730-e8ac-4bd1-8eda-40861b4575cb">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>c8b71c18-002d-4776-805e-cc873ef0b38e</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

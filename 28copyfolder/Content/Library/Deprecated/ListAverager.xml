@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="168f0ed0-b623-4299-8599-a510688f13fc">
+  <descriptionCdata><![CDATA[168f0ed0-b623-4299-8599-a510688f13fc.description=Takes a list of numbers and averages them together.\n\nDeprecated in favor of 'Analyze list'\n\ninputs\:\nkeyName - the name of the list to average\ndelimiter - what separates different elements in the list.\n\nResponses\:\nsuccess - the operation succeeded.\nfailure - something went wrong.\n\nReturns\: The mean average of the list.\n\nExtra Results\:\naverage - The mean average of the list.\n\n
+]]></descriptionCdata>
+  <annotation>168f0ed0-b623-4299-8599-a510688f13fc.description</annotation>
+  <name>ListAverager</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="a3df88fb-2073-4c5b-b9aa-b34181768644">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a2d13122-c26a-47a0-9efa-6b2ba203adfd">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a4a9de50-2f19-43b0-aa25-d0270f034de7">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${List}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="5a79d2aa-3cdd-4ff2-8b84-188c642d96ff">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in2}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="798c0164-d63f-4630-8848-c417b283b0e4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="aa9417fd-85c7-4045-be6c-6b171da28d3c">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="d920b792-f1b5-4121-a47d-c7876b5baa90">
+    <annotation></annotation>
+    <name>Operation ListAverager (73f84f76-5761-453e-ab08-87335cab35e7)</name>
+    <script>var partial;
+partial = scriptletContext.get(keyName);
+if (partial == null)
+	partial = &quot;&quot;;
+//var vals;
+//vals = partial.split(delimiter);
+st = new java.util.StringTokenizer(partial, delimiter);
+var st;
+var count;
+var sum;
+sum = 0;
+if (st==null) {
+  scriptletResponse = &quot;failure&quot;;
+} else {
+var length = st.countTokens();
+for (i=0;i&lt;length;i++) {
+	var val = st.nextToken();
+	sum += java.lang.Double.parseDouble(val);
+	scriptletContext.put(&quot;averaged&quot;+count, val);
+}
+/*for (count = 0; count &lt; vals.length; count++){
+	try{
+		scriptletContext.put(&quot;averaged&quot;+count, vals[count]);
+		sum += java.lang.Double.parseDouble(vals[count]);
+	}
+	catch (e){}
+	//sum+=vals[count];
+}
+length = vals.length;//-1;
+*/
+if (length &lt; 1)
+	length = 1;
+var result = &quot;&quot; + (sum / length)
+scriptletContext.put(&quot;average&quot;, result);
+scriptletResult=result;
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="63ca9454-56f3-4694-8bb9-bcf70f0cd71c">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="fd2270d5-40a7-4bb1-9a1d-d22c85e7ce19">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="5bc57f83-3150-4c9d-afa4-8b3577c4cffc">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="fe66c3ea-0a39-49ee-8d40-bf2ef97601ed">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="4d44ae5b-8db4-4db1-bfdd-1faf5d17ccf9">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

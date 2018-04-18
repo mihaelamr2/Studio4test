@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="9ef06703-f502-48b7-a28f-1197646e098d">
+  <descriptionCdata><![CDATA[9ef06703-f502-48b7-a28f-1197646e098d.7d26932e-217f-4130-862c-9cba46629099.prompt=Threshold
+9ef06703-f502-48b7-a28f-1197646e098d.description=\nChecks to see if the computer was only recently started.\n\ninputs\:\nminutes - How many minutes the computer has been online.\nthreshold - The desired number of minutes the server has been running.\n\nResponses\:\nRecent Reboot - the system recently rebooted.\nsuccess - System has not recently rebooted\nfailure - failed to compare numbers.\n      
+]]></descriptionCdata>
+  <annotation>9ef06703-f502-48b7-a28f-1197646e098d.description</annotation>
+  <name>Check Uptime Threshold</name>
+  <categories/>
+  <inputs>
+    <resultBinding id="2313549a-8fff-47a2-bc42-6acd07580a4b">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>minutes</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+    </resultBinding>
+    <userInputBinding id="7d26932e-217f-4130-862c-9cba46629099">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>threshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>9ef06703-f502-48b7-a28f-1197646e098d.7d26932e-217f-4130-862c-9cba46629099.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6b521a4c-9a64-4343-84b8-debbf7868552">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${minutes}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4a49fbdd-c4a7-460f-8b1f-536408df038a">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in2}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="5d0878ad-3b81-4346-8085-08e615b4bb21">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="da0560aa-bea8-40c0-8264-0c3adf996689">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="6a4ca345-b0b1-4c56-bcf9-ee2847530c37">
+    <annotation></annotation>
+    <name>Operation Check Uptime Threshold (54f6d17f-9b49-4c2d-947f-dc055fc18281)</name>
+    <script>// default response is success
+scriptletResponse = &quot;success&quot;;
+
+// turn the values into integers so we can compare
+thresholdInt = parseInt(threshold);
+minutesInt = parseInt(minutes);
+if (isNaN(minutesInt) || isNaN(thresholdInt)) {
+   scriptletResponse = &quot;failure&quot;;
+}
+else {
+   if (minutesInt &lt; thresholdInt) scriptletResponse = &quot;Recent Reboot&quot;;
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="34c04722-7a52-40c1-98bc-3fdc8185a998">
+      <annotation></annotation>
+      <name>Recent Reboot</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="ea42e242-82aa-45f7-97a5-c6765843ea6e">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="3b64d342-d2af-4cb4-b754-b828d3f6b7e0">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a762d050-73f0-4e60-96df-45166d8a651d">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="43beea71-00a9-447c-ae0e-eba81c7ef6ae">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="8c48d839-4759-453e-a681-014e6547952e">
+        <baseIcon>Calculator.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

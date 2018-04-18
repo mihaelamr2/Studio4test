@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="015aa01f-bd43-4a08-b7ce-9392260761ad">
+  <descriptionCdata><![CDATA[015aa01f-bd43-4a08-b7ce-9392260761ad.0627f940-fede-4e7f-91ce-db86c0aba08f.prompt=Enter trustAllRoots\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.33a3104c-49b8-4838-b1ef-8f864b2ac5a9.prompt=Enter host\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.3894b66c-fdb8-458d-9dd7-e3115c9aa5e7.prompt=Enter keyStorePassword\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.6481ae40-ab70-4c5a-8afa-caa3a4f71460.prompt=Enter useSSL\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.7ea35f7a-9dc2-42c4-8a5c-f6a3f8c369d4.prompt=Enter user Common Name(CN)\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.8ef86c3a-9297-4d81-a184-e11c0154941d.prompt=Enter OU's Distinguished Name(DN)\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.b8c324da-c086-4c13-8c2b-3dafa9df36dd.prompt=Enter username\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.bcd908dd-b9b8-457b-9d55-d73c602115d1.prompt=Enter sAMAccountName\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.c41017f9-b0ec-409b-8c0b-1b76c92a348a.prompt=Enter password\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.db9e224f-d26a-400e-92fe-bf77c37328fa.prompt=Enter keyStore\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.description=<pre>This operation creates a new user in Active Directory.\n\nInputs\:\n    host - The IP or host name of the domain controller. The port number can be mentioned as well, along with the host (hostNameOrIP\:PortNumber).\nExamples\: test.example.com,  test.example.com\:636, <IPv4Address>, <IPv6Address>, [<IPv6Address>]\:<PortNumber> etc.\nValue format\: The format of an IPv4 address is\: [0-225].[0-225].[0-225].[0-225]. The format of an IPv6 address is \#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#\:\#\#\#\#/\#\#\# (with a prefix), where each \#\#\#\# is a hexadecimal value between 0 to FFFF and the prefix /\#\#\# is a decimal value between 0 to 128. The prefix length is optional.\n    OU - The Organizational Unit DN or Common Name DN to add the user to.\nExample\: OU\=OUTest1,DC\=battleground,DC\=ad\n    userCommonName - The CN, generally the full name of user \nExample\: Bob Smith    \n    sAMAccountName - The sAMAccountName. If this input is empty, the value will be assigned from input "userCommonName".\n    userPassword - The password for the new user. See the "Notes" section for more information regarding the password.\n    username - User to connect to Active Directory as.\n    password - Password to connect to Active Directory as.\n    useSSL - If true, the operation uses the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol to establish a connection to the remote computer. By default, the operation tries to establish a secure connection over TLSv1.2. Default port for SSL/TLS is 636.\nDefault value\: false\nValid values\: true, false.\n    trustAllRoots - Specifies whether to enable weak security over SSL. A SSL certificate is trusted even if no trusted certification authority issued it.\nDefault value\: true.\nValid values\: true, false.\n    keyStore - The location of the KeyStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    keyStorePassword - The password associated with the KeyStore file.\n    trustKeystore - The location of the TrustStore file.\nExample\: %JAVA_HOME%/jre/lib/security/cacerts\n    trustPassword - The password associated with the TrustStore file.\n    escapeChars - Add this input and set to true if you want the operation to escape the special AD chars.\n\nResults\:\n    returnCode - This is the primary output. It contains the value 0 if the operation successfully completes and the value -1 otherwise.\n    userDN - The distinguished name of the newly created user\n\nResponses\:\n    success - Operation created a new user in Active Directory.\n    failure - Operation failed to create the user.\n\nNotes\:\n1.  If the inputs contain special characters make sure you enter these inputs either with no special character escaped and set escapeChars to true, either with all the special characters escaped. The special AD characters are '\#','\=','"','<','>',',','+',';','\\','"''.\n2.  If sAMAccountName input contains special characters these will be replaced with the "_" character. The following characters are considered special regarding sAMAccountName\: '"','\\','/','[',']','\:',';','|','\=',',','+','*','?','<','>'.\n3.  If the useSSL input value is set to true then this operation will connect to the Active Directory server using the ldaps protocol on port 636. Installing a valid certificate on a domain controller permits the LDAP service to listen for, and automatically accept, SSL connections for both LDAP and global catalog traffic. If a valid ssl certificate is not installed on the domain controller, the operation will fail with something like "javax.naming.CommunicationException\: simple bind failed\: [Root exception is javax.net.ssl.SSLHandshakeException\: Remote host closed connection during handshake".\n4.  It is recommended that this operation be used with the useSSL input set to true. This is due to the fact this operation interacts with the user's password through LDAP and there is a constraint in Microsoft Active Directory namely that manipulating a user's password through LDAP can be done given certain restrictions and one of those restrictions is that the communication between the client and the server should be done over Secure Socket Layer (SSL) connection. (More details can be found at the following link http\://support.microsoft.com/kb/269190/en-us )\n5.  If the operation is used with useSSL set to false it will fail with the message "LDAP\: error code 53 - 0000001F\: SvcErr\: DSID-031A12D2, problem 5003 (WILL_NOT_PERFORM), data 0" which usually indicates that the LDAP server cannot process the request because of server-defined restrictions.\n6.  The "userPassword" input field must meet the following requirements\:\n        - is at least six characters long\n        - contains characters from at least three of the following five categories\: English uppercase characters ('A' - 'Z'), English lowercase characters ('a' - 'z'), base 10 digits ('0' - '9'), non-alphanumeric (For example\: '\!', '$', '\#', or '%'), unicode characters\n        - does not contain three or more characters from the user's account name\n7. If the input value for useSSL is set to true then the connection will be made using LDAPS, otherwise the connection will be made using LDAP.\n8. If the port number is not specified in the host input the default ports will be used to make the connection (port 636 for LDAPS and 389 for LDAP).\n</pre>
+015aa01f-bd43-4a08-b7ce-9392260761ad.e84bad56-a988-4d2d-96b7-00fafb401bc5.prompt=Enter trustKeystore\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.eaa58dd8-340a-4d6f-82a7-d2d33167a25d.prompt=Enter trustPassword\:
+015aa01f-bd43-4a08-b7ce-9392260761ad.ed27965a-0d83-4718-b155-5f1d721f52da.prompt=Enter userPassword\:
+]]></descriptionCdata>
+  <annotation>015aa01f-bd43-4a08-b7ce-9392260761ad.description</annotation>
+  <name>Create User</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="33a3104c-49b8-4838-b1ef-8f864b2ac5a9">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.33a3104c-49b8-4838-b1ef-8f864b2ac5a9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8ef86c3a-9297-4d81-a184-e11c0154941d">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>OU</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.8ef86c3a-9297-4d81-a184-e11c0154941d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7ea35f7a-9dc2-42c4-8a5c-f6a3f8c369d4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userCommonName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.7ea35f7a-9dc2-42c4-8a5c-f6a3f8c369d4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bcd908dd-b9b8-457b-9d55-d73c602115d1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sAMAccountName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.bcd908dd-b9b8-457b-9d55-d73c602115d1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ed27965a-0d83-4718-b155-5f1d721f52da">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>userPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.ed27965a-0d83-4718-b155-5f1d721f52da.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b8c324da-c086-4c13-8c2b-3dafa9df36dd">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.b8c324da-c086-4c13-8c2b-3dafa9df36dd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c41017f9-b0ec-409b-8c0b-1b76c92a348a">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.c41017f9-b0ec-409b-8c0b-1b76c92a348a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6481ae40-ab70-4c5a-8afa-caa3a4f71460">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>useSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.6481ae40-ab70-4c5a-8afa-caa3a4f71460.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0627f940-fede-4e7f-91ce-db86c0aba08f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.0627f940-fede-4e7f-91ce-db86c0aba08f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>362bc113-e130-45d5-be90-832d5de87730</refId>
+        <refName>Boolean</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="db9e224f-d26a-400e-92fe-bf77c37328fa">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.db9e224f-d26a-400e-92fe-bf77c37328fa.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3894b66c-fdb8-458d-9dd7-e3115c9aa5e7">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyStorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.3894b66c-fdb8-458d-9dd7-e3115c9aa5e7.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e84bad56-a988-4d2d-96b7-00fafb401bc5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.e84bad56-a988-4d2d-96b7-00fafb401bc5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="eaa58dd8-340a-4d6f-82a7-d2d33167a25d">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>015aa01f-bd43-4a08-b7ce-9392260761ad.eaa58dd8-340a-4d6f-82a7-d2d33167a25d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="f49d3252-113d-4f95-b63e-c28ddb38fb01">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="4072b6d9-8140-45c5-b23a-ba10b15d4c9c">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="1882ff53-1fd8-4eda-b48d-83d870c742fb">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="2b352ee4-86e9-44e7-9aff-e7b4da88d014">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="642b728f-f8b1-4787-bd70-7ce6b8dfa17b">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ebbd04ee-40cd-413e-af6a-770c709f18f9">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a240c49b-8be4-4223-8f24-e752fe15cdf1">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="7c43cf33-4a26-4583-b32c-5e23c441836e">
+    <baseIcon>user.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="dc9101b3-7f3c-415b-b0a6-1b0c7ba72f79">
+        <baseIcon>add.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ldap.ADCreateUser</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

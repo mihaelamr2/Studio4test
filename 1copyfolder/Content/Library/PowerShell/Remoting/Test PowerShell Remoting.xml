@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="851c42c2-5425-4c3f-b621-d1a98b65accd">
+  <descriptionCdata><![CDATA[851c42c2-5425-4c3f-b621-d1a98b65accd.21dc6370-341a-44d7-9d33-e7e23fd87a63.prompt=Authentication type\:
+851c42c2-5425-4c3f-b621-d1a98b65accd.387955c1-36a5-4235-b092-72b8cebe3067.prompt=Password\:
+851c42c2-5425-4c3f-b621-d1a98b65accd.97086728-9b2b-4baf-957a-0648a79f57ff.prompt=Delimiter\:
+851c42c2-5425-4c3f-b621-d1a98b65accd.99c22e98-a2c2-4458-8a09-ff3f014549f9.prompt=User name\:
+851c42c2-5425-4c3f-b621-d1a98b65accd.b9c40808-29e0-46b3-a37c-4111fcb8a0d4.prompt=Host\:
+851c42c2-5425-4c3f-b621-d1a98b65accd.description=<pre>This operation tests the remote connection to a given PowerShell host. It fails if PowerShell remoting is not enabled on the target host or the user could not be authenticated using any of the specified authentication mechanisms.\n\nInputs\:\n    host - The hostname or ip address of the target PowerShell. If empty, the operation will test localhost remoting capabilities.\nDefault value\: localhost\n    username - The username to use when connecting to the server.\nValue format\: username@domain or domain\\username.\n    password - The password to use when connecting to the server.\n    authType - Specifies the mechanism that is used to authenticate the user's credentials.\nValid values\: Default, Basic, Credssp,Kerberos, Negotiate, NegotiateWithImplicitCredential, All. (case-insensitive)\n    useSSL - If true, the operation uses the Secure Sockets Layer (SSL) protocol to establish a connection to the remote computer. By default, SSL is not used. WS-Management encrypts all Windows PowerShell content transmitted over the network. UseSSL is an additional protection that sends the data across an HTTPS connection instead of an HTTP connection. Default port for SSL is 5986.\nDefault value\: false\n    port - Specifies the network port on the remote computer that is used for this connection. To connect to a remote computer, the remote computer must be listening on the port that the connection uses. The default ports are 5985 (the WinRM port for HTTP) and 5986 (the WinRM port for HTTPS).\n    delimiter - The delimiter used to separate the items.\nDefault value\: ",".\n\nResponses\:\n    Success - The user was successfully authenticated on the target host.\n    Failure - The target host doesn't have WinRM installed. The WinRM service is not started. No WinRM listeners were configured on the target host. The user could not be authenticated using any of the provided authentication mechanisms.\n\nReturns\:\n    returnResult - Primary output. A report containing information about the WSMan connection (i.e. wsmanInfo) and other relevant information for the selected authentication mechanisms (e.g. the authentication type, if it passed or not, the error message in case of failure).\n    wsmanInfo - WS-Management identity schema, the protocol version, the product vendor, and the product version of the tested service.\t\n    passedAuthentications - A list with the authentication mechanisms for which the user could be authenticated .\n    failedAuthentications - A list with the authentication mechanisms for which the user could not be authenticated .\n\nNote\:\n1. The operation requires PowerShell v2 on the RAS and target host.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>851c42c2-5425-4c3f-b621-d1a98b65accd.description</annotation>
+  <name>Test PowerShell Remoting</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b9c40808-29e0-46b3-a37c-4111fcb8a0d4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>851c42c2-5425-4c3f-b621-d1a98b65accd.b9c40808-29e0-46b3-a37c-4111fcb8a0d4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="99c22e98-a2c2-4458-8a09-ff3f014549f9">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>851c42c2-5425-4c3f-b621-d1a98b65accd.99c22e98-a2c2-4458-8a09-ff3f014549f9.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="387955c1-36a5-4235-b092-72b8cebe3067">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>851c42c2-5425-4c3f-b621-d1a98b65accd.387955c1-36a5-4235-b092-72b8cebe3067.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="21dc6370-341a-44d7-9d33-e7e23fd87a63">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>authType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>851c42c2-5425-4c3f-b621-d1a98b65accd.21dc6370-341a-44d7-9d33-e7e23fd87a63.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>a04b6a23-9868-4d54-9ae7-7c3710a92429</refId>
+        <refName>PowerShell Authentication Types for Remoting</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="97086728-9b2b-4baf-957a-0648a79f57ff">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>851c42c2-5425-4c3f-b621-d1a98b65accd.97086728-9b2b-4baf-957a-0648a79f57ff.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b170962d-673c-4d46-b994-24ba4afec415">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>useSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="04f55f24-92f3-492e-926e-104bdb6102d5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="8837cad2-07c3-4d0f-ad7c-bcd0da98ec82">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="0c0fd74d-24c7-415e-bf9f-c23a364a2ced">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="72bc0ef5-6449-4d16-a413-84cd33d1ace9">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="c399e6cf-485c-4627-8e0a-e716b97ba30c">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="a90aa220-be6d-4310-a797-6a9da1c27f34">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="4aaf5d4e-db32-4ba2-a8a8-de641002bcd1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="59af425a-44d2-4f93-a228-eb41dcfc98c7">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="be4de318-f48d-408c-a79d-f456b24d1a08">
+    <baseIcon>document_pulse.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-powershellv2-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.IActions.TestWSManAction</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

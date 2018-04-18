@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="1d817ea1-5aa4-4709-b5a6-67a293ec0cf4">
+  <descriptionCdata><![CDATA[1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.05867c3e-4f84-46bd-8a04-ff6e3f2a1138.transition.description=CPU % is ${VALUE} and is below threshold
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.0a443f15-d35b-4b41-bcee-f7c5895d8060.prompt=Alternate Credentials - Password\:
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.307c51b4-27c3-4a0b-ad47-dacd17376837.description=<pre>Retrieves the requested Windows Performance Counter Value.  Takes 5 samples in 1 second intervals and returns the average.\n\nInputs\:\nhost - Hostname or ip address of the target machine.\nobject - The counter object (ex. Processor).\ncounter - The counter's name (ex. % Processor Time).\ninstance - The instance of the counter (if applicable) (ex. _Total).\nuser - Username to use for thread impersonation on the RAS host for this operation (can be left blank).\npassword - Password of the user.\n\nResponses\:\nsuccess - Retrieved the counter successfully.\nfailure - Failed to retrieve the counter.\n\nExtra Results\:\nvalue - The actual value captured.\n\nNote\:\nThe performance counter whose value is to be retreived must be running on the target windows host.  The performance counter can be enabled using PerfMon.exe on the target host.\n</pre>
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.65cf1a39-51dd-42b6-a97a-04124670b303.prompt=Alternate Credentials - UserName\:
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.6980a0e7-c7a4-4cdc-b489-cbb1afe10c82.transition.description=CPU % is ${VALUE} and exceeds threshold
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.943fd310-1e4b-46a7-a92f-c4b47068999a.callout=The first step of this flow gets the CPU Utilization by getting a Windows Performance counter.  You can change the object, counter and instance to access any performance variable on a Windows system. The second step compares the returned value to a threshold which can be changed by modifying Value2 in the inputs.
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.a2af5123-da07-4242-9d03-ff02940e448b.transition.description=CPU % on ${host} is ${VALUE}
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.bd2822ac-8eab-42cc-949c-65bde366d4e5.description=<pre>Executes an Expression (e.x value1 \=\= value2)\n\nInput Parameters\:\nvalue1 - the value to threshold with\nvalue2 - the threshold to threshold against\noperator - (\=\=, \!\=,  >, >\=, <, <\=) the type of threshold\nokstring - string to push into returnResult if the threshold has not been passed\nfailedstring - string to push into the returnResult if the threshold has been passed\n\nResponses\:\nTrue - the expression is true\nFales - the expression is false</pre>
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.ce9f50e0-3a00-414b-9292-293fcab5efba.prompt=HostName\:
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.description=<pre>Use this flow to get the CPU utilization from a Windows machine.  This uses a generic operation to gather Performance Counters so you may modify the parameters to read any object with a performance counter including Process, Disk, Network and applications.\n\nResponses\:\nsuccess - flow ran successfully.\nfailure - an error occurred.\n\nNote\:\nThis flow checks the value of a performance counter that must be running on the target windows host prior to flow execution\:\nPerformance Object\: Processor\nPerformance Counter\: % Processor Time\nThis performance counter can be enabled using PerfMon.exe on the target host.\n</pre>
+1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.f6d081d8-4edb-4469-b687-4a3eff8b6148.transition.description=Unable to get performance counters from ${host}
+]]></descriptionCdata>
+  <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.description</annotation>
+  <name>Check Windows CPU</name>
+  <categories>
+    <category>
+      <refId>52a35ef3-32cc-4523-ae68-45de1dd8efdb</refId>
+      <refName>Windows OS</refName>
+    </category>
+  </categories>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="fa792f65-9761-42a0-b996-391e9b3488d0">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="dd09522d-2ec0-43a1-b220-2ad70631fe84">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d600b55e-5da4-4105-8763-515eb46f691d">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="90200a6f-9ae3-4066-b4c4-0867ae65c1aa">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="943fd310-1e4b-46a7-a92f-c4b47068999a">
+      <text>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.943fd310-1e4b-46a7-a92f-c4b47068999a.callout</text>
+      <bounds>
+        <x>275.0</x>
+        <y>-5.0</y>
+        <width>210.0</width>
+        <height>151.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="307c51b4-27c3-4a0b-ad47-dacd17376837">
+      <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.307c51b4-27c3-4a0b-ad47-dacd17376837.description</annotation>
+      <name>Get CPU %</name>
+      <bounds>
+        <x>0.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="02b83a2d-17df-44fa-9d54-ba09c6ebf1fc">
+        <annotation></annotation>
+        <name>Step Get CPU % in Flow Check Windows CPU (63fdf70d-f105-44f5-a256-c4c9c0533e0c)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="ce9f50e0-3a00-414b-9292-293fcab5efba">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.ce9f50e0-3a00-414b-9292-293fcab5efba.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="ed9cdd21-56ee-4589-b905-713f2eb96b23">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>object</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Processor</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="fe66d344-23b3-4e60-bd59-3324640a8642">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>counter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>% Processor Time</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="75c36553-96d8-448d-9379-d903470b13f6">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>instance</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>_Total</value>
+          <record>false</record>
+        </staticBinding>
+        <userInputBinding id="65cf1a39-51dd-42b6-a97a-04124670b303">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>user</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.65cf1a39-51dd-42b6-a97a-04124670b303.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <userInputBinding id="0a443f15-d35b-4b41-bcee-f7c5895d8060">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.0a443f15-d35b-4b41-bcee-f7c5895d8060.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="f6d081d8-4edb-4469-b687-4a3eff8b6148">
+          <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.f6d081d8-4edb-4469-b687-4a3eff8b6148.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d2af12ee-18d5-4e43-8a8b-c55e5237b384</refId>
+          </destination>
+          <source>
+            <refId>307c51b4-27c3-4a0b-ad47-dacd17376837</refId>
+          </source>
+          <positions>
+            <point>
+              <x>221.0</x>
+              <y>68.28571428571429</y>
+            </point>
+            <point>
+              <x>470.0</x>
+              <y>378.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>545.1487167307184</x>
+            <y>5.294977485844494</y>
+          </labelPosition>
+        </transition>
+        <transition id="a2af5123-da07-4242-9d03-ff02940e448b">
+          <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.a2af5123-da07-4242-9d03-ff02940e448b.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>bd2822ac-8eab-42cc-949c-65bde366d4e5</refId>
+          </destination>
+          <source>
+            <refId>307c51b4-27c3-4a0b-ad47-dacd17376837</refId>
+          </source>
+          <positions>
+            <point>
+              <x>90.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>90.0</x>
+              <y>105.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>723.3317969392695</x>
+            <y>27.62552327509691</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>c8b71c18-002d-4776-805e-cc873ef0b38e</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="b6a32c47-66bb-4e1a-9804-4c8194ae0c8d">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>0.0</x>
+        <y>242.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="e13c8040-8c00-48f0-bc9e-2b5663da2d5d">
+        <annotation></annotation>
+        <name>Step Resolved : success in Flow Check Windows CPU (fbc0998f-c8f7-4c13-a7ce-0a87d09009b7)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="88eb78f3-90c8-488c-b038-5befbd80f6fb">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b6a32c47-66bb-4e1a-9804-4c8194ae0c8d</refId>
+          </destination>
+          <source>
+            <refId>b6a32c47-66bb-4e1a-9804-4c8194ae0c8d</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="41f0e3fa-5f19-4111-9ee9-dd2c300e888c">
+      <annotation></annotation>
+      <name>Diagnosed : success</name>
+      <bounds>
+        <x>130.0</x>
+        <y>242.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="a26f670c-2e44-4a21-9270-07d9f8748db9">
+        <annotation></annotation>
+        <name>Step Diagnosed : success in Flow Check Windows CPU (98f605bf-8375-472c-8cf2-a5b249480acc)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="ada15140-4d83-4aa6-a7d4-e648ea73223d">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>41f0e3fa-5f19-4111-9ee9-dd2c300e888c</refId>
+          </destination>
+          <source>
+            <refId>41f0e3fa-5f19-4111-9ee9-dd2c300e888c</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>DIAGNOSED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="d2af12ee-18d5-4e43-8a8b-c55e5237b384">
+      <annotation></annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>130.0</x>
+        <y>100.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="057a6a01-d197-49ec-b4ac-21b7e7bef72d">
+        <annotation></annotation>
+        <name>Step Error : failure in Flow Check Windows CPU (6640eca3-33a0-49c1-b4d9-20c960ff7627)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="c3048b09-9837-4d94-9df1-ef3ab274bb5b">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>d2af12ee-18d5-4e43-8a8b-c55e5237b384</refId>
+          </destination>
+          <source>
+            <refId>d2af12ee-18d5-4e43-8a8b-c55e5237b384</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="bd2822ac-8eab-42cc-949c-65bde366d4e5">
+      <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.bd2822ac-8eab-42cc-949c-65bde366d4e5.description</annotation>
+      <name>CPU % &lt; 80?</name>
+      <bounds>
+        <x>0.0</x>
+        <y>100.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="ab3c7a32-dceb-4215-ab5b-b2996d7d4940">
+        <annotation></annotation>
+        <name>Step CPU % &lt; 80? in Flow Check Windows CPU (e857c978-5809-4d3e-8888-5c7a73ea6e5a)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <staticBinding id="00eb1516-ac67-486b-9346-9f369c6b09d7">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>value1</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>${value}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="4b08142a-eb81-4947-a000-ef0bf1eeabbe">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>value2</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>80</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0f7a7d37-f664-4f08-85f3-8d5f948a20fe">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>operator</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>&lt;</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="8e64007d-79bc-4d61-add0-63b72e52f0bc">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>truestring</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>True</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="dc3987d3-25d2-443e-989c-3287ed34648f">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>falsestring</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>False</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="430cd684-86e7-4529-9572-374ae5724894">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>operation</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${operator}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="05867c3e-4f84-46bd-8a04-ff6e3f2a1138">
+          <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.05867c3e-4f84-46bd-8a04-ff6e3f2a1138.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>b6a32c47-66bb-4e1a-9804-4c8194ae0c8d</refId>
+          </destination>
+          <source>
+            <refId>bd2822ac-8eab-42cc-949c-65bde366d4e5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>134.0</y>
+            </point>
+            <point>
+              <x>50.0</x>
+              <y>244.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>518.9004221589013</x>
+            <y>24.53439218043577</y>
+          </labelPosition>
+        </transition>
+        <transition id="6980a0e7-c7a4-4cdc-b489-cbb1afe10c82">
+          <annotation>1d817ea1-5aa4-4709-b5a6-67a293ec0cf4.6980a0e7-c7a4-4cdc-b489-cbb1afe10c82.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>41f0e3fa-5f19-4111-9ee9-dd2c300e888c</refId>
+          </destination>
+          <source>
+            <refId>bd2822ac-8eab-42cc-949c-65bde366d4e5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>50.0</x>
+              <y>134.0</y>
+            </point>
+            <point>
+              <x>180.0</x>
+              <y>244.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>503.9332413129282</x>
+            <y>-3.409921132808178</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>f61afe20-3c09-490b-8ff7-8540bedc5001</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+  </steps>
+  <startSteps>307c51b4-27c3-4a0b-ad47-dacd17376837</startSteps>
+</flow>

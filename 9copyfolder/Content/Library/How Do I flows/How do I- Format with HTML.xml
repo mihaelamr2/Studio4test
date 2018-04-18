@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="994dfc9f-8c09-4d67-bd48-b2cb15d88f57">
+  <descriptionCdata><![CDATA[994dfc9f-8c09-4d67-bd48-b2cb15d88f57.0920fa6d-1ffa-4bc3-88cc-85ab0f7d12a6.transition.description=The "Write to File" step was able to append the HTML-formatted table from the "HTML Table Formatter" step to the specified file. The flow transitions to the "Display Message" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.096f2343-93a7-4712-8aeb-8a94edac8c97.description=The "FS Get Children" step retrieves a list of the files and folders in a specified folder and makes them available to the "HTML Table Formatter" step.\n\nStep Inputs\:\n"source" - The directory from which to retrieve the list of files and folders.  In this flow, the "source" input gets its value from the user by means of a user prompt.\n"delimiter" - The delimiter placed between the files and folders in the list. The default is a comma (,). In this flow, the delimiter input gets its value from the constant ",".\n\nStep Results\:\nThe list of files and folders are retrieved from the specified folder. In this flow, the results are assigned to the flow variable "tableReady" which is defined on the Results tab. \n\nExtra Results\:\n"count" - This is the number of files and folders in the "source" folder.\n\nStep Responses\:\n"success" - The step was able to retrieve the list of files and folders from the specified folder. The flow transitions to the "HTML Table Formatter" step.\n"failure" - The step could not retrieve the list of files and folders from the specified folder. The flow transitions to the "Error\: failure" step and ends unsuccessfully.\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.0af8d761-3c68-46ff-b5b5-e48ae57ba49b.transition.description=The "Write to File" step has created the file you specified and appended the formatted string form the "HTML String Formatter" step to it.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.33768946-a851-4424-9e49-30719126b1b3.transition.description=The "FS Get Children" step was able to retrieve the files and folders in the specified folder. The flow transitions to the "HTML Table Formatter" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.40f01a90-e316-4969-8d2f-8aaacdfa26f1.prompt=This step takes the HTML-formatted string created in the "HTML \nString Formatter" step and appends it to a file.\n\nEnter the name of the file to append the string to.\nExamples\:\nFor Windows, "C\:\\HTMLformat.htm" and for Linux, "/tmp/HTMLformat.html"
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.41b83f38-81c6-4f20-9fa1-e7261389678e.transition.description=The "HTML Table Formatter" step was able to create an HTML table rom the results of the "FS Get Children" step. The flow transitions to the "Write to File" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.42fb3801-990b-4200-b395-9573cb50c0d4.callout=STEP 2. The "Write to File" step retrieves the formatted text from the perevious step, creates the  file you specify, and appends the text to it. \n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.491f2423-756c-40b2-b071-f72127ce256a.description=The "HTML String Formatter" step formats the text string "The specified folder contains the following files and folders\:" with HTML tags and makes it available as an input to the next step.\n\nStep Inputs\:\n"toFormat" - The text string to format with HTML. In this flow, the "toFormat" input gets its value from the constant "The specified folder contains the following files and folders\:<BR><HR>" . The <BR> HTML tag forces a line break and the <HR> tag inserts a horizontal line to separate the heading from the table that will be appended in a later step.\n"style" - The style in which to format the string. The choices are "italic", "bold", or "underline".  In this flow, the style input gets its value from the constant "bold".\n"color" - The color in which to format the string, such as "blue" or "green".  In this flow, the color input gets its value from the constant "blue".\n"size" - The font size in which to format the string, using "+n" or" -"n where "n" is the number of points to increase or decrease the font size relative to the browser default. Examples include "+2" and "-1". In this flow, the size input gets its value from the constant "+2".\n\nStep Returns\:\nThe formatted HTML string. In this flow, it is assigned to the default flow variable "Result".\n\nStep Responses\:\n"success" - The step was able to format the string using HTML. In this flow, a success result transitions the flow to the "Append to File" step.\t\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.50a15ba8-192b-4533-8823-e6b2a108ba7c.transition.description=The "HTML Table Formatter" step was unable to generate an HTML table from the results of the "FS Get Children" step. The flow transitions to the "Error\:failure" step and ends unsuccessfully.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.66155ec0-fe3d-4750-9f11-b04790a7538e.transition.description=The "Display Message" step was able to display its message. The flow transitions to the "Resolved\:success" step and ends successfully.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.7acda128-9105-49fe-92b3-49a108f48657.transition.description=The "Write to File" step was unable to append the HTML-formatted table from the" HTML Table Formatter" step to the specified file. The flow transitions to the "Error\:faulre" step and ends unsuccessfully.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.85f465c9-4078-4b70-aa81-7e8d156a39b6.callout=STEP 4. The "HTML Table Formatter" step retrieves the list of files and folders from the "FS Get Children" step, and generates an HTML table from  it. This table is made available to the "Append to File" step. \n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8cc9b68c-7753-4ef1-9df3-57b73ace9437.description=The "HTML Formatter" step generates an HTML table from the list of files and folders created in the "FS Get Children" step, and makes this table available to the following  "Append to File" step.\n\nStep Inputs\:\n"tableData" - The list of files and folders from which the step generates the table.  In this flow, the "tableData" input gets its value from the "FS Get Children" step\u2019s flow variable "tableReady".\n"columnDelimiter" - The delimiter used with the list in "tableData" to specify where to start a new column in the table.  In this flow, the "columnDelimiter" input gets its value from the constant ",".\n"rowDelimiter" - The delimiter used with the list in "tableData" to specify where to start a new row in the table. In this flow, the "rowDelimiter" input gets its value from the constant ",".\n\nStep Results\:\nThe HTML-formatted table is assigned to the default flow variable "Result".\n\nStep Responses\:\n"success" - The step was able to generate the HTML table. The flow transitions to the "Append to File" step.\n"failure" -The step was not able to generate the HTML table. The flow transitions to the "Error\: failure" step and finishes unsuccessfully.\n\nExample\:\nHere is an example of how the "columnDelimiter"  and  "rowDelimter"  work\:\n\nThe list you want to use to generate the HTML table is\:\n r1c1,r1c2,r1c3,r1c4|r2c1,r2c2,r2c3,r2c4\n\n"columnDelimiter" is ",".\n"rowDelimiter" is "|".\n\nThe HTML generated by the "HTML Table Formatter" step is\: \n<table><tr><td>r1c1</td><td>r1c2</td><td>r1c3</td><td>r1c4</td></tr><tr><td>r2c1</td><td>r2c2</td><td>r2c3</td><td>r2c4</td></tr></table>\nWhich is the HTML for the following table.\n\nThe resulting table looks like this\:\nr1c1  r1c2  r1c3  r1c4  \nr2c1  r2c2  r2c3  r2c4 \n \n\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8d73c1fe-8587-45c7-83e4-e89126a0e1ba.transition.description=The "Write to File" step was not able to create the specified  file (you may have forgotten to delete an existing file of this name before running the flow) or append the HTML-formatted string to it. The flow transitions to the "Error\:failure" step and ends unsuccessfully.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8f6dea0b-33e3-45f0-83e5-b9f347c6c54e.transition.description=The "HTML String Formatter" step has successfully converted a text string to HTML. The flow transitions to the "Write to File" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.9a516d04-6f48-4ac4-b1a7-fce87251a3dd.prompt=This step retrieves a list of files and folders from a specified folder.\n\nEnter the name of the folder whose files and folders you want \nto retrieve.\nExamples\:\nFor Windows, " C\:\\Program Files" and for Linux, " /etc"\n\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a0b00c60-2008-4ec5-9db1-52e538824804.callout=STEP 3. The "FS Get Children" step retrieves the names of the  files and folders in the  folder you specify, placing them a list with a  "," delimiter between the  list elements. The elements in the list are made available to the "HTML Table Formatter" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a2e1f81e-ce44-4697-ae4a-e402c53f7375.transition.description=The "FS Get Children" step was unable to retrieve the files and folders in the specified directory. The flow transitions to the "Error\:failure" step and ends unsuccessfully.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a52c8ec8-8cb0-48f4-b149-125bfdf5def2.description=<pre>\nThe "Write to File" step appends the results from the previous step, the HTML-formatted table, to the specified file.\n\nStep Inputs\:\n"source" - The full path to the file to which you want to append the HTML-formatted table. In this flow, the" source" input gets its value from the earlier "Write to File" step's flow variable "File". \n"contents" - The contents to write to the file. In this flow, the "contents" input gets its value from the "HTML Table Formatter" step\u2019s default  flow variable "Result".\noverwrite - specifies whether to overwrite the file or to append to it. By default, the used value is true. Accepted values\: true, false or the empty string. If this is left empty, the file will be overwritten.\n\nStep Results\:\nThe formatted HTML table from the "HTML Table Formatter" step is appended to the specified file.\n\nStep Responses\:\n"success" -The step was able to append the HTML-formatted table to the specified file. The flow transitions to the "Display Message" step.\n"failure" - The step was unable to append  the HTML-formatted table to the specified file. The flow transitions to the "Error\: failure" step and finishes unsuccessfully.\n</pre>\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a7340f41-22a8-483b-b843-9260135cedd7.callout=STEP 1. The "HTML String Formatter" step formats a text string  as HTML. The formatted HTML string is  made available to the "Append to File" step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.be13dbe9-6ec3-4da1-b3f6-6a768cb11238.callout=STEP 0. BEFORE TESTING OR RUNNING THIS FLOW\:\nIn this flow, you will specify a file to be used for appending the HTML. For the flow to succeed, you need to make sure that this file does not already exist. If it does exist, delete it before you run the flow.\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.d022cc1f-a59b-49a2-ae0f-037e59c712af.callout=The "How do I\: Format with HTML" flow shows how to use the "HTML String Formatter" and "HTML Table Formatter" steps to format their output in HTML. In this case, the flow formats a text string as HTML and appends it to the file you specify. Next it retrieves a list of the files and folders from the  folder you specify and formats this list into an HTML table, appending it to the previously-specified file. You can use HTML formatting to display the data retrieved from an operation or flow on a page in a Web browser. \n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.d1ca4884-9c78-44c7-9601-225a81e9e8c9.callout=STEP 5. The "Write to File" step retrieves the HTML table created by the  "HTML Table Formatter" step and appends it to the  file you specified in the previous "Write to File" step. 
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.description=<pre>\nThe "How do I\: Format with HTML" flow demonstrates how to format text as HTML, retrieve a list of the\nfiles and folders in a directory, generate an HTML table from the list, and append the text and table \nto a file. \n\nThis flow was created using the following OO operations\:\n-  "HTML String Formatter" from the Library/Utility Operations/HTML Formatting folder.\n-  "Append to File" from the Library/Operations/FileSystem/Cross Platform folder.\n-  "FS Get Children" from the Library/Operations/FileSystem/Cross Platform folder.\n-  "HTML Table Formatter" from the Library/Utility Operations/HTML Formatting folder.\n-  "Display Message" from the Library/Utility Operations folder.\n\nThe flow contains the following steps\:\n\n1.  The "HTML String Formatter" step formats a text string.\n      Input\: " toFormat"\n      Gets value from\: constant  "The specified folder contains the following files and  folders\:"\n      Places result in\:  default flow variable "Result"\n  \n      Input\:  "style"\n      Gets value from\: constant  \u201Cbold\u201D\n      Places result in\: default flow variable "Result"\n\n      Input\: "color"\n      Gets value from\: constant  "blue"  \n      Places result in\: default flow variable "Result"\n\n      Input\: "size"\n      Gets value from\: constant  "+2"\n      Places result in\: default flow variable "Result" \n       \n2. The "Append to File" step appends the HTML-formatted string to the specified  file. \n      Input\: "source"\n      Gets value from\: user prompt\n      Places result in\: flow variable  "File" \n\n      Input\: "contents"\n      Gets value from\: result of previous step\n      Places result in\: flow variable "contents" \n   \n3. The "FS Get Children" step retrieves a list of the files and folders.\n      Input\: "source"\n      Gets value from\: user prompt \n      Places result in\:  flow variable  "tableReady" \n\n      Input\: "delimiter" \n      Gets value from\: constant  ","\n      Places result in\: default flow variable "Result"\n \n4.  The "HTML Table Formatter" step generates an HTML table from the list retrieved in the previous step.\n      Input\:" tableData" \n      Gets value from\: "FS Get Children" step flow variable  "tableReady"\n      Places result in\: default flow variable "Result"\n\n      Input\: "columnDelimiter" \n      Gets value from\: constant  ","\n      Places result in\: default flow variable "Result"\n\n      Input\: "rowDelimiter" \n      Gets value from\: constant  ","\n      Places result in\: default flow variable "Result"\n\n5. The "Append to File" step appends the HTML table  to the specified file.\n      Input\: "source"  \n      Gets value from\: flow variable "File"\n      Places result in\:  flow variable "File"\n\n      Input\: "contents" \n      Gets value from\: result of previous step \n      Places result in\: default flow variable "Result"\n\n6.  The "Display Message" step displays a message to the user.     \n      Input\: "message" \n      Gets value from\: constant "The flow was successful. Open the specified file to which you appended the \n      HTML-formatted text and table to view  the results."\n      Places result in\: flow variable "message"\n\n</pre>
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.e1cffabd-8fe5-4c04-a863-920f56f28320.description=This step provides a message to the user. This step is actually a subflow. To learn about the steps contained in the subflow, right-click the step, click "Open Subflow," and then study the subflow's diagram and properties page, and the Inspectors of the subflow's steps. On the subflow's Properties sheet, you can see the flow inputs on which the step's inputs are based.\n\nStep Inputs\:\n"message" -  The message to send the user.  In this flow, the "message" input gets its value from the constant "The flow was successful. Open the specified file to which you appended the HTML-formatted text and table to view the results".\n\nStep Responses\:\n"success" - The step was able to display the message. The flow transitions to the "Resolved\: success" step and ends successfully.\n\t\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fa29bebf-2028-418a-bec6-eebd645f5fc9.description=<pre>The "Write to File" step appends the result of the previous step, the HTML-formatted string, to a specified file.\n\nStep Inputs\:\n"source" - The full path to the file to which you want to append the HTML-formatted text string. In this flow, the "source" input gets its value from the user by means of a user prompt. \n"contents" - The contents to write to the file. In this flow, the "contents" input gets its value from the "HTML String Formatter" step\u2019s results.\noverwrite - specifies whether to overwrite the file or to append to it. By default, the used value is true. Accepted values\: true, false or the empty string. If this is left empty, the file will be overwritten.\n\nStep Results\:\nThe formatted HTML string  is appended to the specified file.\n\nStep Responses\:\n"success" -The step was able to append the formatted HTML string to the specified file. The flow transitions to the "FS Get Children" step.\n"failure" - The step was unable to append  the formatted HTML string tothe specified file. The flow transitions to the "Error\: failure" step and finishes unsuccessfully.\n</pre>\n\n\n\n
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fe1fe297-3d12-4a6f-b275-937b4d4baa00.callout=Understanding data movement. How each of the flow's steps gets the data it needs to do its work is crucial to understanding how to harness the flow's techniques for your own purposes. Data can be assigned from user input when the flow runs, from step results, or from flow variables. \nData movement in this How Do I flow is detailed on the Description tab of the flow's Properties sheet and of each step's Inspector. To open the flow's Properties sheet, click the Properties tab at the lower-left of the flow canvas. To open a step's Inspector, double-click the step.
+994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fe2ff29a-d4a9-43df-9be8-8e46f56bce50.callout=STEP 6. The "Display Message" step displays a message about the outcome of the flow. \n
+]]></descriptionCdata>
+  <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.description</annotation>
+  <name>How do I- Format with HTML</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="47b3e26e-ad33-4553-9763-42acae6c8f2e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="55240692-2c3f-46a8-8a76-93fba166da7c">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="aafc702c-de66-46c4-a0e2-101e3040fede">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="03ab0bea-81bb-4227-9de0-beb5315b63a7">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="be13dbe9-6ec3-4da1-b3f6-6a768cb11238">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.be13dbe9-6ec3-4da1-b3f6-6a768cb11238.callout</text>
+      <bounds>
+        <x>7.0</x>
+        <y>140.0</y>
+        <width>282.0</width>
+        <height>80.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="d022cc1f-a59b-49a2-ae0f-037e59c712af">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.d022cc1f-a59b-49a2-ae0f-037e59c712af.callout</text>
+      <bounds>
+        <x>7.0</x>
+        <y>73.0</y>
+        <width>804.0</width>
+        <height>65.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="a0b00c60-2008-4ec5-9db1-52e538824804">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a0b00c60-2008-4ec5-9db1-52e538824804.callout</text>
+      <bounds>
+        <x>651.0</x>
+        <y>202.0</y>
+        <width>154.0</width>
+        <height>148.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>096f2343-93a7-4712-8aeb-8a94edac8c97</refId>
+      </step>
+    </callout>
+    <callout id="a7340f41-22a8-483b-b843-9260135cedd7">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a7340f41-22a8-483b-b843-9260135cedd7.callout</text>
+      <bounds>
+        <x>14.0</x>
+        <y>240.0</y>
+        <width>180.0</width>
+        <height>83.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>491f2423-756c-40b2-b071-f72127ce256a</refId>
+      </step>
+    </callout>
+    <callout id="fe1fe297-3d12-4a6f-b275-937b4d4baa00">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fe1fe297-3d12-4a6f-b275-937b4d4baa00.callout</text>
+      <bounds>
+        <x>4.0</x>
+        <y>4.0</y>
+        <width>805.0</width>
+        <height>66.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="85f465c9-4078-4b70-aa81-7e8d156a39b6">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.85f465c9-4078-4b70-aa81-7e8d156a39b6.callout</text>
+      <bounds>
+        <x>649.0</x>
+        <y>409.0</y>
+        <width>160.0</width>
+        <height>122.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>8cc9b68c-7753-4ef1-9df3-57b73ace9437</refId>
+      </step>
+    </callout>
+    <callout id="42fb3801-990b-4200-b395-9573cb50c0d4">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.42fb3801-990b-4200-b395-9573cb50c0d4.callout</text>
+      <bounds>
+        <x>305.0</x>
+        <y>155.0</y>
+        <width>228.0</width>
+        <height>66.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>fa29bebf-2028-418a-bec6-eebd645f5fc9</refId>
+      </step>
+    </callout>
+    <callout id="fe2ff29a-d4a9-43df-9be8-8e46f56bce50">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fe2ff29a-d4a9-43df-9be8-8e46f56bce50.callout</text>
+      <bounds>
+        <x>15.0</x>
+        <y>487.0</y>
+        <width>185.0</width>
+        <height>54.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>e1cffabd-8fe5-4c04-a863-920f56f28320</refId>
+      </step>
+    </callout>
+    <callout id="d1ca4884-9c78-44c7-9601-225a81e9e8c9">
+      <text>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.d1ca4884-9c78-44c7-9601-225a81e9e8c9.callout</text>
+      <bounds>
+        <x>236.0</x>
+        <y>586.0</y>
+        <width>374.0</width>
+        <height>52.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>a52c8ec8-8cb0-48f4-b149-125bfdf5def2</refId>
+      </step>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="491f2423-756c-40b2-b071-f72127ce256a">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.491f2423-756c-40b2-b071-f72127ce256a.description</annotation>
+      <name>HTML String Fomatter</name>
+      <bounds>
+        <x>202.0</x>
+        <y>236.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="9c93d276-b98d-4a42-bd34-d1d919803887">
+        <annotation></annotation>
+        <name>Step HTML String Fomatter in Flow How do I- Format with HTML (b04c8a32-4ddf-4b82-9855-7ec2ce80c372)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <staticBinding id="8912c7e8-1b94-434e-84ca-9c5d0ea564e9">
+          <annotation></annotation>
+          <toContextKey>Contents</toContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>toFormat</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The specified folder contains the following files and folders:&lt;BR&gt;&lt;HR&gt;
+
+</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="ef46c04d-42a3-4f2c-82ac-e899faa0fae4">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>style</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value> bold</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2874cadd-9b4a-4e8b-b9b7-df72a85dd824">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>color</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>blue</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5ac8435f-31b3-490d-b0bb-8a2fea19a53a">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>size</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>+2</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="77299ce2-581d-4919-b938-602750d77de2">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_2</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${in2}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="5999a991-5521-45f9-8596-eccf8b09714d">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_3</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${in3}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="337c3183-563b-4b51-980e-614d0aa06a29">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_4</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${in4}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2650d0d6-1a24-4341-8db1-2f676755c4fe">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_1</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${in1}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="8f6dea0b-33e3-45f0-83e5-b9f347c6c54e">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8f6dea0b-33e3-45f0-83e5-b9f347c6c54e.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>fa29bebf-2028-418a-bec6-eebd645f5fc9</refId>
+          </destination>
+          <source>
+            <refId>491f2423-756c-40b2-b071-f72127ce256a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>252.0</x>
+              <y>270.0</y>
+            </point>
+            <point>
+              <x>208.0</x>
+              <y>696.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>e4efc7ee-d43e-4dc8-bafd-8c60aa900109</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="51de5b23-5737-4b6e-9066-f4158ff551bf">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>htmlHeader</contextKey>
+          <expression id="8a4a42df-18ae-4f81-bd33-507fef8e0f5c">
+            <annotation></annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="e1cffabd-8fe5-4c04-a863-920f56f28320">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.e1cffabd-8fe5-4c04-a863-920f56f28320.description</annotation>
+      <name>Display Message</name>
+      <bounds>
+        <x>202.0</x>
+        <y>478.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <staticBinding id="6258bc8c-1f4a-4b78-b44b-974ddb430de0">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notifyData</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The flow was successful. Open the file ${File} to view the results.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0169c985-d7bf-4d21-ac96-0ac03bf33c9a">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notifyMethod</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>display</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="a0758e10-6bfa-4e2e-b579-394ebe34f4e6">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>subject</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Notification</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="bb7b7fbd-365a-4cae-9eae-40494dbb2804">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>destination</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="b3ca78af-c24c-44e3-b6f2-5bec2ea7e7b7">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notificationServer</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="4a5d4153-b5a3-4ed3-90ac-221a14b55049">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>from</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="154bea3e-c6b4-43f7-b768-1be15f84ac57">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>serverPort</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="ebc555ee-d639-4c20-bfc6-37990f4268e1">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>htmlEmail</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="e5070d00-f9f0-46b9-9f73-f6c4e952d583">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>message</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The flow was successful. Open the file ${File} to view the results.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="1e89c1b7-87f8-49d7-9f34-8c6396145f79">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>title</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Status Message</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="66155ec0-fe3d-4750-9f11-b04790a7538e">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.66155ec0-fe3d-4750-9f11-b04790a7538e.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3699ab11-866e-46a2-8efa-eec9a993ebc8</refId>
+          </destination>
+          <source>
+            <refId>e1cffabd-8fe5-4c04-a863-920f56f28320</refId>
+          </source>
+          <positions>
+            <point>
+              <x>837.0</x>
+              <y>253.0</y>
+            </point>
+            <point>
+              <x>840.0</x>
+              <y>378.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>299.5796739234887</x>
+            <y>22.50112492786015</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>434e6fa2-26bc-4e84-9e1f-0aa6946cf920</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="8cc9b68c-7753-4ef1-9df3-57b73ace9437">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8cc9b68c-7753-4ef1-9df3-57b73ace9437.description</annotation>
+      <name>HTML Table Formatter</name>
+      <bounds>
+        <x>551.0</x>
+        <y>478.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="45af1a86-be0c-4e78-a088-f0d069c964a6">
+        <annotation></annotation>
+        <name>Step HTML Table Formatter in Flow How do I- Format with HTML (d9937265-d489-48ca-be75-2f3e40921ee4)</name>
+        <script></script>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="675b0ab8-a601-4b73-a89a-cfd5a16b7486">
+          <annotation></annotation>
+          <toContextKey>tableReady</toContextKey>
+          <fromContextKey>tableReady</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>tableData</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt></prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="99f91142-b7c0-4c90-abb8-0add941b3d3b">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>columnDelimiter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>,</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="d592788f-5eff-49e7-9ad3-89c23cfc35b6">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>rowDelimiter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>,</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="cfa111c4-1bfb-4497-99a9-5f40ea08a5b6">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_3</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${rowDelimiter}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="b0b6e45b-d2eb-4c4c-ac72-6fb770160061">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_4</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${in4}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="1e514aa3-36c9-47e8-988d-0986c59edc35">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_2</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${columnDelimiter}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="87fedcc2-c6c9-4ed8-aa04-d2909796e152">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <recordKey></recordKey>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>Field_1</inputSymbol>
+          <listDelimiter></listDelimiter>
+          <value>${tableData}</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="50a15ba8-192b-4533-8823-e6b2a108ba7c">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.50a15ba8-192b-4533-8823-e6b2a108ba7c.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </destination>
+          <source>
+            <refId>8cc9b68c-7753-4ef1-9df3-57b73ace9437</refId>
+          </source>
+          <positions>
+            <point>
+              <x>336.0</x>
+              <y>421.0</y>
+            </point>
+            <point>
+              <x>276.0</x>
+              <y>344.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>222.8248105204344</x>
+            <y>17.472427756723878</y>
+          </labelPosition>
+        </transition>
+        <transition id="41b83f38-81c6-4f20-9fa1-e7261389678e">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.41b83f38-81c6-4f20-9fa1-e7261389678e.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>a52c8ec8-8cb0-48f4-b149-125bfdf5def2</refId>
+          </destination>
+          <source>
+            <refId>8cc9b68c-7753-4ef1-9df3-57b73ace9437</refId>
+          </source>
+          <positions>
+            <point>
+              <x>601.0</x>
+              <y>512.0</y>
+            </point>
+            <point>
+              <x>185.0</x>
+              <y>730.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>c307773a-2033-45dc-ac90-3feb261be46d</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="3699ab11-866e-46a2-8efa-eec9a993ebc8">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>202.0</x>
+        <y>348.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="1b45f572-abc4-45a5-9459-b9f8f2aee8a2">
+        <annotation></annotation>
+        <name>Step Resolved : success in Flow How do I- Format with HTML (16b6a8da-bd44-4a85-ae30-3d88bff3d098)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="25797b21-2f14-40fb-bbb0-c97443440903">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3699ab11-866e-46a2-8efa-eec9a993ebc8</refId>
+          </destination>
+          <source>
+            <refId>3699ab11-866e-46a2-8efa-eec9a993ebc8</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="626208f0-2561-4a25-9996-77491a70e26b">
+      <annotation></annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>375.0</x>
+        <y>358.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="f3e0e5c2-55bc-4b02-a4dc-618d4602db36">
+        <annotation></annotation>
+        <name>Step Error : failure in Flow How do I- Format with HTML (f13b254b-b3ef-4605-90e8-a0e6be9f26a2)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings/>
+      <transitions>
+        <transition id="e70f9a37-4a35-49d2-b9c5-453e2da61979">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </destination>
+          <source>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="fa29bebf-2028-418a-bec6-eebd645f5fc9">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.fa29bebf-2028-418a-bec6-eebd645f5fc9.description</annotation>
+      <name>Write to File</name>
+      <bounds>
+        <x>374.0</x>
+        <y>235.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="40f01a90-e316-4969-8d2f-8aaacdfa26f1">
+          <annotation></annotation>
+          <toContextKey>File</toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.40f01a90-e316-4969-8d2f-8aaacdfa26f1.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="80b73ff1-736e-4084-af25-c63807fd09e0">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>contents</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;/&gt;
+&lt;/head&gt;
+${htmlHeader}</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="4f78f7a5-6244-45ba-99ce-e0863503a8f9">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>overwrite</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="0af8d761-3c68-46ff-b5b5-e48ae57ba49b">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.0af8d761-3c68-46ff-b5b5-e48ae57ba49b.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>096f2343-93a7-4712-8aeb-8a94edac8c97</refId>
+          </destination>
+          <source>
+            <refId>fa29bebf-2028-418a-bec6-eebd645f5fc9</refId>
+          </source>
+          <positions>
+            <point>
+              <x>208.0</x>
+              <y>696.0</y>
+            </point>
+            <point>
+              <x>601.0</x>
+              <y>270.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="8d73c1fe-8587-45c7-83e4-e89126a0e1ba">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.8d73c1fe-8587-45c7-83e4-e89126a0e1ba.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </destination>
+          <source>
+            <refId>fa29bebf-2028-418a-bec6-eebd645f5fc9</refId>
+          </source>
+          <positions>
+            <point>
+              <x>208.0</x>
+              <y>696.0</y>
+            </point>
+            <point>
+              <x>425.0</x>
+              <y>392.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>af728dc4-d7a0-4e8e-917a-74c188f2e470</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="096f2343-93a7-4712-8aeb-8a94edac8c97">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.096f2343-93a7-4712-8aeb-8a94edac8c97.description</annotation>
+      <name>FS Get Children</name>
+      <bounds>
+        <x>551.0</x>
+        <y>236.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="9a516d04-6f48-4ac4-b1a7-fce87251a3dd">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.9a516d04-6f48-4ac4-b1a7-fce87251a3dd.prompt</prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="ee4f4673-2724-427a-8f71-c24e43d597aa">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>delimiter</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>,</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="a2e1f81e-ce44-4697-ae4a-e402c53f7375">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a2e1f81e-ce44-4697-ae4a-e402c53f7375.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </destination>
+          <source>
+            <refId>096f2343-93a7-4712-8aeb-8a94edac8c97</refId>
+          </source>
+          <positions>
+            <point>
+              <x>632.0</x>
+              <y>326.0</y>
+            </point>
+            <point>
+              <x>449.0</x>
+              <y>449.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>354.2005183730632</x>
+            <y>19.498712518084698</y>
+          </labelPosition>
+        </transition>
+        <transition id="33768946-a851-4424-9e49-30719126b1b3">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.33768946-a851-4424-9e49-30719126b1b3.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>8cc9b68c-7753-4ef1-9df3-57b73ace9437</refId>
+          </destination>
+          <source>
+            <refId>096f2343-93a7-4712-8aeb-8a94edac8c97</refId>
+          </source>
+          <positions>
+            <point>
+              <x>632.0</x>
+              <y>326.0</y>
+            </point>
+            <point>
+              <x>637.0</x>
+              <y>579.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>263.7141537058128</x>
+            <y>22.241242237784594</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>fc8a33f6-4dcf-4674-8eff-d9053f88f4e8</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="3e95aa3e-69a5-4e9b-a168-a104df9c53c9">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>tableReady</contextKey>
+          <expression id="fe029fbf-ca92-4ff6-9a03-ea1f21485046">
+            <annotation></annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <containsEvaluator id="0fda74ad-f4b9-451f-b4bd-945940d878dd">
+              <annotation></annotation>
+              <name>Config Item</name>
+              <text></text>
+              <ignoreCase>true</ignoreCase>
+              <matchType>CONTAINS</matchType>
+            </containsEvaluator>
+            <filters>
+              <replaceAllFilter id="dc044c46-89a7-4478-b8ae-af7364d75e84">
+                <annotation></annotation>
+                <name>Replace</name>
+                <ignoreCase>false</ignoreCase>
+                <searchString>,</searchString>
+                <replaceString>,</replaceString>
+                <replaceType>ALL</replaceType>
+              </replaceAllFilter>
+            </filters>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <step id="a52c8ec8-8cb0-48f4-b149-125bfdf5def2">
+      <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.a52c8ec8-8cb0-48f4-b149-125bfdf5def2.description</annotation>
+      <name>Write to File</name>
+      <bounds>
+        <x>373.0</x>
+        <y>477.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <resultBinding id="4ae08800-844a-418d-9a1c-60cf2a4f4c9b">
+          <annotation></annotation>
+          <toContextKey>File</toContextKey>
+          <fromContextKey>File</fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>source</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+        </resultBinding>
+        <resultBinding id="ef862632-f04a-4090-bb2b-1980cda86edd">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>contents</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+        </resultBinding>
+        <staticBinding id="ec85efaa-b9d5-4377-ac60-c4d5cc3e4e69">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>overwrite</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="7acda128-9105-49fe-92b3-49a108f48657">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.7acda128-9105-49fe-92b3-49a108f48657.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>626208f0-2561-4a25-9996-77491a70e26b</refId>
+          </destination>
+          <source>
+            <refId>a52c8ec8-8cb0-48f4-b149-125bfdf5def2</refId>
+          </source>
+          <positions>
+            <point>
+              <x>185.0</x>
+              <y>730.0</y>
+            </point>
+            <point>
+              <x>425.0</x>
+              <y>392.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="0920fa6d-1ffa-4bc3-88cc-85ab0f7d12a6">
+          <annotation>994dfc9f-8c09-4d67-bd48-b2cb15d88f57.0920fa6d-1ffa-4bc3-88cc-85ab0f7d12a6.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e1cffabd-8fe5-4c04-a863-920f56f28320</refId>
+          </destination>
+          <source>
+            <refId>a52c8ec8-8cb0-48f4-b149-125bfdf5def2</refId>
+          </source>
+          <positions>
+            <point>
+              <x>185.0</x>
+              <y>730.0</y>
+            </point>
+            <point>
+              <x>252.0</x>
+              <y>512.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>333.0</x>
+            <y>0.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>af728dc4-d7a0-4e8e-917a-74c188f2e470</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+  </steps>
+  <startSteps>491f2423-756c-40b2-b071-f72127ce256a</startSteps>
+</flow>

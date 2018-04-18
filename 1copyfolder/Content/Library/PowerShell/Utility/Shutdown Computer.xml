@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="7805c561-6507-4d5d-a2a3-a2f73c1369ce">
+  <descriptionCdata><![CDATA[7805c561-6507-4d5d-a2a3-a2f73c1369ce.7553cbff-7ff3-4bd4-9a42-1b6e8ebfbf03.prompt=Password\:
+7805c561-6507-4d5d-a2a3-a2f73c1369ce.c1b17751-3dcf-4ddb-9bea-77462ddfe9d6.prompt=Host\:
+7805c561-6507-4d5d-a2a3-a2f73c1369ce.d40e1fb7-48a1-4982-b8ca-c14860e5ce52.prompt=Username\:
+7805c561-6507-4d5d-a2a3-a2f73c1369ce.description=<pre>\nShuts down the target Windows computer. If the target computer is not present in the list of Trusted Hosts in WS-Management of the RAS host, the operation may fail when using the target computer's system account as user credentials.\n\nRemoting is not required to execute this operation on remote hosts. However, WMI services must be running.\n\nInputs\: \nhost\t- The host name or the IP address of the target Windows computer.\nusername \t- Username to use to connect to the target computer. \npassword \t- Password of the user.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nThe operation's return code.\n\nExtra Results\:\nexception \t- If something went wrong, the error message.\n</pre>
+]]></descriptionCdata>
+  <annotation>7805c561-6507-4d5d-a2a3-a2f73c1369ce.description</annotation>
+  <name>Shutdown Computer</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="c1b17751-3dcf-4ddb-9bea-77462ddfe9d6">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7805c561-6507-4d5d-a2a3-a2f73c1369ce.c1b17751-3dcf-4ddb-9bea-77462ddfe9d6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d40e1fb7-48a1-4982-b8ca-c14860e5ce52">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7805c561-6507-4d5d-a2a3-a2f73c1369ce.d40e1fb7-48a1-4982-b8ca-c14860e5ce52.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="7553cbff-7ff3-4bd4-9a42-1b6e8ebfbf03">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>7805c561-6507-4d5d-a2a3-a2f73c1369ce.7553cbff-7ff3-4bd4-9a42-1b6e8ebfbf03.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="9b7f8eca-2d98-4dc1-97c6-0eed57391608">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="e89d24cc-cc45-4041-866a-cac3c55833a9">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="94765189-41c4-47dd-97c6-7da7117edf62">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="a278a798-4404-4eb1-9b88-59dfc96631e3">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="d28f28b5-aca0-41f2-aa79-c04c1b2916f2">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c68d80b2-c445-4848-99e4-71af0bca9532">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6f1037ff-efa3-4746-8690-182d6868d7f4">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="a48d000e-43b4-48c9-aaff-48f01ca7222a">
+    <baseIcon>workstation1.png</baseIcon>
+    <basePath>/Clients/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="14f8afbe-41e3-4ccd-95d5-93cf8e02546c">
+        <baseIcon>shutdown.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.ShutdownComputer</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

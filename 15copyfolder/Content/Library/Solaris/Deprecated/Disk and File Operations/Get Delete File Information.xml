@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d69f8557-dad5-45e3-bcce-e7afa8f74e50">
+  <descriptionCdata><![CDATA[d69f8557-dad5-45e3-bcce-e7afa8f74e50.02c4daf8-721d-45bc-990f-f4d33f2e8ba2.prompt=Directory\:
+d69f8557-dad5-45e3-bcce-e7afa8f74e50.730bc976-836b-4361-83aa-ce2c48c1c6bb.prompt=User Name\:
+d69f8557-dad5-45e3-bcce-e7afa8f74e50.ba8a102e-c71a-4b68-a46a-6e3b08d87437.prompt=Host\:
+d69f8557-dad5-45e3-bcce-e7afa8f74e50.description=This verifies that the directory entered ends with a '/' or appends one if it is needed\n\nInputs\:\nhost - the host to delete the file from.\nusername - The username to log into host with.\npassword - the password for username.\ndir - The directory to ensure ends with a /\n\nResponses\:\nsuccess - the result ends in a /\n\nReturns\:\ndir with a / appended if needed.\n
+d69f8557-dad5-45e3-bcce-e7afa8f74e50.fc1a2ac2-c51f-4698-954f-e050e29dc07a.prompt=Password\:
+]]></descriptionCdata>
+  <annotation>d69f8557-dad5-45e3-bcce-e7afa8f74e50.description</annotation>
+  <name>Get Delete File Information</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="ba8a102e-c71a-4b68-a46a-6e3b08d87437">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d69f8557-dad5-45e3-bcce-e7afa8f74e50.ba8a102e-c71a-4b68-a46a-6e3b08d87437.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="730bc976-836b-4361-83aa-ce2c48c1c6bb">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d69f8557-dad5-45e3-bcce-e7afa8f74e50.730bc976-836b-4361-83aa-ce2c48c1c6bb.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="fc1a2ac2-c51f-4698-954f-e050e29dc07a">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d69f8557-dad5-45e3-bcce-e7afa8f74e50.fc1a2ac2-c51f-4698-954f-e050e29dc07a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="02c4daf8-721d-45bc-990f-f4d33f2e8ba2">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dir</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d69f8557-dad5-45e3-bcce-e7afa8f74e50.02c4daf8-721d-45bc-990f-f4d33f2e8ba2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="30727d6c-c461-4594-8c1a-a4bd4d1dcfe7">
+    <annotation></annotation>
+    <name>Operation Get Delete File Information (ed9d7319-d176-4639-b0e9-6be139d7a5ff)</name>
+    <script>/*
+	This verifies that the directory entered ends with a &apos;/&apos; or appends one if it is needed
+*/
+
+// get the length
+length = dir.length;
+// it is zero based
+if (length &gt; 0) length--;
+// check the last character, if not a &apos;/&apos; then append a &apos;/&apos;
+if (dir[length] != &apos;/&apos;) dir = dir + &quot;/&quot;;
+// put it into the context
+scriptletContext.putGlobal(&quot;dir&quot;,dir);
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="1e5d0bad-f0ab-4b4e-928c-5c45a671971f">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="94449c14-8709-4b82-8476-97acae1035ca">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4a01f475-7d4d-45f0-9288-76210faa6515">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="33ee843c-4fc2-4360-8c20-7d750e6b3db2">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

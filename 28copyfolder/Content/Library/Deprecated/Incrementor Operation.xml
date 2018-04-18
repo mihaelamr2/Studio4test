@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d31598cd-966d-4e65-83a7-b7085a75a124">
+  <descriptionCdata><![CDATA[d31598cd-966d-4e65-83a7-b7085a75a124.01f4fd38-37b3-4b1d-91ac-88a796c3433b.prompt=Key Name\:
+d31598cd-966d-4e65-83a7-b7085a75a124.description=<pre>\nSimple op that adds one (1) to a context variable.  If the supplied context key is null, a new global variable is started with a value of zero.\n\nInputs\:\nkeyName - the context key for the number you want to increment\n\nResponses\:\nsuccess - completed task\n</pre>
+]]></descriptionCdata>
+  <annotation>d31598cd-966d-4e65-83a7-b7085a75a124.description</annotation>
+  <name>Incrementor Operation</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="01f4fd38-37b3-4b1d-91ac-88a796c3433b">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d31598cd-966d-4e65-83a7-b7085a75a124.01f4fd38-37b3-4b1d-91ac-88a796c3433b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="9189095e-73c5-4f0e-bf35-365941a1b4e0">
+    <annotation></annotation>
+    <name>Operation Incrementor Operation (0ce8e3d7-4aaf-418e-b283-9de7aa01c1c0)</name>
+    <script>aNumber = scriptletContext.get(keyName);
+
+if (aNumber!=null) {
+  aNumber++;
+} else {
+  aNumber = 0;
+}
+
+scriptletContext.putGlobal(keyName, aNumber.toString());</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="3c84f242-ceab-49fd-b157-18c2b21cb837">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="19d88510-03a5-4b84-b9e7-303c5f7d9996">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="ad1d1f68-cf74-499b-b1b7-dc133876884a">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="d44adef0-17fa-4eea-a9ed-3019da87c118">
+        <baseIcon>add.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>1bd85f69-23a6-4ea0-93df-419b1487789a</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

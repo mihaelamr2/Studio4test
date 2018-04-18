@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c9fee985-28f6-44e3-b8cb-354fc4e1a4b3">
+  <descriptionCdata><![CDATA[c9fee985-28f6-44e3-b8cb-354fc4e1a4b3.description=<pre> Extract a ZIP archive.\n\nInputs\:\nzipFileName - The absolute path including file name of the ZIP file that wants to be extracted. \noutputDirectory - Location where the extracted content to be written. If the directory doesn't exist, will be created.\n\n\nResponses\:\nsuccess - The files were extracted successfully.\nfailure - The files could not be extracted.\n</pre>
+]]></descriptionCdata>
+  <annotation>c9fee985-28f6-44e3-b8cb-354fc4e1a4b3.description</annotation>
+  <name>Extract Zip</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b3b888b8-55b3-4738-844e-c02b784b7535">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>zipFileName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c07574d2-67bd-40f6-8c85-bb13537c3577">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>outputDirectory</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="a15925d5-1e41-4f68-86e7-5169e4f0c737">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="b61db1a6-6258-491d-9d47-7a66c5279289">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="5648ac6b-f8a4-466e-bce7-aeff7bcf5b5a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="5ea6badd-e092-4b1d-a99a-127844e96493">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="ee7b866a-ba00-4e08-840d-9d3921449a08">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="8aba3ebd-599d-40dc-ac16-a9c233f23126">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="59159a3b-9abc-4263-95c0-d379af3ef5ee">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="ac63c6d1-061b-4df2-9f1b-fcaff38f4cea">
+    <baseIcon>application_green.png</baseIcon>
+    <basePath>/Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="726e8c7a-f802-4ea7-8730-c84d31a5812c">
+        <baseIcon>flow.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-fs-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>ExtractZip</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

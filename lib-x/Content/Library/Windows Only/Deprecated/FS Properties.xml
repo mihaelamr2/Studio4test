@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="a13b934e-205f-4f15-b16f-c2f994105bde">
+  <descriptionCdata><![CDATA[a13b934e-205f-4f15-b16f-c2f994105bde.description=<pre>\nFSProperties reads the properties of a file, and reports them back.\n\nInput Parameters\:\nSource - the file to read\nusername - username to use when reading.\npassword - password to use when reading.\n\nResponses\:\nfailure - the move failed\nsuccess - the move succeeded.\n\nExtra results\: Each result is a property of the file. a result is set to 'true' is true, or 'false' if it is not set.\n\narchive - The file's archive status.\ncompressed - The file is compressed.\ndevice - reserved for future use.\ndirectory - the file is actually a directory, not a file.\nencrypted - the file is encrypted.\nhidden - the file is hidden.\nnormal - no attributes other than this one are set.\nnotcontentindexed - the file will not be indexed by the operating system.\noffline - the file is offline, and not immediately available.\nreadonly - the file is read only, and cannot be written to.\nreparsepoint - contains a reparse point, or block os user define data.\nsparsefile - is a sparse file. this normally means it is a large file composed primarily of bits that are 0.\t\t\t\nsystem - this file is used by the operating system.\ntemporary - this file is temporary.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>a13b934e-205f-4f15-b16f-c2f994105bde.description</annotation>
+  <name>FS Properties</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="622d6ccb-1e18-4014-b4a4-c17079964bee">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Source</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6f41642d-77dd-412c-8c02-4cdda6a52e05">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5bb91ef5-1243-497f-af93-bc2825fb620d">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="a575f588-3ea5-4b1d-9ca1-48f1582ce9c8">
+    <annotation></annotation>
+    <name>Operation FS Properties (2700f2f4-bc0a-431f-96c4-4a524c08e846)</name>
+    <script>scriptletContext.put(&quot;archive&quot;, scriptletRawResult[&apos;archive&apos;]);
+scriptletContext.put(&quot;compressed&quot;, scriptletRawResult[&apos;compressed&apos;]);
+scriptletContext.put(&quot;device&quot;, scriptletRawResult[&apos;device&apos;]);
+scriptletContext.put(&quot;directory&quot;, scriptletRawResult[&apos;directory&apos;]);
+scriptletContext.put(&quot;encrypted&quot;, scriptletRawResult[&apos;encrypted&apos;]);
+scriptletContext.put(&quot;hidden&quot;, scriptletRawResult[&apos;hidden&apos;]);
+scriptletContext.put(&quot;normal&quot;, scriptletRawResult[&apos;normal&apos;]);
+scriptletContext.put(&quot;notcontentindexed&quot;, scriptletRawResult[&apos;notcontentindexed&apos;]);
+scriptletContext.put(&quot;offline&quot;, scriptletRawResult[&apos;offline&apos;]);
+scriptletContext.put(&quot;readonly&quot;, scriptletRawResult[&apos;readonly&apos;]);
+scriptletContext.put(&quot;reparsepoint&quot;, scriptletRawResult[&apos;reparsepoint&apos;]);
+scriptletContext.put(&quot;sparsefile&quot;, scriptletRawResult[&apos;sparsefile&apos;]);
+scriptletContext.put(&quot;system&quot;, scriptletRawResult[&apos;system&apos;]);
+scriptletContext.put(&quot;temporary&quot;, scriptletRawResult[&apos;temporary&apos;]);</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="caccc09c-02ff-45f3-b6fb-45ae669bf7d5">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="e09c31fd-971f-4e9e-9859-a1009e01aa33">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="4df3b0fc-c8e2-43ed-af5e-ff435f0be604">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="46b23849-5915-4b18-ade0-e5090a0f246e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="dc1bcffe-d20f-4bbc-90eb-c669f9acc391">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0017ae21-00c9-4cbf-8b5e-e1d462d4fd6e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c11f92a4-9dbb-40bc-8b52-13210c1a111f">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="09a6f9bb-237e-42c0-9873-3a600ace5710">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3fbd5bf8-96a2-4189-b9f1-0cb510f7e836">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_FileSystem.FSProperties</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

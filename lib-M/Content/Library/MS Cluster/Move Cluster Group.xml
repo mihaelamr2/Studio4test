@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="8c8f05b6-5fb3-4354-b917-5147caa80172">
+  <descriptionCdata><![CDATA[8c8f05b6-5fb3-4354-b917-5147caa80172.72d3e947-59ad-4f0b-9f93-8f59ec59ebd5.prompt=Resource Group Name\:
+8c8f05b6-5fb3-4354-b917-5147caa80172.99b69259-65eb-4fac-a21b-359e771eebbc.prompt=HostName\:
+8c8f05b6-5fb3-4354-b917-5147caa80172.d41db072-0d9a-4959-9896-1d7ae68cec5f.prompt=Target Node\:
+8c8f05b6-5fb3-4354-b917-5147caa80172.description=<pre>\nAttempts to move a cluster group from one node to another\n\nInput Parameters\:\nhost - hostname or ip address of the cluster\nresourceGroup - name of the resource group to move\ntargetNode - (optional) the node name to move the group to (if left blank, MS cluster service will pick the best node)\n\nResponses\:\nonline - the group is online\noffline - the group is offline\npartially Online - the group is partially online\npending - the group is pending\nfailure - a failure occurred and/or the group state is unknown\n\nExtra Results\:\nnodeName - name of current group owner\n\nNotes\:\n1. Thanks to MS's way of building the COM interface to MS Clustering admin tools, we can't use any impersonation with it.  \nTherefore, to make it work properly you have to run the Windows RAS service as an account with privileges.\n2. Clean install of Windows 2008 (on the RAS machine) does not include by default msclus.dll library. To work around this issue there are 2 alternatives. The first one is to install the failover clustering feature on the machine, which will install the msclus.dll to "%systemroot%\\system32\\msclus.dll". The alternative is to  copy "%systemroot%\\system32\\msclus.dll" from a Windows Server 2003 server to the same location on the Windows 2008 (R2) machine and run "regsvr32 %systemroot%\\system32\\msclus.dll" (if you have a 64-bit Windows 2008 then you have to copy msclus.dll from a 64-bit Windows 2003).\n3. To administer a Windows 2008 cluster you have to install RAS on a Windows 2008 machine. Backward compatibility has been broken by Microsoft, according to http\://msdn.microsoft.com/en-us/library/bb756975.aspx, which means that you cannot call Cluster APIs from a Windows Server 2008 Cluster to a down-level cluster (Windows NT 4.0, Windows 2000, or Windows 2003). Also, you cannot be on a down-level client and remotely call Cluster APIs against a Windows Server 2008 node.\n</pre>
+]]></descriptionCdata>
+  <annotation>8c8f05b6-5fb3-4354-b917-5147caa80172.description</annotation>
+  <name>Move Cluster Group</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="99b69259-65eb-4fac-a21b-359e771eebbc">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>8c8f05b6-5fb3-4354-b917-5147caa80172.99b69259-65eb-4fac-a21b-359e771eebbc.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="72d3e947-59ad-4f0b-9f93-8f59ec59ebd5">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resourceGroup</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>8c8f05b6-5fb3-4354-b917-5147caa80172.72d3e947-59ad-4f0b-9f93-8f59ec59ebd5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d41db072-0d9a-4959-9896-1d7ae68cec5f">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>targetNode</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>8c8f05b6-5fb3-4354-b917-5147caa80172.d41db072-0d9a-4959-9896-1d7ae68cec5f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="d8b5521f-fb3e-44d3-8d8f-37940422f0d2">
+    <annotation></annotation>
+    <name>Operation Move Cluster Group (74015ca4-761e-42ee-82f3-8ca1993ed92d)</name>
+    <script>
+        	scriptletContext.put(&quot;nodeName&quot;, scriptletRawResult[&apos;nodeName&apos;]);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="27bc5f93-333e-42b5-912e-806c62d47f1c">
+      <annotation></annotation>
+      <name>partially online</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="32e90f48-9af4-4214-afa7-14868ed2763d">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="39e8b8ad-f195-4b18-ba1b-58f66c9f6768">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>4</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="99f74717-3081-4c1f-9550-0b15342c6e85">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="fa51739b-19de-45da-bc7e-4fff213cb348">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="81e4dee4-5ee1-429c-be7f-9e47f8db73a4">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="38f20bd6-0ae8-4635-a6f0-1639ef8211f1">
+      <annotation></annotation>
+      <name>online</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="cfc2958e-d07b-4146-b8b0-afe3390771a4">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="09e47f6c-5422-4040-b862-42538fd49d35">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>2</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="870b744f-98dd-41bb-9840-5ceb0779fc81">
+      <annotation></annotation>
+      <name>offline</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="a7f53d45-77c5-4b82-b888-4cc4f4c8ec90">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="884bbaeb-fe8d-433c-807e-0dda55381f06">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>3</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="cf346608-76b5-46ad-be0b-8939dcb54536">
+      <annotation></annotation>
+      <name>pending</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="ba0891b9-2ad4-4141-a0d6-3dd0f6f2568e">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0400e6a6-8d39-4f9b-8360-45b0d529f328">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>5</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="920bba7e-a179-4fc2-9bdf-ad519c2c4158">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="8c18df2c-42d2-4fe5-a413-ab5ed7d28705">
+    <baseIcon>node.png</baseIcon>
+    <basePath>Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="06e75799-ac69-4706-b361-a327deae0728">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-mscluster-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Cluster.MoveClusterGroup</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

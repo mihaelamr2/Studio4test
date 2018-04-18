@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="3836e989-e7be-49eb-a9c3-5455e5dfa19b">
+  <descriptionCdata><![CDATA[3836e989-e7be-49eb-a9c3-5455e5dfa19b.description=<pre>Service to retrieve JVM memory pool info (only 1.6 JVMs or 1.5 JVMs)\n\nInput Operators\: \nNone\n\nResponses\:\nmemory within threshold - memory is within the threshold\nlow memory reported - memory was reported low\nnon 1.6 jvm - JVM is not 1.6\nfailure - general failure reported\n\nExtra Results\:\nnumberOfMemoryPools - contains the number of memory pools managed by the JVM\nlowMemory - true/false; if any of the pools have reported a usage threshold exceeded\npoolName - memory pool name\npoolUsed - contains the amount of memory used (in bytes) in the heap\npoolCommitted - amount of memory in bytes that is committed for the Java virtual machine to use\npoolInit - amount of memory in bytes that the Java virtual machine initially requests from the operating system for memory management\npoolMax - Returns the maximum amount of memory in bytes that can be used for memory management\npeakUsed - contains the amount of memory used (in bytes)\npeakCommitted - amount of memory in bytes that is committed for the Java virtual machine to use\npeakInit - amount of memory in bytes that the Java virtual machine initially requests from the operating system for memory management\npeakMax - Returns the maximum amount of memory in bytes that can be used for memory management\ncollectionUsed - contains the amount of memory used (in bytes)\ncollectionCommitted - amount of memory in bytes that is committed for the Java virtual machine to use\ncollectionInit - amount of memory in bytes that the Java virtual machine initially requests from the operating system for memory management\ncollectionMax - Returns the maximum amount of memory in bytes that can be used for memory management\n</pre>
+]]></descriptionCdata>
+  <annotation>3836e989-e7be-49eb-a9c3-5455e5dfa19b.description</annotation>
+  <name>JVM Low Memory Check</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="7cc12db4-8703-4ae6-94ec-02936a48833a">
+    <annotation></annotation>
+    <name>Operation JVM Low Memory Check (67a9913f-47b8-4879-af0b-1b5fd9c38ace)</name>
+    <script>
+        	scriptletContext.put(&quot;numberOfMemoryPools&quot;, scriptletRawResult[&apos;numberOfMemoryPools&apos;]);
+        	scriptletContext.put(&quot;lowMemory&quot;, scriptletRawResult[&apos;lowMemory&apos;]);
+        	scriptletContext.put(&quot;poolName&quot;, scriptletRawResult[&apos;poolName&apos;]);
+        	scriptletContext.put(&quot;poolUsed&quot;, scriptletRawResult[&apos;poolUsed&apos;]);
+        	scriptletContext.put(&quot;poolCommitted&quot;, scriptletRawResult[&apos;poolCommitted&apos;]);
+        	scriptletContext.put(&quot;poolInit&quot;, scriptletRawResult[&apos;poolInit&apos;]);
+        	scriptletContext.put(&quot;poolMax&quot;, scriptletRawResult[&apos;poolMax&apos;]);
+        	scriptletContext.put(&quot;peakUsed&quot;, scriptletRawResult[&apos;peakUsed&apos;]);
+        	scriptletContext.put(&quot;peakCommitted&quot;, scriptletRawResult[&apos;peakCommitted&apos;]);
+        	scriptletContext.put(&quot;peakInit&quot;, scriptletRawResult[&apos;peakInit&apos;]);
+        	scriptletContext.put(&quot;peakMax&quot;, scriptletRawResult[&apos;peakMax&apos;]);
+        	scriptletContext.put(&quot;collectionUsed&quot;, scriptletRawResult[&apos;collectionUsed&apos;]);
+        	scriptletContext.put(&quot;collectionCommitted&quot;, scriptletRawResult[&apos;collectionCommitted&apos;]);
+        	scriptletContext.put(&quot;collectionInit&quot;, scriptletRawResult[&apos;collectionInit&apos;]);
+        	scriptletContext.put(&quot;collectionMax&quot;, scriptletRawResult[&apos;collectionMax&apos;]);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="4add583f-1fa9-4c14-aaae-8da3c84f3a10">
+      <annotation></annotation>
+      <name>non 1.6 jvm</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="6e5d3a18-dedb-47b3-ba97-4107dff9d2ec">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="811295f0-d28a-4106-989b-026009fd87d4">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>6</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="b82e0679-515d-454d-a8d0-5355215c66fa">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="6f85f55f-be46-4152-97dd-2eff9d074338">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="f0661996-3ca7-44d8-a7e0-20bb800f204e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="4f228f6e-b6f1-4fb0-9a5a-a9780a673516">
+      <annotation></annotation>
+      <name>low memory reported</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="99434885-0543-4a25-9064-300eb10c5f4d">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e583f895-a574-4487-a80e-c1d73ffbad30">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>5</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3f1e96f6-ad44-4a91-84cc-f54cc9755b26">
+      <annotation></annotation>
+      <name>memory within threshold</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="e5083ded-ed36-409d-9ab9-947e842810df">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="22755cb4-42a7-4d57-8fe2-0beeb96ec151">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="753f8bc8-61e4-4319-b918-8fda66d328da">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="94c5ed21-9af5-4043-8fc8-c21c4590af4c">
+    <baseIcon>memory.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="7870f4e1-c21e-4848-99c4-047edde329cc">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.jvm.JVMLowMemoryCheck</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

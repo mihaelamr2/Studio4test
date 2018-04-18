@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="ce0e2878-3f9c-4e44-a17d-7488a66bd0fe">
+  <descriptionCdata><![CDATA[ce0e2878-3f9c-4e44-a17d-7488a66bd0fe.description=This compares durations of two different pings.  Used by the Ping Triangulation flow.\n\nInputs\:\nthreshold - What difference between ping times is considered similar.\n\nResponses\:\nsimilar - pings had similar duration.\ndifferent - pings had different durations.\nfailure - the operation failed.
+]]></descriptionCdata>
+  <annotation>ce0e2878-3f9c-4e44-a17d-7488a66bd0fe.description</annotation>
+  <name>Compare durations</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="d06c6e39-9f9e-4db6-957b-51bac6359849">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>threshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="96f2edad-f0e6-4c42-8295-6fe91e425fdd">
+    <annotation></annotation>
+    <name>Operation Compare durations (d7e075f8-f7f3-4348-b3d1-a86f8bd78d4e)</name>
+    <script>/*
+	This operation is specific for the Ping Triangulation flow.  The preceeding steps
+	ping a server from two different locations, and this then calculates the difference
+	between the ping durations.  It relies on the previous steps to fill in context
+	variables for duration1 and duration2. 
+
+	This places the difference into the context variable Difference
+
+	Returns:
+		&quot;Different&quot; if Differnce is greater than the input threshold
+		&quot;Similar&quot; if Difference is less than or equal to the input threshold
+*/
+
+// compare duration1 and duration2
+duration1 = parseInt(scriptletContext.get(&quot;duration1&quot;));
+duration2 = parseInt(scriptletContext.get(&quot;duration2&quot;));
+difference = java.lang.Math.abs(duration2 - duration1);
+
+// place the information into the context
+scriptletResult = difference.toString();
+scriptletContext.putGlobal(&quot;Difference&quot;,scriptletResult);
+
+// calculate the response based on the threshold
+if (difference &gt; parseInt(threshold)) {
+	scriptletResponse = &quot;different&quot;;
+}
+else {
+	scriptletResponse = &quot;similar&quot;;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="625b9f60-1964-4a69-880f-46ae435a531b">
+      <annotation></annotation>
+      <name>similar</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="58202dac-54a4-4890-89ad-b1cb55197108">
+      <annotation></annotation>
+      <name>different</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="df219ea1-5d15-4485-81e5-7c7c417f9caa">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="d3f35fac-94ad-4e11-a681-c412539e2410">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="925584cd-01a2-4336-a83c-4fa2d6613cc1">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7">
+  <descriptionCdata><![CDATA[b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.1dcfaaaa-0271-4d29-a16f-9364a0c5047c.transition.description=Query Retrieved
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.3487c87d-cc16-4c7d-bfd3-076ee94985c0.description=<pre>\nConverts the XML from WMIQuery to another format.  \n\nNOTE\: currently text and csv\n\nInput Parameters\:\nxml - the xml to transform\nformat - (text, csv) the format to transform the xml too\n\nResponses\:\nsuccess - xml formated properly\nfailure - unable to format xml\n</pre>
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.43845bd7-4667-45a5-866f-3b90f89394f1.prompt=Alternate Credentials - UserName\:
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.47a2f046-c776-40cd-9816-bb4055b6db63.description=<pre>\nRuns a query against WMI and returns all the properties in XML format.\n\nNOTE\: use WMIQueryFormat on the returned XML to convert to some other format.\n\nInput Parameters\:\nhost - host name or ip address\nnamespace - namespace to run query against (e.x. root\\cimv2)\nquery - the query to execute (e.x. select * from win32_service)\nuser - user to login as\npassword - password for user\n\nResponses\:\nsuccess - the query returned successfully\nfailure - unable to execute query\n</pre>
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6c0e1c04-b740-41d4-97ac-91976180a446.prompt=Alternate Credentials - Password\:
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6e48d0b0-0f63-40d7-8363-e2c14256682c.description=This step will display the successful message of the WMI QueryResults Transformer step.
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6e48d0b0-0f63-40d7-8363-e2c14256682c.prompt=<pre>\nThe WMI Query was successful. See below for details.\n\n--Hostname--\n${host}\n\n--Namespace--\n${nameSpace}\n\n--Query--\n${query}\n\n--OutputFormat--\n${format}\n\n--ResultOfTheQuery--\n${result}\n</pre>
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.80d2c9ab-447e-45f3-a39a-bba65a118c34.description=This step will display the failing message of either the WMIQuery step or the WMI QueryResults Transformer step.
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.80d2c9ab-447e-45f3-a39a-bba65a118c34.prompt=There was an error encountered\:\n${result}\n
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.a6497423-9bff-4f43-a171-78734f521160.transition.description=WMI Query fetch failed.
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.description=<pre>\nThis sample flow uses two operations from the WMI package. The first is WMIQuery which retrieves class information, and the second is WMIQueryResultsTransformer which will take the XML results from WMIQuery and convert them into either CSV or Text if the user wishes.  This flow also automatically uses the following input values for WMIQuery\:\n  namespace \= root\\cimv2\n  query \= select * from Win32_ShareToDirectory\n\nInputs\:\nhost - Host name or ip address.\nuser - Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword - Password of the user.\nformat - The format to transform the xml to (text, csv).\n\nResponses\:\nsuccess - When the flow executes properly.\nfailure - When some error occurs while executing.\n\nResults\:\nformattedOutput - Output of the formatted WMI query.\n</pre>
+b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.e24729cf-12ef-447e-83f2-533dc621453e.transition.description=Query results could not be transformed from XML.
+]]></descriptionCdata>
+  <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.description</annotation>
+  <name>WMI Query (1)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="fd2ef5ff-b872-4347-ac81-d96c1ab6db94">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="43845bd7-4667-45a5-866f-3b90f89394f1">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.43845bd7-4667-45a5-866f-3b90f89394f1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6c0e1c04-b740-41d4-97ac-91976180a446">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6c0e1c04-b740-41d4-97ac-91976180a446.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e9f3d574-07fd-489b-a21d-f18bd7e616e2">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>format</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>0ecd4f29-bc49-48b4-8733-9cf89fa475b9</refId>
+        <refName>WMI Query Format</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="4d1c0b8e-6c1e-45d0-824d-e82b4b199b3d">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="92a96e84-4908-4bde-8ce6-b86c98bb3d4e">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions>
+    <expression id="9fab0ed8-4e9a-4afe-8bb4-984ab0da889e">
+      <annotation></annotation>
+      <name>formattedOutput</name>
+      <fieldName>formattedOutput</fieldName>
+      <sourceType>RAWRESULT</sourceType>
+      <filters/>
+    </expression>
+  </availableResultExpressions>
+  <resultExpression id="6965c2d0-5fd4-4540-9286-6839d47a2099">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>formattedOutput</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="45960a7f-1460-4d94-892a-9ce49ef722b9">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts/>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>true</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="47a2f046-c776-40cd-9816-bb4055b6db63">
+      <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.47a2f046-c776-40cd-9816-bb4055b6db63.description</annotation>
+      <name>WMIQuery</name>
+      <bounds>
+        <x>-10.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>true</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <resultContextKey>result</resultContextKey>
+      <userPrompt></userPrompt>
+      <bindings>
+        <userInputBinding id="819d917c-b280-4b86-a125-7c7619bda974">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>host</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt></prompt>
+          <isMultiSelect>false</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+        <staticBinding id="a11af3e9-5f1b-429e-a4ed-99b8c3d444ab">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>nameSpace</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>root\cimv2</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="56ed0eaa-2599-4fd6-95a7-be34818a6224">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>query</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>select * from Win32_ShareToDirectory</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="9509ad8c-3b8d-42cd-8a8e-910aa77bff88">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>user</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="1855ed0e-cf7f-43c4-ba7d-4fa8277600fe">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>ENCRYPTED</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>password</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="1dcfaaaa-0271-4d29-a16f-9364a0c5047c">
+          <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.1dcfaaaa-0271-4d29-a16f-9364a0c5047c.transition.description</annotation>
+          <name>Query Fetched</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>3487c87d-cc16-4c7d-bfd3-076ee94985c0</refId>
+          </destination>
+          <source>
+            <refId>47a2f046-c776-40cd-9816-bb4055b6db63</refId>
+          </source>
+          <positions>
+            <point>
+              <x>110.0</x>
+              <y>70.0</y>
+            </point>
+            <point>
+              <x>210.0</x>
+              <y>70.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>450.0</x>
+            <y>-12.0</y>
+          </labelPosition>
+        </transition>
+        <transition id="a6497423-9bff-4f43-a171-78734f521160">
+          <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.a6497423-9bff-4f43-a171-78734f521160.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>80d2c9ab-447e-45f3-a39a-bba65a118c34</refId>
+          </destination>
+          <source>
+            <refId>47a2f046-c776-40cd-9816-bb4055b6db63</refId>
+          </source>
+          <positions>
+            <point>
+              <x>80.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>80.0</x>
+              <y>125.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>533.3333333333334</x>
+            <y>16.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>db1c9e03-65fb-44a8-a5ae-4ab1fe64236b</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="a05c9933-53ac-411c-87af-23b312640ecb">
+          <annotation>Automatically created during conversion</annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>result</contextKey>
+          <expression id="fc5bf0be-3265-4c3e-8b3a-39be996f9d6d">
+            <annotation>Automatically created during conversion</annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="80d2c9ab-447e-45f3-a39a-bba65a118c34">
+      <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.80d2c9ab-447e-45f3-a39a-bba65a118c34.description</annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>-10.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.80d2c9ab-447e-45f3-a39a-bba65a118c34.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="21551dd6-0c72-4a68-bd48-5e58a0f7bfe4">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>80d2c9ab-447e-45f3-a39a-bba65a118c34</refId>
+          </destination>
+          <source>
+            <refId>80d2c9ab-447e-45f3-a39a-bba65a118c34</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="5f1593a9-4e69-45ee-8a44-fb56a7507e5d">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Error</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="85004b45-d960-408c-a077-6a09ea55ac9b">
+            <doubleValue>500.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="de81261d-1e03-4c9f-945e-536029e82643">
+            <doubleValue>500.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+    <returnStep id="6e48d0b0-0f63-40d7-8363-e2c14256682c">
+      <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6e48d0b0-0f63-40d7-8363-e2c14256682c.description</annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>140.0</x>
+        <y>120.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>true</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.6e48d0b0-0f63-40d7-8363-e2c14256682c.prompt</userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="cf8388fc-3b3f-4679-8d59-ce44899f788d">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6e48d0b0-0f63-40d7-8363-e2c14256682c</refId>
+          </destination>
+          <source>
+            <refId>6e48d0b0-0f63-40d7-8363-e2c14256682c</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties>
+        <entry>
+          <key>Prompt Title</key>
+          <modelValue id="5638e201-8f17-4444-8525-3464fb7fa50f">
+            <doubleValue>0.0</doubleValue>
+            <stringValue>Success</stringValue>
+            <encrypted>false</encrypted>
+            <type>9</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Width</key>
+          <modelValue id="b7e2ffee-3a54-4c2e-8508-4bf565ed8203">
+            <doubleValue>500.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+        <entry>
+          <key>Prompt Height</key>
+          <modelValue id="8c93267a-09a8-481e-99dc-4b66c828fcc7">
+            <doubleValue>500.0</doubleValue>
+            <encrypted>false</encrypted>
+            <type>5</type>
+          </modelValue>
+        </entry>
+      </properties>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="3487c87d-cc16-4c7d-bfd3-076ee94985c0">
+      <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.3487c87d-cc16-4c7d-bfd3-076ee94985c0.description</annotation>
+      <name>WMI QueryResults Transformer</name>
+      <bounds>
+        <x>140.0</x>
+        <y>0.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>true</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <resultContextKey>result</resultContextKey>
+      <userPrompt></userPrompt>
+      <scriptlet id="325bacba-b44f-4fc3-85f6-ec17bb662eb5">
+        <annotation></annotation>
+        <name>Step WMI QueryResults Transformer in Flow WMI Query (1) (01cf5aef-6c7c-4241-83d4-2ad4fe814cb7)</name>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <resultBinding id="f16d94aa-cb8e-40ad-b1d9-79a3ffd55bb4">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>xml</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+        </resultBinding>
+        <staticBinding id="4e554172-f505-4a4c-b88a-90ff4e2182c1">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>format</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>text</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="e24729cf-12ef-447e-83f2-533dc621453e">
+          <annotation>b0f3d4cf-cb47-4af6-9f88-c55fb64f57f7.e24729cf-12ef-447e-83f2-533dc621453e.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>80d2c9ab-447e-45f3-a39a-bba65a118c34</refId>
+          </destination>
+          <source>
+            <refId>3487c87d-cc16-4c7d-bfd3-076ee94985c0</refId>
+          </source>
+          <positions>
+            <point>
+              <x>201.0</x>
+              <y>62.80000000000001</y>
+            </point>
+            <point>
+              <x>111.0</x>
+              <y>134.8</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>555.2845528455281</x>
+            <y>-14.367986093751757</y>
+          </labelPosition>
+        </transition>
+        <transition id="0ce9f959-c0be-4387-8db1-eb7416172538">
+          <annotation></annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>6e48d0b0-0f63-40d7-8363-e2c14256682c</refId>
+          </destination>
+          <source>
+            <refId>3487c87d-cc16-4c7d-bfd3-076ee94985c0</refId>
+          </source>
+          <positions>
+            <point>
+              <x>230.0</x>
+              <y>65.0</y>
+            </point>
+            <point>
+              <x>230.0</x>
+              <y>125.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>533.3333333333334</x>
+            <y>-23.0</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>dc6c2b59-7d9d-444e-a64e-01b0acfb969c</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="0aef2a64-10a5-43c5-9b8d-cc3483516764">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_OUTPUT_FIELD</assignmentTargetType>
+          <contextKey>formattedOutput</contextKey>
+          <expression id="8b6556bd-5508-4261-b044-e8c80511ca87">
+            <annotation></annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+        <flowVariableAssignment id="4254a8cd-1708-4004-ae52-0e71f6efb78c">
+          <annotation>Automatically created during conversion</annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>result</contextKey>
+          <expression id="756a7d98-e9f1-416f-9ddd-3c3186f60cae">
+            <annotation>Automatically created during conversion</annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+  </steps>
+  <startSteps>47a2f046-c776-40cd-9816-bb4055b6db63</startSteps>
+</flow>

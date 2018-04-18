@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="ce0deace-0c30-46d3-b59f-4e2e42e06ecf">
+  <descriptionCdata><![CDATA[ce0deace-0c30-46d3-b59f-4e2e42e06ecf.c8879b17-0d90-4e18-96a9-dbe2ea94bcfe.prompt=Value Delimiter\:
+ce0deace-0c30-46d3-b59f-4e2e42e06ecf.description=<pre>Sends an SNMPv3 GETNEXT request to obtain the next OID(s) value(s).\n\nInput Parameters\: \nhost - IP address/host name of SNMP agent.  \nport - Port to which SNMP agent is listening (default is 161).\nusername - SNMPv3 security name for contacting the agent.\nauthPassword - Authentication key to be used.\nprivPassword - Privacy key to be used.\nauthProtocol - Authentication hashing protocol to use. Valid values\: MD5, SHA, NONE (changes security level to noAuth, noPriv).\nprivProtocol - Encryption cipher to use for privacy. Valid values\: DES, 3DES, AES128, AES192, AES256, NONE (changes security level to noPriv).\noid - Object identifier (OID) for which you want to get the next value of, ex\: 1.3.6.1.2.1.1.6 will return 1.3.6.1.2.1.1.6.0 for managed node location.  Can be a list of OIDs to get multiple values.\noidDelimiter - Delimiter for the oid input and result list (default is comma).\nvalueDelimiter - If multiple OIDs will be in the result, this delimiter will be used in the value result list (default is comma).\ntypeDelimiter - If multiple OIDs will be in the result, this delimiter will be used in the type result list (default is comma).\nretries - The number of attempts to retry the request if a timeout occurs (default is 0).\ntimeout - The time to wait for a response from the SNMP agent in milliseconds (default 1000ms which is 1 second).\n\nResponses\: \nsuccess - The value of given OID(s) is retrieved.\nfailure - Value of OID(s) cannot be retrieved.\n \nResults\:\nreturnResult - Value for the given OID(s) on success, reason for error on failure.\noid - List of OID(s) retrieved.\noidDelimiter - Delimiter that separates values in the oid result.\nvalue - List of values for the retrieved OID(s).\nvalueDelimiter - Delimiter that separates values in the value result.\ntype - List of types for the retrieved OID(s).\ntypeDelimiter - Delimiter that separates values in the type result.\nresponsePduError - An error description from the SNMP agent.\nresponsePduErrorIndex - The index of the OID request that caused the error (starts at 1).\n</pre>
+]]></descriptionCdata>
+  <annotation>ce0deace-0c30-46d3-b59f-4e2e42e06ecf.description</annotation>
+  <name>SNMPv3 Get Next</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="f402b7df-903e-484a-8827-819afa18fe1e">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4d5ab6b9-545c-402e-977e-6b2602bf566e">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="15081dbf-ef5d-4ffc-9b1b-28c2ed1c8983">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4e97d792-552d-403f-9fbf-d46c155f8dc6">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>authPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ac4f61c2-dadc-4bcd-81c8-d1d20f5ec102">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>privPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a2822d77-6997-4ffb-b7db-ce48a3361233">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>authProtocol</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>64075415-1209-4b43-a914-8f9b60f44fba</refId>
+        <refName>SNMPv3 Authentication Protocol</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a76704c8-189b-4fbf-9c42-56ac4fdd8847">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>privProtocol</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>25efcd0b-e295-415b-aeaa-81a5a6b0206d</refId>
+        <refName>SNMPv3 Privacy Protocol</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1689e878-7d3f-433d-9999-ad4f12691a4e">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>oid</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5bbe5470-45ba-4035-874b-fa0b3fe56eea">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>oidDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c8879b17-0d90-4e18-96a9-dbe2ea94bcfe">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>valueDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>ce0deace-0c30-46d3-b59f-4e2e42e06ecf.c8879b17-0d90-4e18-96a9-dbe2ea94bcfe.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="5d7dd666-bc9f-4877-b8b5-8419e52a4366">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>typeDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9ab911f4-2263-4378-9ab7-e7ecebe10fef">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>retries</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="28baf341-4aa2-468a-8010-d0b38a9658c3">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="ff2cfc45-a8ef-44bc-ad2d-0a4ad4ce268b">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c1d5805b-7ee7-4fd5-bd16-3ddd20dac070">
+          <annotation></annotation>
+          <name>Code</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="49e6f89b-5ad3-4dde-83ea-b5c577f468e6">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="6c90168b-3e0a-4034-b41e-606184b2f7e3">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="b280eeff-fe8b-4ace-9aad-f6d21db273dd">
+          <annotation></annotation>
+          <name>returnResult</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="0ca876b0-21ab-48e7-9710-6f7500b8c765">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c65ac3a2-b912-4b2f-bcee-a0d374e39994">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="ffae7011-c8f6-4719-92d2-4540bb3bc3e4">
+    <baseIcon>client_network.png</baseIcon>
+    <basePath>/Networking/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="cd7c2682-b53e-4683-954c-ea9bb1a52bcc">
+        <baseIcon>receive.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-snmp-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.hp.oo.content.actions.snmp.SNMPv3GetNext</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

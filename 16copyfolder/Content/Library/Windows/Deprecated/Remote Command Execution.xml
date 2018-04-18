@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c224a239-fdae-47af-a919-d9edd1643a8b">
+  <descriptionCdata><![CDATA[c224a239-fdae-47af-a919-d9edd1643a8b.1c224ff4-fb3b-40dc-bbee-0cfe3af95fbc.prompt=Command\:
+c224a239-fdae-47af-a919-d9edd1643a8b.33e25ef7-afa6-4c04-bfe1-9f48f7012465.prompt=Alternate Credentials - UserName\:
+c224a239-fdae-47af-a919-d9edd1643a8b.6425c06c-3b9d-400e-97ca-55ef632b9cbe.prompt=HostName\:
+c224a239-fdae-47af-a919-d9edd1643a8b.6a41aba5-bc83-465a-ba77-372db7798a91.prompt=Alternate Credentials - Password\:
+c224a239-fdae-47af-a919-d9edd1643a8b.description=<pre>Uses WMI to attempt to create a remote process on a machine.  The command passed should be formatted as though it was run on the command line.\n\nCAUTION\: internally 'cmd /c' gets prepended to the command passed.  Also '2>tempfile 1>tempfile' get appended to the command so that we can attempt to capture stdout and stderr.\nSo your command will look like this when executed\:\n\t'cmd /c [your command] 2>temperr 1>tempout'\nIf you redirected your command yourself we will only prepend 'cmd /c' to the command.  Also by doing this we will not retrieve any results for you.\n\nInput Parameters\:\nhost - hostname or ip address of the target machine\ncommand - the command you want executed\ncurrentDirectory - the directory to run the command from (leave blank for WMI default)\nuser - alternate credentials username (domain\\user or remotemachine\\user)\npassword - alternate credentials password\n\nResponses\:\nsuccess - remote process successfully launched and has completed executing\nfailure - unable to start remote process\n\nExtra Results\:\nReturnValue - return value from WMI for starting the process (not the exit value of the process)\nProcessID - the process id of the remote process\nStdOut - standard output from the remote process\nStdErr - standard error from the remote process\n\n</pre>
+c224a239-fdae-47af-a919-d9edd1643a8b.ef5828fa-1292-43cd-b2ad-966b5e31910c.prompt=Directory to start in\:
+]]></descriptionCdata>
+  <annotation>c224a239-fdae-47af-a919-d9edd1643a8b.description</annotation>
+  <name>Remote Command Execution</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="6425c06c-3b9d-400e-97ca-55ef632b9cbe">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c224a239-fdae-47af-a919-d9edd1643a8b.6425c06c-3b9d-400e-97ca-55ef632b9cbe.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1c224ff4-fb3b-40dc-bbee-0cfe3af95fbc">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>command</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c224a239-fdae-47af-a919-d9edd1643a8b.1c224ff4-fb3b-40dc-bbee-0cfe3af95fbc.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="ef5828fa-1292-43cd-b2ad-966b5e31910c">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>currentDirectory</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c224a239-fdae-47af-a919-d9edd1643a8b.ef5828fa-1292-43cd-b2ad-966b5e31910c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="33e25ef7-afa6-4c04-bfe1-9f48f7012465">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c224a239-fdae-47af-a919-d9edd1643a8b.33e25ef7-afa6-4c04-bfe1-9f48f7012465.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6a41aba5-bc83-465a-ba77-372db7798a91">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c224a239-fdae-47af-a919-d9edd1643a8b.6a41aba5-bc83-465a-ba77-372db7798a91.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="bc6b136d-43bd-48bd-8f97-3a32f080b01f">
+    <annotation></annotation>
+    <name>Operation Remote Command Execution (ab546f9e-ab9b-4dd4-8bbf-ca8a19b563ac)</name>
+    <script>sErr = scriptletRawResult[&quot;StdErr&quot;];
+sOut = scriptletRawResult[&quot;StdOut&quot;];
+
+if (sErr.length &gt; 0)
+{
+   scriptletResult = sErr;
+   if (sErr != sOut)
+   {
+      scriptletResult = scriptletResult + sOut;
+   }
+}
+else
+{
+   scriptletResult = sOut;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="52a92c31-77e3-4ad9-9889-1f58795c9007">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="50fc40b1-74b8-407c-a50c-000ef1f5e549">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ede996a8-a73a-48bf-86a5-515e0fcb37f4">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="2aff7f80-a6da-489e-acdd-d225a6d6c29c">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="f26f857f-b8be-4f1a-9199-5fa35d3179e5">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e58e7bde-3082-4e47-8bf5-fca976f66d89">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="c68c6257-97e8-4f7e-a1a9-82571c227a00">
+    <annotation></annotation>
+    <name>exception</name>
+    <fieldName>exception</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="745d6a40-57d0-4abf-ab5a-7a9084db83b2">
+    <baseIcon>workstation_network.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="fb9180cf-5b6d-494a-be2a-aedb15d060ec">
+        <baseIcon>remote.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>632830d9-d5be-47b3-9768-efa99decb443</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="12f58336-d4c5-4871-8804-9f5578094343">
+  <descriptionCdata><![CDATA[12f58336-d4c5-4871-8804-9f5578094343.description=<pre>Performs a statistical analysis on the given list.\n\nInputs\:\nlist - The list to perform the analysis on.\ndelimiter - A delimiter that separates elements in the list.\n\nReturns\:\nA delimiter separated list containing the Z-scores of each element in the list. A Z-score is a measurement of how many standard deviations away from the mean of the list a specific value is.\n\nExtra Results\:\nmean - The mean of the list.\nmedian - The median of the list.\nstandard deviation - The standard deviation of the list.\n\nResponses\:\nsuccess - The operation completed successfully.\nfailure - Failed to process the list or something went wrong.\n</pre>
+]]></descriptionCdata>
+  <annotation>12f58336-d4c5-4871-8804-9f5578094343.description</annotation>
+  <name>Analyze List</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="7dd2e5a4-030c-449a-a808-a5c9a58e9542">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="5e8bd68b-d571-4154-a55c-4fe758bc1050">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="a0872533-7b4a-4efc-b6a1-bfcf801a312c">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>percent_to_trim</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>20</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="69b288e2-564d-476d-b956-c06104cd40a1">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="dbfe8f54-4678-40ac-9bdb-33ca6f5ba6b7">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="a0325623-de45-4ff1-bb57-9ad46120e767">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="08bd0664-d862-4057-997f-8c0cdaad3396">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="211812b5-113c-4d52-bcdd-1224912213b8">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="8cd870b2-d145-4b58-9f9b-06a455e8fe6e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="db365589-a082-4c2e-9746-285e381176a4">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="064ef62d-3369-4fb2-beeb-75edb6d0d42d">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>Analyze List</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

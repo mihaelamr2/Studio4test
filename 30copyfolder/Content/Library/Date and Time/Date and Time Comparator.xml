@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="40b9ba1b-3e61-44e3-affd-7153c78835e1">
+  <descriptionCdata><![CDATA[40b9ba1b-3e61-44e3-affd-7153c78835e1.description=<pre>\nCompares two dates. If the locale is not specified, the inputs must be in the format of date/time format of OO Central Server's, which is dependent of Java Locale. You can use flow " Get Current Date and Time" to check upon the default date/time format. If locale is specified, the inputs must be in the format of the locale. If locale is not specified, then default locale will be used. In order to compare UNIX timestamps use 'unix' for localeLang input.\n\nInputs\:\n    d1 - The first date. \nValue format\:\nFormat is dependant on the 'localeLang' and 'localeCountry' inputs and, if the inputs are not provided, on the default locale. \n- If localeLang\="en" and localeCountry\="US" the format is "MMMM d, yyyy h\:mm\:ss a z".\n- If no localeLang is provided and the default locale is English the format is "MMM d, yyyy h\:mm\:ss a".\nThis is the meaning of the above pattern letters\:\ny\tYear, Examples\:\t1996; 96\nM\tMonth in year, Examples\:\tJuly; Jul; 07\nd\tDay in month, Examples\:\t10\na\tAm/pm marker, Examples\:\tPM\nh\tHour in am/pm (1-12), Ex.\:\t12\nm\tMinute in hour, Examples\:\t30\ns\tSecond in minute, Examples\:\t55\nz\tTime zone, Examples\:\tPacific Standard Time; PST; GMT-08\:00\nExamples\:\nIf locale is not specified and the US default locale is English, the format could be "July 12, 2006 4\:23\:20 PM" or "July 12, 2006 4\:23\:20 PM PST". If localeLang\="en" and localeCountry\="US", the format should be "July 12, 2006 4\:23\:20 PM PST".\n    d2 - The second date.  It must be in the format that is the same as d1.\n    threshold -The number of milliseconds around each date that still allows the dates to be considered equal.\n    localeLang - The locale language for date and time string. \nExamples\:  en, ja, unix.\n    localeCountry - The locale country for date and time string. For example, US or JP. If localeLang is not specified, this input will be ignored.\n\nResponses\:\n    before - If d1 is before d2.\n    equal - If d1 is < d2 + threshold and d1 > d2-threshold.\n    after - If d1 is after d2.\n    failure - Something went wrong.\n\nResults\:\n    The value of d1-d2 in milliseconds.\n\nNote\:\n    1. if localeLang is specified the date "LONG" style is used but if it is not specified the "DEFAULT" style is used. Example\: For U.S. Locale "LONG" style is "June 30, 2009 7\:03\:47 AM PDT" and "DEFAULT" style is "Jun 30, 2009 7\:03\:47 AM"\n    2. For UNIX timestamps, just use the value 'unix' for input LocaleLang and the operation will treat the input dates as UNIX timestamps. In this case localeCountry input is ignored.\n</pre>
+]]></descriptionCdata>
+  <annotation>40b9ba1b-3e61-44e3-affd-7153c78835e1.description</annotation>
+  <name>Date and Time Comparator</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="6a63022e-5b70-4c05-b8ee-67fe61a1a1f1">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>d1</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="805a5ae3-8783-45f9-ba9f-1cdfe4d44733">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>d2</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8d926d1f-5dae-46f8-bb59-9bfb910c331a">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>threshold</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="f8b109a4-168c-4afe-8d9e-77ac68ff19b8">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>localeLang</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="faaea0c2-ca37-4f8d-a6d7-2bb004317717">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>localeCountry</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="35366714-f0f8-41a4-8498-e47d58e4a505">
+    <annotation></annotation>
+    <name>Operation Date and Time Comparator (f6c60b19-9de0-437b-90d3-577c18f764ba)</name>
+    <script>scriptletResponse = &quot;failure&quot;;
+try{
+var oLocale; // = java.util.Locale object
+var formatter; // = java.text.DateFormat.getDateTimeInstance();
+
+//add to check negative threshold
+var thresholdInt = 0;
+if( threshold != null &amp;&amp; threshold.length &gt; 0)
+{
+   thresholdInt = parseInt(threshold);
+   if(thresholdInt &lt; 0 )
+   {
+       throw new java.lang.Exception(&quot;Threshold can not be negative.&quot;);
+   }
+}
+ if(typeof localeLang != &apos;undefined&apos; &amp;&amp; null != localeLang &amp;&amp; localeLang.toLowerCase() == &quot;unix&quot;) {
+   var intDate1 = parseInt(d1);
+   var intDate2 = parseInt(d2);
+   if(isNaN(intDate1)) {
+   	throw &quot;Input value for &apos;d1&apos; is not a unix timestamp!&quot;;
+   }
+   if(isNaN(intDate2)) {
+   	throw &quot;Input value for &apos;d2&apos; is not a unix timestamp!&quot;;
+   }
+   var dif = intDate1 - intDate2;    
+    
+   scriptletResult = &quot;&quot; + dif * 1000;
+   
+   if(Math.abs(dif) &lt;= threshold/1000) { 
+	   scriptletResponse = &quot;equal&quot;;//date1 is equal with date2.
+   } else {
+	if(dif &lt; 0) scriptletResponse = &quot;before&quot;;//date1 is before date2.     
+	   else if(dif &gt; 0) scriptletResponse = &quot;after&quot;;//date1 is after date2.	   	  	
+   }
+}
+else {
+	if(typeof localeLang != &apos;undefined&apos; &amp;&amp; null != localeLang &amp;&amp; localeLang.length &gt;0)
+	{
+		 if(typeof localeCountry != &apos;undefined&apos; &amp;&amp; null != localeCountry &amp;&amp; localeCountry.length &gt;0)
+		 {
+			  oLocale = new java.util.Locale(localeLang, localeCountry); //for exsample US or JP
+		 }
+		 else //only has language, no country
+		 {
+			  oLocale = new java.util.Locale(localeLang);//for example en or ja
+		 }
+		 formatter = new java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.LONG, java.text.DateFormat.LONG, oLocale);
+	}
+	else //use whatever default is
+	{
+		 formatter = new java.text.DateFormat.getDateTimeInstance();
+	}
+	
+	formatter.setLenient(false); //validate the input date strings
+	
+	var date1 = formatter.parse(d1);
+	var date2 = formatter.parse(d2);
+	
+	scriptletResult = &quot;&quot; + (date1.getTime() - (date2.getTime()));
+	
+	var lowBound = formatter.parse(d2);
+	
+	lowBound.setTime(lowBound.getTime() - thresholdInt);
+	var upBound = formatter.parse(d2);
+	upBound.setTime(upBound.getTime() + thresholdInt);
+	if (date1.compareTo(lowBound) &lt; 0)
+		scriptletResponse = &quot;before&quot;;//date1 is older than date 2.
+	else if (date1.compareTo(upBound) &gt; 0)
+		scriptletResponse = &quot;after&quot;;//date1 is more recent than date 2.
+	else
+		scriptletResponse = &quot;equal&quot;;//date differences are within threshold.
+	}
+}
+catch (e){
+scriptletResponse = &quot;failure&quot;;
+scriptletResult = &quot;&quot;+e;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="46acaaee-1d67-4415-b60b-2e40b0dfedfa">
+      <annotation></annotation>
+      <name>before</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="d12f3c08-169c-4ddd-90d6-ead4424dc7a0">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="bfd21a7e-45c4-4167-9974-bcd455ce3acc">
+      <annotation></annotation>
+      <name>after</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="f220c38f-a464-4901-be55-c84e74e5fffd">
+      <annotation></annotation>
+      <name>equal</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a5b12413-1d93-4ff0-b562-2bbd3c2ee324">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="cd59cf94-d964-41fe-b2f1-436fb428c880">
+    <baseIcon>calendar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="81c16602-aed6-420d-a78a-ff54df62e76f">
+        <baseIcon>compare.png</baseIcon>
+        <basePath>Utilities/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

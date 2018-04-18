@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="a0cb73bd-785f-48e3-ae6c-1ca2adb1a742">
+  <descriptionCdata><![CDATA[a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.2ba40aaa-604a-4f52-870e-c966687c8580.prompt=Host\:
+a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.93f7517a-56d2-4958-b7f3-af835f882ae1.prompt=Password\:
+a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.b10aa860-ecd2-4b2d-b75c-b1b23d9ad850.prompt=Username\:
+a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.description=<pre>\nOS Detector Connects to a specified host, and determines what operating system the host is running.\n\nInput Parameters\:\nhost - hostname to connect to.\nusername - username to use when connecting.\npassword - password to use when connecting.\n\nResponses\:\nfailure - System could not determine remote hosts operating system.\nlinux - Remote host is running linux.\nsolaris - Remote host is running solaris.\nunknown unix - Remote host appears to be unix based, but is an unknown variant.\nwindows xp - Remote host is a windows xp system.\nwindows 2008 server - Remote host is a windows 2008 server.\nwindows 2008 enterprise - Remote host is running windows 2008 enterprise edition.\nwindows 2003 server - Remote host is a windows 2003 server.\nwindows 2003 enterprise - remote host is running windows 2003 enterprise edition.\nwindows 2000 - remote host is running windows 2000.\nunknown windows - Remote host is running an unknown version of windows.\n\nExtra Results\:\n\t\tosName - the completely returned string of the OS name.\n\t\tversion - the operating systems version.\n\t\thostName - The host name the remote computer reports for itself.\n\nThe following results give more refined results about what version of windows is detected.\nIf a unix is being run, the following results are always set to 'false'\n\t\tenterprise - 'true' if the operating system is an enterprise edition\n\t\tserver - 'true' if the operating system is a server edition\n\t\tprofessional - 'true' if the operating system is a professional edition.\n\t\tstandard - 'true' if the operating system is a standard edition.\n\n\nreturns the output of a uname -a for unix based hosts, and the results of osName and version WMI queries for a windows host.\n</pre>
+]]></descriptionCdata>
+  <annotation>a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.description</annotation>
+  <name>Operating System Detector (2)</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="2ba40aaa-604a-4f52-870e-c966687c8580">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.2ba40aaa-604a-4f52-870e-c966687c8580.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b10aa860-ecd2-4b2d-b75c-b1b23d9ad850">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.b10aa860-ecd2-4b2d-b75c-b1b23d9ad850.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="93f7517a-56d2-4958-b7f3-af835f882ae1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>a0cb73bd-785f-48e3-ae6c-1ca2adb1a742.93f7517a-56d2-4958-b7f3-af835f882ae1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="3e05e43f-fa3b-4c6c-bb8e-50a237dd97b2">
+      <annotation></annotation>
+      <name>linux</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="4135c2e0-7fa6-41d1-bbce-268dbacef5ba">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="1724dd3b-e8a4-4661-bc68-901dfa13491e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>18</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3a555893-ec69-410b-9497-9bf6e197ba84">
+      <annotation></annotation>
+      <name>solaris</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="7e3f35ac-3b7c-4400-8605-fce7f88d93ab">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="31ecaf59-dadc-4892-a4a6-ab0320cf66a5">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>19</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3bdb6441-88e9-4ea6-a3a1-09412b6fcc62">
+      <annotation></annotation>
+      <name>unknown unix</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="e4340781-a7e2-4280-a714-6d0505344858">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="441f3abd-95af-434e-afdf-473b87cd40f6">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>20</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="64e5fdd8-c635-4edb-9855-f2867f32cda8">
+      <annotation></annotation>
+      <name>unknown windows</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="9f15dcaf-0697-4e90-bd6c-81018e63ce87">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="42b403ce-9312-47f2-bc9b-f24f2d03c838">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>24</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="e9325f52-4ea2-458b-bbf7-88a939a82599">
+      <annotation></annotation>
+      <name>windows xp</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="c3803539-996f-4369-9cd3-af0828e3e759">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="a07d0fd8-a8f3-4ddc-9ee2-aaaabe55229e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>21</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="7f7a1296-d4ba-441f-a2c7-51bfebd423db">
+      <annotation></annotation>
+      <name>windows 2008</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="a33a88e2-9e7f-429f-bf1b-7cba77e4ea36">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="a8c32950-ef0c-4f8d-86a8-29d203bce2aa">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>32</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="c291abfb-6238-4c51-8384-c126a7608b6e">
+      <annotation></annotation>
+      <name>windows 2003</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="4e9aebe4-dc17-4842-a628-9ba832ffd4f6">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="8771c75b-9524-4d0f-9844-b325bff31827">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>23</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="0a56eb3d-df40-461b-a06d-de8eadb4aea4">
+      <annotation></annotation>
+      <name>windows 2000</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="eec89b23-90ec-4372-811a-cc1897d652b1">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ef21dc8b-bf1e-4efe-bcb5-b9cceffd2d47">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>22</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="35524e36-b39a-48d5-b378-2863043c27df">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="5304090b-1ecd-4c00-a0fb-8831ab0c2741">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="7022eaee-1180-412a-b001-64f823928451">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="be16121f-725f-4461-81d2-a05faadfce95">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="b142a1cd-e2c7-44ee-9975-9fe26ea1e7ff">
+    <baseIcon>generic_server_plain.png</baseIcon>
+    <basePath>/Servers/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="00c9db5d-1291-4b76-9cbb-9990b183d6eb">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNetWebActions_Detector.OSDetector</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

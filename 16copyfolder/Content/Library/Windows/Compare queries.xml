@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="a4aa62cb-506f-4887-9e8b-254ca4c526ce">
+  <descriptionCdata><![CDATA[a4aa62cb-506f-4887-9e8b-254ca4c526ce.description=<pre> Compares wmi results and gives a report. Don't touch this unless you know what you're doing.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>a4aa62cb-506f-4887-9e8b-254ca4c526ce.description</annotation>
+  <name>Compare queries</name>
+  <categories/>
+  <inputs/>
+  <scriptlet id="c24c9353-eed2-4558-9f80-fcfbaf1e5d5d">
+    <annotation></annotation>
+    <name>Operation Compare queries (9d293ad9-750f-43ef-8410-b3aeb447d771)</name>
+    <script>var q1 = scriptletContext.get(&quot;query2&quot;).split(&quot;\n&quot;);
+var q2 = scriptletContext.get(&quot;query1&quot;).split(&quot;\n&quot;);
+var delim = scriptletContext.get(&quot;delimiter&quot;);
+if(delim == null){
+    delim = &quot;,&quot;;
+}
+
+var props = scriptletContext.get(&quot;properties&quot;).split(delim);
+var outputDelim = scriptletContext.get(&quot;outputDelimiter&quot;);
+if(outputDelim == null){
+    outputDelim = &quot;\r\n&quot;;
+}
+
+var map1 = new Array();
+
+for (i=0; i&lt;q1.length; i++) {
+        var index = q1[i].search(&quot;:&quot;);
+        if(index&gt;0){
+            var key = q1[i].substring(0, index);
+            var value = q1[i].substring(index+1);
+            map1[key] = value;
+        }
+}
+
+var map2 = new Array();
+
+for (i=0; i&lt;q2.length; i++) {
+        var index = q2[i].search(&quot;:&quot;);
+        if(index&gt;0){
+            var key = q2[i].substring(0, index);
+            var value = q2[i].substring(index+1);
+            map2[key] = value;
+        }
+}
+
+var cmpResults = &quot;&quot;;
+var val1 = &quot;&quot;;
+var val2 = &quot;&quot;;
+var val3 = &quot;&quot;;
+
+var allEqual=true;
+for (var i in props) {
+    var cond = false;
+    var propName = props[i];
+    var cmp = &quot;==&quot;;
+    var par1 = props[i].search(&quot;\\(&quot;);
+    var par2 = props[i].search(&quot;\\)&quot;);
+    
+    if (par1 != -1 &amp;&amp; par2 != -1 &amp;&amp; par2 &gt; par1) {
+        propName = props[i].substring(0, par1);
+        cmp = props[i].substring(par1+1, par2);
+    }else{
+        cond = true;
+    }
+
+    if (!(propName in map1) || !(propName in map2)) {
+        cmpResults += &quot;undefined,&quot;;
+        allEqual = false;
+        val1 += map1[propName] + delim;
+        val2 += map2[propName] + delim;
+        continue;
+    }
+    
+    var expr = false;
+    if (cmp == &quot;&lt;&quot;)
+        expr = (map1[propName] &lt; map2[propName]);
+    else if (cmp == &quot;&lt;=&quot;)
+        expr = (map1[propName] &lt;= map2[propName]);
+    else if (cmp == &quot;&gt;&quot;)
+        expr = (map1[propName] &gt; map2[propName]);
+    else if (cmp == &quot;&gt;=&quot;)
+        expr = (map1[propName] &gt;= map2[propName]);
+    else if (cmp == &quot;!=&quot;)
+        expr = (map1[propName] != map2[propName]);
+    else
+        expr = (map1[propName] == map2[propName]); // default comparator
+
+    if (expr||cond)
+        cmpResults += &quot;true,&quot;;
+    else {
+        cmpResults += &quot;false,&quot;;
+        allEqual = false;
+    }
+    
+    val1 += map1[propName] + delim;
+    val2 += map2[propName] + delim;
+    if(cond){
+        val3 += propName + &quot;:&quot; + map1[propName] + &quot; --- &quot; + map2[propName] + outputDelim;
+    }else{
+        if(cmp.toString()==&quot;&quot;){
+            cmp = &quot;==&quot;;
+        }
+        val3 += propName + &quot;:&quot; + map1[propName] + &quot; &quot; + cmp + map2[propName] + &quot;(&quot; + expr + &quot;)&quot; + outputDelim;
+    }
+}
+
+scriptletResult = (allEqual ? &quot;Success&quot; : &quot;Failure&quot;) + &quot;\n&quot; + val3;
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="68122acb-1d3a-4252-b3d6-e8a62c0e3553">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="bb960ed7-b83f-4bf4-9396-0099923a585e">
+          <annotation></annotation>
+          <name>Field 1</name>
+          <fieldName>Result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="950c3299-d2f8-4fa4-bac9-8c68b6e3402e">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>true</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>CONTAINS</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="db86466f-ce2b-47bf-9584-1f05d524bc43">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="cde36c2f-25e1-42a5-871b-f17f816be75a">
+          <annotation></annotation>
+          <name>Field 1</name>
+          <fieldName>Result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="afa8067c-7dcd-4cca-9c83-31b8a0aef478">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>false</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>CONTAINS</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b57949ab-f1ad-47d4-b1b1-0411c995a13a">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="673ae399-2782-4f92-ac1f-02c03b72a1ac">
+    <baseIcon>scriptlet.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

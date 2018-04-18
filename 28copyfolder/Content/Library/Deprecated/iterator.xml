@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="f605b160-6ce3-4b31-849e-743db94e2121">
+  <descriptionCdata><![CDATA[f605b160-6ce3-4b31-849e-743db94e2121.description=Deprecated in favor of 'List Iterator'
+]]></descriptionCdata>
+  <annotation>f605b160-6ce3-4b31-849e-743db94e2121.description</annotation>
+  <name>iterator</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="70a7cb60-4126-4759-979c-33c9204ffedb">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>listname</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3dbac8a6-a58e-4535-9069-21fe4ce43082">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>separator</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="6b2de2b5-b626-4e47-a035-156bc1a915b8">
+    <annotation></annotation>
+    <name>Operation iterator (c59c1310-800b-48e2-9732-facd1e6315f8)</name>
+    <script>list = scriptletContext.get(listname);
+if (separator == &quot;\\t&quot;) {
+  separator = &quot;\t&quot;;
+}
+if (separator == &quot;\\w&quot;) {
+  separator = &quot; &quot;;
+}
+if (separator == &quot;\\n&quot;) {
+  separator = &quot;\n&quot;;
+}
+if (separator == &quot;\\r&quot;) {
+  separator = &quot;\r&quot;;
+}
+if ((list == null) || (list == &quot;&quot;)) {
+  scriptletResult = &quot;&quot;;
+  scriptletResponse = &quot;no more&quot;;
+}
+else {
+  tokens = list.split(separator);
+  if (tokens.length == 0) {
+    scriptletContext.put(listname,&quot;&quot;);
+    scriptletResult = &quot;&quot;;
+    scriptletResponse = &quot;no more&quot;;
+  }
+  else if (tokens.length == 1) {
+    scriptletResult = tokens[0];
+    tokens = removeTop(tokens);
+    scriptletContext.put(listname,&quot;&quot;);
+    scriptletResponse = &quot;has more&quot;;
+  }
+  else {
+    scriptletResult = tokens[0];
+    tokens = removeTop(tokens);
+    scriptletContext.put(listname, tokens.join(separator));
+    scriptletResponse = &quot;has more&quot;;
+  }
+}
+
+function removeTop(array){
+    var newArray = new Array();
+    for(var i = 1; i&lt;array.length; i++)
+        newArray[i-1] = array[i];
+    return newArray;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="ae4b798a-1d3b-4930-a9bf-af52f0a87f08">
+      <annotation></annotation>
+      <name>has more</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="49b70cec-6819-455c-b0a2-2b866f523b69">
+      <annotation></annotation>
+      <name>no more</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="9241ba60-c014-4150-a26a-3222cf4ac10f">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="78512e68-b822-46ed-9b7b-9d62ae694bd6">
+    <baseIcon>wrench.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="c612cf55-31fd-4ee1-bfc0-8cd6e182ee88">
+        <baseIcon>restart.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

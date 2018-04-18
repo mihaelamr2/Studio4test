@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="2e3ca352-c523-4d57-b2ab-25583700011b">
+  <descriptionCdata><![CDATA[2e3ca352-c523-4d57-b2ab-25583700011b.4c87fb56-d1ed-4fb2-b26d-d49d85f615bc.prompt=Host name\:
+2e3ca352-c523-4d57-b2ab-25583700011b.56f48e0c-3964-4e89-897e-7c6501adf5a5.prompt=User name\:
+2e3ca352-c523-4d57-b2ab-25583700011b.be383b2d-05ff-493a-b7ad-97336ee8b463.prompt=Startup Mode\:
+2e3ca352-c523-4d57-b2ab-25583700011b.d44c610a-386a-4996-a2b5-92931615745d.prompt=Password\:
+2e3ca352-c523-4d57-b2ab-25583700011b.description=<pre>\nGets a list of Windows services based on their configured start mode. \n\nServices which are set to "Automatic Delayed Start" are considered to have start mode of Auto by default, so that a search\nfor services with start mode \= Auto will return both Auto and "Automatic Delayed Start" services. This default behavior\ncan be overriden setting the strictAutoMatch flag to true. \n\nThere is, however, a performance penalty for setting the strictAutoMatch flag to true, or for doing a search for start mode of \n"Automatic Delayed Start". Since the WMI query used to search for services cannot distinguish between Auto and "Automatic Delayed Start",\na registry lookup must be performed on each service in the list returned by the WMI query to check for the DelayedAutoStart flag. \n\nThis performance hit can be quite significant, so care should be taken when using the strictAutoMatch flag.\n\nInputs\:\nhost\t- The hostname or IP address of the Windows computer.\nuser\t- The name of the Windows user account to use for WMI impersonation on the Windows host for this operation (can be left blank).\npassword\t- The password of the Windows user account.\nstartMode\t- The configured start mode of the service - Boot, System, Auto, Manual, Disabled or Automatic Delayed Start.\nstrictAutoMatch - Match only services with start mode Auto (not Automatic Delayed Start) when searching for start mode \= Auto (default\: false)\n\nResponses\:\nsuccess\t- A list of Windows services is retrieved successfully.\nfailure\t- The operation failed to retrieve the list of Windows services.\n\nExtra Results\:\nserviceList - The list of Windows services separated by '|'.\n\nNote\:\nThe start mode "Automatic (Delayed Start)" is not supported.\n</pre>
+]]></descriptionCdata>
+  <annotation>2e3ca352-c523-4d57-b2ab-25583700011b.description</annotation>
+  <name>Get Service List By Start Mode</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4c87fb56-d1ed-4fb2-b26d-d49d85f615bc">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2e3ca352-c523-4d57-b2ab-25583700011b.4c87fb56-d1ed-4fb2-b26d-d49d85f615bc.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="56f48e0c-3964-4e89-897e-7c6501adf5a5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>user</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2e3ca352-c523-4d57-b2ab-25583700011b.56f48e0c-3964-4e89-897e-7c6501adf5a5.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d44c610a-386a-4996-a2b5-92931615745d">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2e3ca352-c523-4d57-b2ab-25583700011b.d44c610a-386a-4996-a2b5-92931615745d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="be383b2d-05ff-493a-b7ad-97336ee8b463">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>startMode</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>2e3ca352-c523-4d57-b2ab-25583700011b.be383b2d-05ff-493a-b7ad-97336ee8b463.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>c3016449-2573-480a-aaaf-79249743d1c2</refId>
+        <refName>Windows Service Startup Mode</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0faf2f66-f07c-4ce3-93d9-87e707a6e3f9">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>strictAutoMatch</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="78e03186-5103-49a2-874c-6bc37fde0550">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="bc17f0c8-5b1c-4767-abc4-d9a0f2b28e81">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="ae30c99a-de46-4661-881c-89f4497ee7db">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="4721dac2-4de7-457f-bc84-6350a34a9543">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="67705dca-c6c6-42e7-bd19-f86211cc388e">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="33fc2061-1841-4535-93ac-3ce6b58b57f7">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="3397a7ec-0879-4c20-b26e-0fc3d180ba91">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="1bd5c5ae-91c1-4b9d-892f-46744d599b71">
+    <baseIcon>windows_service.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="36bc3d08-9486-4eca-be25-2af191dd1790">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Windows.GetServiceListByStartMode</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

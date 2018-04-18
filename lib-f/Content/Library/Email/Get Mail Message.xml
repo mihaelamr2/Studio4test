@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="e2c27b44-e200-45ac-998f-fd154a8927f8">
+  <descriptionCdata><![CDATA[e2c27b44-e200-45ac-998f-fd154a8927f8.0b93dbac-3f48-4e33-8cfb-4042e46d6e73.prompt=TrustKeystore\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.156b0438-5129-426f-89d3-2e7aec6a5aa0.prompt=Trust all roots\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.18fd68ff-57d3-425f-ba76-11593c264286.prompt=Username\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.389a7f25-939b-4f40-b49c-a585e648b00b.prompt=Decryption key alias\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.4a7e37af-29f1-4b65-a611-2dac405c33b3.prompt=Password\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.643b1b74-784f-4fea-baf1-45b138dcbf6a.prompt=Enable SSL\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.6c1666e8-afd8-4b3e-b64b-4a4b623b4e49.prompt=Message number\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.78d8029c-eaab-42c8-a765-fd5eda496d15.prompt=Decryption keystore\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.8a870c7c-ea8a-4d82-8a76-28f93297b7df.prompt=Keystore\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.93643a1a-f3d5-43a7-ab0e-8e82559062bd.prompt=Character set\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.9ce5097b-58bc-4a20-8158-3624f504a89d.prompt=Keystore password\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.9e43040f-8539-47b1-ae73-1c1b82458ea4.prompt=Host\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.b47e5696-c193-47e1-8058-c7a413087be6.prompt=Port\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.cd9713ea-a937-49b4-b54d-08bbd2671642.prompt=Delete email\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.cfd931c1-a149-46fd-bb3a-f9bc4e3d5ded.prompt=Protocol\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.d601b516-6ebb-4b85-9974-69e909a0c166.prompt=TrustKeystore password\:
+e2c27b44-e200-45ac-998f-fd154a8927f8.description=<pre>This operation is used to get the contents of a mail message. Inline attachments are not supported by this operation.\n\nInputs\:\n    host - The email host.\n    port - The port to connect to on host (normally 110 for POP3, 143 for IMAP4). This input can be left empty if the "protocol" value is "pop3" or "imap4"\: for "pop3" this input will be completed by default with 110, for "imap4", this input will be completed by default with 143.\n    protocol - The protocol to connect with. This input can be left empty if the port value is provided\: if the provided port value is 110, the pop3 protocol will be used by default, if the provided port value is 143, the imap4 protocol will be used by default. For other values for the "port" input, the protocol should be also specified.\nValid values\: pop3, imap4, imap.\n    username - The username for the mail host. Use full email address as username.\n    password - The password for the mail host.\n    folder - The folder to read the message from (NOTE\: POP3 only supports "INBOX").\n    trustAllRoots -  Specifies whether to trust all SSL certificate authorities. This input is ignored if the enableSSL input is set to false. If false, make sure to have the certificate installed. The steps are explained at the end of inputs description.\nValid values\: true, false.\nDefault value\: true.\n    messageNumber - The number (starting at 1) of the message to retrieve.  Email ordering is a server setting that is independent of the client.\n    subjectOnly - A boolean value. If true, only subjects are retrieved instead of the entire message.\nValid values\: true, false.\nDefault value\: false.\n    enableTLS - Enables starttls. If the server supports TLS or SSL, the communications will be secured by TLS or SSL. If it doesn't support TLS or SSL the communication will be unsecure.\nValid values\: true, false.\nDefault value\: false.\n    enableSSL - Specify if the connection should be SSL enabled or not.\nValid values\: true, false.\nDefault value\: false.\n    keystore - The path to the keystore to use for SSL Client Certificates.\n    keystorePassword - The password for the keystore.\n    trustKeystore - The path to the trustKeystore to use for SSL Server Certificates.\n    trustPassword - The password for the trustKeystore.\n    characterSet - The character set used to read the email. By default the operation uses the character set with which the email is marked, in order to read its content. Because sometimes this character set isn't accurate you can provide you own value for this property. \nValid values\: UTF-8, UTF-16, UTF-32, EUC-JP, ISO-2022-JP, Shift_JIS, Windows-31J.\nDefault value\: UTF-8.\n    deleteUponRetrieval - If true the email which is retrived will be deleted. For any other values it will be just retrieved. \nValid values\: true, false.\nDefault value\: false.\n    decryptionKeystore - The path to the pks12 formatted keystore used to decrypt the mail.\n    decryptionKeyAlias - The alias of a RSA key pair from the decryptionKeystore. The private key from the pair will be used to decrypt the mail. The key pair must not have password. The recommended key size is 2048 bit or higher.\n    verifyCertificate - Checks that the certificate is currently valid. It is if the current date and time are within the validity period given in the certificate.\n    decryptionKeystorePassword - The password for the decryptionKeystore.\n    timeout - The timeout in seconds for sending the mail message.\n\nResults\:\n    returnCode - This is the primary output. It is 0 if the operation succeeded and -1 for failure.\n    Subject - Subject of the email.\n    Body - Only the body contents of the email. This will not contain the attachment including inline attachments. This is in HTML format, not plain text. \n    AttachedFileNames - Attached file names to the email.\n    plainTextBody - The body content of the email in plain text format. If there is no text plain message content, this result will be empty.\n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully. See the Notes for troubleshooting help.\n\nNote\:\n\nExtra settings\:\n1.How to manually install certificate\:\n    1.1.Obtaint the certificate file you need to install.\n           For Microsoft Exchange Servers\:\n           Go to the IIS Manager on the server.\n           Navigate to the Default Web Site (In Web Sites dir).\n           Right click->Properties->Directory Security->View certificate...->Details->Copy to file..\n    1.2Install with Java keytool.\n           To import the certificate into the default keystore execute the following command under $(java.home)/lib/security\:\n           (NOTE\: if java is not installed, java.home might point to the java directory located where Operations Orchestration is installed.)\n           keytool -import -alias chooseAliasName -file serverCertificate.cer -keystore cacerts\n           You will be prompted for a password, the default password is\: "changeit"\n2. You can use KeyStore Explorer to obtain RSA Keystore with keyPairs for encryption/decryption.\n    2.1 If you get "llegal key size exception" you don't have JCE Unlimited Strength installed.\n</pre>
+e2c27b44-e200-45ac-998f-fd154a8927f8.f30b4aef-3be9-4c48-b4b1-c0b4dbaa56f7.prompt=Decryption keystore password\:
+]]></descriptionCdata>
+  <annotation>e2c27b44-e200-45ac-998f-fd154a8927f8.description</annotation>
+  <name>Get Mail Message</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="9e43040f-8539-47b1-ae73-1c1b82458ea4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.9e43040f-8539-47b1-ae73-1c1b82458ea4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b47e5696-c193-47e1-8058-c7a413087be6">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>port</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.b47e5696-c193-47e1-8058-c7a413087be6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cfd931c1-a149-46fd-bb3a-f9bc4e3d5ded">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>protocol</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.cfd931c1-a149-46fd-bb3a-f9bc4e3d5ded.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="18fd68ff-57d3-425f-ba76-11593c264286">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.18fd68ff-57d3-425f-ba76-11593c264286.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="4a7e37af-29f1-4b65-a611-2dac405c33b3">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.4a7e37af-29f1-4b65-a611-2dac405c33b3.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="ccb38d8b-2679-4ec6-8d6e-12c5d75df6da">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>folder</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>INBOX</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="156b0438-5129-426f-89d3-2e7aec6a5aa0">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.156b0438-5129-426f-89d3-2e7aec6a5aa0.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>362bc113-e130-45d5-be90-832d5de87730</refId>
+        <refName>Boolean</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6c1666e8-afd8-4b3e-b64b-4a4b623b4e49">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>messageNumber</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.6c1666e8-afd8-4b3e-b64b-4a4b623b4e49.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="1f4b5daf-62de-4efa-91ba-e5eaf76af5f3">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>subjectOnly</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="7eff12bc-d025-4be0-b48e-635573079a9c">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>enableTLS</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="643b1b74-784f-4fea-baf1-45b138dcbf6a">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>enableSSL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.643b1b74-784f-4fea-baf1-45b138dcbf6a.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="8a870c7c-ea8a-4d82-8a76-28f93297b7df">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.8a870c7c-ea8a-4d82-8a76-28f93297b7df.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="9ce5097b-58bc-4a20-8158-3624f504a89d">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.9ce5097b-58bc-4a20-8158-3624f504a89d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0b93dbac-3f48-4e33-8cfb-4042e46d6e73">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.0b93dbac-3f48-4e33-8cfb-4042e46d6e73.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="d601b516-6ebb-4b85-9974-69e909a0c166">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.d601b516-6ebb-4b85-9974-69e909a0c166.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="93643a1a-f3d5-43a7-ab0e-8e82559062bd">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>characterSet</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.93643a1a-f3d5-43a7-ab0e-8e82559062bd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>3ad6a21d-fc94-4603-aa1e-c5a63f894549</refId>
+        <refName>Character Sets</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cd9713ea-a937-49b4-b54d-08bbd2671642">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>deleteUponRetrieval</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.cd9713ea-a937-49b4-b54d-08bbd2671642.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>96a1ed25-cdc9-4ff6-8fba-e9c044c5ca53</refId>
+        <refName>Boolean - False Default</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="78d8029c-eaab-42c8-a765-fd5eda496d15">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>decryptionKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.78d8029c-eaab-42c8-a765-fd5eda496d15.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="389a7f25-939b-4f40-b49c-a585e648b00b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>decryptionKeyAlias</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.389a7f25-939b-4f40-b49c-a585e648b00b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="e33f8f87-3cff-43ff-85f8-c175191b7a82">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>verifyCertificate</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>true</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="f30b4aef-3be9-4c48-b4b1-c0b4dbaa56f7">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>decryptionKeystorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2c27b44-e200-45ac-998f-fd154a8927f8.f30b4aef-3be9-4c48-b4b1-c0b4dbaa56f7.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="b6ae4242-b1c3-418f-88da-918da239b187">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="48c71e6a-0dcd-4e66-a0ad-f53b41c229c2">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="2a5a3a39-f1da-47c0-b387-d207d7b98b0a">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="58d38342-1e4e-487e-8a16-5a6e7105f619">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="42780ef4-8351-440d-93c6-1080c2d82c64">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="1f0908a4-fd8c-4976-bfcd-8f1d8368c3e0">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3c37e898-01d7-4685-8e4f-916604d6e3c2">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="10bee5be-8fc7-4e0a-bd4a-c360758df34a">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="99d39a20-91d0-4293-aa77-e28ab998bf2d">
+    <baseIcon>mail.png</baseIcon>
+    <basePath>/E-mail/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="098d77f9-97fb-44c6-ad6c-d0658d297287">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-mail-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>Get Mail Message</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

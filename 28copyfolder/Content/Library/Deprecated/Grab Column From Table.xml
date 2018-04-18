@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="49347ca1-3a78-490f-bdd5-35af5427d35a">
+  <descriptionCdata><![CDATA[49347ca1-3a78-490f-bdd5-35af5427d35a.description=Retrieves 1 column from a given table.\n\nDeprecated in favor of 'Get Column from Table'\n\nInputs\:\ntable - the table to retrieve the column from.\ncolumn - The number of the column to retrieve (starting at 1).\nrowDelimiter - A delimiter that separates rows.\ncolumnDelimiter - A delimiter that separates columns.\n\nResponses\:\nsuccess - Operation completed successfully.\nfailure - something went wrong.\n\nReturns\:\nThe elements in column delimited by rowDelimiter.
+]]></descriptionCdata>
+  <annotation>49347ca1-3a78-490f-bdd5-35af5427d35a.description</annotation>
+  <name>Grab Column From Table</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b45ce5ab-8f44-4f07-ba00-73ffc04a77d0">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>table</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="02d9d9e4-f02b-4c77-a6a2-5700a8feac4e">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>column</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a9da028b-a3c2-405c-9281-e4471312a04a">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>rowDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c75ca4ab-12d5-4fb2-98a7-6783ebeb468b">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>columnDelimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="78cbe66d-cd47-4eb2-9512-3d41cfdc1cd1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${table}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="6d972489-2e5d-46cc-b769-4c177cafadc5">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${column}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="405b5c78-6909-42de-a7de-d525af0166de">
+    <annotation></annotation>
+    <name>Operation Grab Column From Table (4fdbcedd-9f0d-492a-92df-5487942ede4a)</name>
+    <script>try{
+lines = table.split(rowDelimiter);
+scriptletResult = &quot;&quot;;
+scriptletResponse = &quot;success&quot;;
+colNum = parseInt(column);
+
+for (i = 0; i &lt; lines.length; i++) {
+   cols = lines[i].split(columnDelimiter);
+   if (i != 0)
+	scriptletResult += rowDelimiter;
+   if (colNum &gt; cols.length)
+	throw new Exception(&quot;Array Index out of bounds&quot;);
+   scriptletResult += cols[colNum - 1];
+}
+}
+catch (e){
+scriptletResponse=&quot;failure&quot;;
+scriptletResult=e.toString();
+}
+
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="27a53c9e-19f2-4776-ae0e-3b04adfb12f7">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="28851aab-48b6-47b0-a2c9-7f04611f4144">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="46277d1e-d816-4853-925d-12c87899dad4">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="14f56086-171e-42a7-a9e7-0f07b7e9e48b">
+    <baseIcon>column.png</baseIcon>
+    <basePath>Databases/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

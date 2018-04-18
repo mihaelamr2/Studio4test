@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="4243805d-23e7-45fd-8b12-abb7203c44f9">
+  <descriptionCdata><![CDATA[4243805d-23e7-45fd-8b12-abb7203c44f9.1940dee8-2173-411c-9a6c-d150ecbaf28b.prompt=Give the host of the source file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.40b5b2e1-011a-4064-a10b-63de0f01a1a1.prompt=Give the path to the source file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.6f35f0ae-2f6d-4aa1-bc51-497544c7a1b4.prompt=Give the host of the destination file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.a62ba937-0b30-44d3-a5c5-8cfbc20cb7a1.prompt=Give the password for connecting to the host of the destination file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.af139f5e-2524-4181-9f2f-33962f189737.prompt=Give the password for connecting to the host of the source file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.b153647b-5585-46f5-95ad-71a8aeebf8dd.prompt=Give the path to the destination file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.cec76536-b978-4fd0-9107-100631072364.prompt=Give the username for connecting to the host of the destination file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.cfb0d048-7db9-4930-817d-a186527f80f6.prompt=Give the username for connecting to the host of the source file or folder
+4243805d-23e7-45fd-8b12-abb7203c44f9.description=<pre>Copies folders or files between 2 different machines. The source and the destination folder must be shared.\n\nInputs\:\n    sourcePath - The path to the shared folder or file that will be copied, without leading or ending slashes. This will be appended to the source host in order to obtain the UNC path of the shared location to be copied. \nExample\: if you shared a distinct folder, the path could be\: mySharedFolder\\folderToBeCopied. Or, if you shared the whole disk drive\: C\:\\aFolder\\anotherFolder\\folderToBeCopied. \n    sourceHost - The host of the source folder or file.\n    sourceUser - The username used for connecting to the "sourceHost".\n    sourcePassword - The password used for connecting to the "sourceHost".\n    destinationPath - The path to the shared folder where the source folder or file will be copied, without leading slashes. This will be appended to the destination host in order to obtain the UNC path of the destination folder.\nExample\: if you shared a distinct folder the path could be\: mySharedFolder\\destinationFolder. Or, if you shared the whole disk drive\: C\:\\aFolder\\anotherFolder\\destinationFolder.\n    destinationHost - The host of the destination folder.\n    destinationUser - The username used for connecting to the " destinationHost".\n    destinationPassword - The password used for connecting to the " destinationHost".\n    overwrite - If set to "true" the "destination" file will be overwritten. If set to "false" and the "destination" file exists the operation will fail. This input is considered always "true" when the "source" input indicates to a folder.\nValid values\: true, false\nDefault value\: false\n    removeSource - Should the source folder be removed?\nValid values\: true, false\nDefault value\: false\n\nResponses\:\n    success - The folder was copied successfully.\n    failure - Something went wrong.\n\nNote\:\n1. The RAS/Central service must be run as a user that has enough privileges to impersonate on a remote machine.\n2. The operation streams the file or folder from source to destination without creating a temporary copy.\n3. The operation uses administrative shares for copying files so it might have different limitations on the number of connections allowed depending on environment configurations.\n4. If the "source" input indicates to a file and the "destination" input indicates to a folder, the file will be copied to that folder. If the "destination" specifies a file, the content from the source file will be copied to the destination (if the destination file does not exist it will be created, if it exists the operation will take into account the "overwrite" input).\n5. If the "destination" input specifies a path that doesn\u2019t exist, the operation will create it. There is an exceptional case when the "source" input indicates to a file and the "destination" input indicates to a path that should be created. In this case the operation differentiates between a file or a folder by the last / from the "destination" path.\nExample\: C\:/Temp is a folder that exists, the rest of the folder from the following example should be created.\nC\:/Temp/f1/f2/f3 -> f3 is a file, the "source" file's content will be copied into f3 file.\nC\:/Temp/f1/f2/f3/ -> f3 is a folder, the "source" file will be copied into f3 folder.\n6. The "overwrite" is always true when the "source" input indicates to a folder. If the folder tree exists in the "destination" all the files and folders will be overwritten.\n7. This copy operation is modeled after the Windows command-line copy operation. So given a sample directory structure\:\n--DirectoryA\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n\n--DirectoryB\n   |--File3\n   |--File4\n\nIf your Source is "DirectoryA" and your Destination is "DirectoryB" your end result will be\:\n--DirectoryA\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n\n--DirectoryB\n   |--File3\n   |--File4\n   |--File1\n   |--File2\n   |--DirectoryC\n       |-File5\n</pre>
+]]></descriptionCdata>
+  <annotation>4243805d-23e7-45fd-8b12-abb7203c44f9.description</annotation>
+  <name>FS Copy Inter Machines</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="40b5b2e1-011a-4064-a10b-63de0f01a1a1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sourcePath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.40b5b2e1-011a-4064-a10b-63de0f01a1a1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="1940dee8-2173-411c-9a6c-d150ecbaf28b">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sourceHost</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.1940dee8-2173-411c-9a6c-d150ecbaf28b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cfb0d048-7db9-4930-817d-a186527f80f6">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>sourceUser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.cfb0d048-7db9-4930-817d-a186527f80f6.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="af139f5e-2524-4181-9f2f-33962f189737">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>sourcePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.af139f5e-2524-4181-9f2f-33962f189737.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="b153647b-5585-46f5-95ad-71a8aeebf8dd">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>destinationPath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.b153647b-5585-46f5-95ad-71a8aeebf8dd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="6f35f0ae-2f6d-4aa1-bc51-497544c7a1b4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>destinationHost</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.6f35f0ae-2f6d-4aa1-bc51-497544c7a1b4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="cec76536-b978-4fd0-9107-100631072364">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>destinationUser</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.cec76536-b978-4fd0-9107-100631072364.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a62ba937-0b30-44d3-a5c5-8cfbc20cb7a1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>false</isPersisted>
+      <inputSymbol>destinationPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>4243805d-23e7-45fd-8b12-abb7203c44f9.a62ba937-0b30-44d3-a5c5-8cfbc20cb7a1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="4514880d-8037-4821-bac0-7903f60bea84">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>removeSource</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="307fa678-fb89-4560-808b-97cc073d6405">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>overwrite</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>true</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="6096e056-4577-47ec-999e-ba7b02de68cf">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="8e07a1d5-be9d-4c45-9917-772ac907bbb5">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="42b0bb65-7986-425a-afbd-c6c39488aed1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="2746e828-e777-4ff3-b2e3-950cdac67c6d">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="289d4ad1-ddaa-4915-9376-1aeee51c6a86">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="561cceb9-4d1d-4da7-a16c-f9527ff37fe0">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f7bb8431-c729-430e-8e5e-0a3eb2601707">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="bbcb3f60-8a80-4d55-b865-d856603bdbdb">
+    <baseIcon>text.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="011e62c3-d816-43b2-b93f-db46909040d6">
+        <baseIcon>copy.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_FileSystem.FSCopyDifferentMachines</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d0a8e416-c5cb-43e7-832f-136066baea42">
+  <descriptionCdata><![CDATA[d0a8e416-c5cb-43e7-832f-136066baea42.description=<pre>Performs a linear regression on a list of measurements taken at equal time intervals.\n\nInputs\:\nlist - The list to perform the analysis on.\ndelimiter - A delimiter that separates elements in the list.\n\nExtra Results\:\nslope - The slope of the best-fit line.\nintercept - The intercept of the best fit line.\nsumSquaredError - The sum squared error of the best fit line.\ninterceptStandardError - The standard error of the intercept of the best fit line.\nslopeStandardError - The standard error of the slope of the best fit line.\nr - The coefficient of correlation for the best fit line.\nrSquared - The coefficient of determination of the best fit line.\nslopeConfidenceInterval - The 95% Confidence interval for the slope.\n\nResponses\:\nincreasing - All slopes of the line within the 95% CI are > 0\nstable - The slope of 0 is within the best fit line's 95% confidence interval.\ndecreasing - All slopes of the line within the 95% CI are < 0\nfailure - Failed to process the list or something went wrong.\n</pre>
+]]></descriptionCdata>
+  <annotation>d0a8e416-c5cb-43e7-832f-136066baea42.description</annotation>
+  <name>Check Trend</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="99d5c7b2-6be8-4952-b9bf-f9b03ff5a162">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6eb07eb3-5f42-4e06-826b-1f33724c16fe">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="56606e45-cf00-4118-9076-bcd2ab7b71f5">
+      <annotation></annotation>
+      <name>increasing</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="bbe5a173-e689-48d7-8e94-3025bf0b18a2">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="d71b9c5c-3266-46fe-988e-2e43c12a867b">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>increasing</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="90dac76e-0b72-4209-a377-cbd3e03f82a9">
+      <annotation></annotation>
+      <name>decreasing</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="78669111-3980-48c8-8a27-f86d9ce17f0d">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="f0a8989b-fc00-46f6-be54-77e272ba7aab">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>decreasing</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="708b00ae-03fe-47e2-98a6-a0e29ba17dc0">
+      <annotation></annotation>
+      <name>stable</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="d258846a-5b94-4d76-a918-fe274dd87515">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="f7f65b82-5d79-4b65-804b-b9969aaeff3d">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>stable</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="1831d4cf-946f-40f5-990d-c8cc4ec5e711">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="4ea6850a-9943-4741-8ed0-43eb74fa7bf2">
+          <annotation></annotation>
+          <name>response</name>
+          <fieldName>response</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="a2ed5204-4d5a-4f43-96dc-34624a7c6686">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="f6816102-45d0-4e41-84ea-474609cec985">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="a4e97b6a-945b-4551-a908-938cabbba3b8">
+    <baseIcon>calculator.png</baseIcon>
+    <basePath>Others</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>Check Trend</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

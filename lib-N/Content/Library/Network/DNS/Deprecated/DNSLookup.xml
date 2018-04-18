@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="630ca21f-83b7-4659-8663-dd59d1283855">
+  <descriptionCdata><![CDATA[630ca21f-83b7-4659-8663-dd59d1283855.4b31123c-8f74-4735-b435-39fce0747513.prompt=HostName\:
+630ca21f-83b7-4659-8663-dd59d1283855.description=<pre>Does a DNS Lookup of the requested name\n\nInput Parameters\:\nhost - hostname or IP address of the target host\n\nResponses\:\nsuccess - resolved hostname\nhost not found - could not resolve hostname to a valid IP address\n\nExtra Results\:\naddresses - list of addresses returned from DNS\naliases - list of aliases returned from DNS</pre>
+]]></descriptionCdata>
+  <annotation>630ca21f-83b7-4659-8663-dd59d1283855.description</annotation>
+  <name>DNSLookup</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="4b31123c-8f74-4735-b435-39fce0747513">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>630ca21f-83b7-4659-8663-dd59d1283855.4b31123c-8f74-4735-b435-39fce0747513.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <scriptlet id="2d48c03a-3684-432a-9f96-885af845a039">
+    <annotation></annotation>
+    <name>Operation DNSLookup (bab0e45c-80ff-45a9-86a4-dbdbc2480950)</name>
+    <script>
+        	scriptletContext.put(&quot;addresses&quot;, scriptletRawResult[&apos;addresses&apos;]);
+        	scriptletContext.put(&quot;aliases&quot;, scriptletRawResult[&apos;aliases&apos;]);
+        </script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d7937a92-80b3-480d-be02-6832175c63bc">
+      <annotation></annotation>
+      <name>host not found</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="6d7c532f-a7be-4762-9e73-e70ec3db80d2">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="bd213cd8-03e1-4c73-a529-64cd5a179b12">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>10</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="b4539f7a-8048-4255-a69e-2576abd5cffa">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="b850f9a3-d023-45b4-beed-68a8a4cfa760">
+          <annotation></annotation>
+          <name></name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="366f6c6d-2b1c-4090-9a5a-67ef39a591c4">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="7c20d54a-0414-4b17-a86e-c06b76d84cfe">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="5502c996-3993-4161-86bf-f407f7ecb2f7">
+    <baseIcon>client_server_app.png</baseIcon>
+    <basePath>Application/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="506a7161-bf23-4c25-a389-d3caba94e843">
+        <baseIcon>view.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_Network.DNSLookup</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

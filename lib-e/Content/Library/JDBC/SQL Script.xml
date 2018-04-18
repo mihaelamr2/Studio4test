@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c06d5a28-1b95-434a-88a4-5ff4696ce513">
+  <descriptionCdata><![CDATA[c06d5a28-1b95-434a-88a4-5ff4696ce513.12c25a06-706d-46b8-899d-5dfcbc1ccbe1.prompt=Give the line number 0 from the command to be executed.
+c06d5a28-1b95-434a-88a4-5ff4696ce513.17ca4473-efea-4724-89d1-26365ba7e581.prompt=HostName\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.27b865cc-1fac-4f51-ac70-9edef1a436dd.prompt=UserName\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.29202f2a-e0dc-4536-8404-480daec4c333.prompt=DBPort\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.75031baa-5ce6-44c7-8c12-5091d45c98e2.prompt=Password\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.77334c3f-dcdb-4ae2-b24d-928bad31edd1.prompt=timeout\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.93f03b12-b8c1-4ef2-9a41-2a2d06aec027.prompt=Authentication Type\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.a761af7c-7093-49a7-809c-e19139248c8d.prompt=instance\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.c1083dd2-6268-42e3-95fa-78771aef861e.prompt=Database Name\:
+c06d5a28-1b95-434a-88a4-5ff4696ce513.description=<pre>\nThis operation runs a SQL multi-line command against a database. The commands are given one in a line. As many inputs named "Line[Number]" as needed can be added, each one representing a command. The commands can also be given in a SQL Script file.\nThe operation only executes SQL commands and not SQL queries. It does not return any results (only whether the command was executed or not).\n\nInputs\:\n    DBServerName - The hostname or ip address of the database server.\n    DbType - The type of database to connect to. \nValid values\: Oracle, MSSQL, Sybase, Netcool, DB2, PostgreSQL and Custom.\nDefault value\: Oracle\n    Username - The username to use when connecting to the server.\n    Password - The password to use when connecting to the server.\n    instance - The name instance of MSSQL Server. Leave it blank for default instance.\nExample\: MSSQLSERVER\n    DbPort - The port to connect to.\nValid values\: Oracle\: 1521, MSSQL\: 1433, Sybase\: 5000, Netcool\: 4100, DB2\: 50000, PostgreSQL\: 5432.\n    Database - The name of the database to connect to.\n    authenticationType - The type of authentication used to access the database (applicable only to MSSQL type). \nValid values\: sql, windows (for MSSQL)\nDefault value\: sql\n    dbClass - The classname of the JDBC driver to use.\n    dbURL - The url required to load up the driver and make your connection.\n    Line0 - The first line of the SQL command to execute. All the other necessary lines should be added if needed, following the following name convention\: Line[Number] where [Number] is replaced in increasing order by 1,2,3 ... This is not a required input. However, if  both line0 and scriptFileName are empty, the operation will give an error message and fail. If both line0 and scriptFileName have input, the operation takes the line input. \n    scriptFileName - SQL script file name. The command in the file need to have ';' to indicate the end of the command. This is not a required input. However, if  both line0 and scriptFileName are empty, the operation will give an error message and fail. If both line0 and scriptFileName have input, the operation takes the line input. \n    timeout - Seconds to wait before timing out the SQL command execution. When the default value is used, there is no limit on the amount of time allowed for a running command to complete. Timeout only takes effect when executing a single command.\nDefault value\: 0 \n    databasePoolingProperties - Properties for database pooling configuration. This parameter replaces the databasePooling.properties file from 9x version (you may copy-paste the file content here). Pooling is disabled by default. For more details check the /Library/Operations/Database/JDBC folder description.\nExample\: db.pooling.enable\=true\n    resultSetType - the result set type. See JDBC folder description for more details.\nValid values\: TYPE_FORWARD_ONLY, TYPE_SCROLL_INSENSITIVE,TYPE_SCROLL_SENSITIVE.\nDefault value\: TYPE_SCROLL_INSENSITIVE\n    resultSetConcurrency - the result set concurrency. See JDBC folder description for more details.\nValid values\: CONCUR_READ_ONLY, CONCUR_UPDATABLE\nDefault value\: CONCUR_READ_ONLY\n\nResults\:\n    returnResult - This is the primary output. Returns a success or failure message.\n    updateCount - The update count of the command executed.\n\nResponses\:\n    success - The command was successfully executed.\n    failure - Failed to execute the command.\n\nNotes\:\n1. Check the JDBC  folder description for details on how to load database connectors.\n2. Use the 'Line0', 'Line1 ...' inputs with caution as it can expose the target system to security risks. By exposing the 'Line0', 'Line1 ...' inputs as a prompt to the user, it will enable the user to execute any SQL command on the target system taking into account the permissions of the credentials given as inputs.\n\nExamples\:\n1. The following example demonstrates how to use this operation to execute multiple commands, whitout using a SQL Script file. Suppose a user wants to run the following two commands against a database\:\n        INSERT INTO TABLE_NAME(COLUMN) VALUES(VALUE_1)\n        INSERT INTO TABLE_NAME(COLUMN) VALUES(VALUE_2)\n    Then, the commands are given each one in a different Line<Number> input. The "Line0" input field will contain the first command and for the second command, the user will have to add an extra input field named "Line1" which will contain this command.\n    So, the two inputs and their values will be as follows\:\n        Line0\: INSERT INTO TABLE_NAME(COLUMN) VALUES(VALUE_1)\n        Line1\: INSERT INTO TABLE_NAME(COLUMN) VALUES(VALUE_2)    \n</pre>
+c06d5a28-1b95-434a-88a4-5ff4696ce513.e1b665e2-3cff-488a-a3d5-f8b6e8c89637.prompt=scriptFileName\:
+]]></descriptionCdata>
+  <annotation>c06d5a28-1b95-434a-88a4-5ff4696ce513.description</annotation>
+  <name>SQL Script</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="17ca4473-efea-4724-89d1-26365ba7e581">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DBServerName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.17ca4473-efea-4724-89d1-26365ba7e581.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a653b29d-cbdf-4caf-9331-f7b00ae386c0">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DbType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>31757bef-e16a-48dd-a53f-a68fd8f64c6a</refId>
+        <refName>SQL Database Type</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="27b865cc-1fac-4f51-ac70-9edef1a436dd">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.27b865cc-1fac-4f51-ac70-9edef1a436dd.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="75031baa-5ce6-44c7-8c12-5091d45c98e2">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.75031baa-5ce6-44c7-8c12-5091d45c98e2.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="a761af7c-7093-49a7-809c-e19139248c8d">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>instance</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.a761af7c-7093-49a7-809c-e19139248c8d.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="29202f2a-e0dc-4536-8404-480daec4c333">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DBPort</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.29202f2a-e0dc-4536-8404-480daec4c333.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="c1083dd2-6268-42e3-95fa-78771aef861e">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Database</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.c1083dd2-6268-42e3-95fa-78771aef861e.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="93f03b12-b8c1-4ef2-9a41-2a2d06aec027">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>authenticationType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.93f03b12-b8c1-4ef2-9a41-2a2d06aec027.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="bc1b59d0-e376-4ff5-9eff-17729fb9029c">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dbClass</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0030742e-5e1e-4be9-a032-083c7a502953">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>dbURL</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="12c25a06-706d-46b8-899d-5dfcbc1ccbe1">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Line0</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.12c25a06-706d-46b8-899d-5dfcbc1ccbe1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="e1b665e2-3cff-488a-a3d5-f8b6e8c89637">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>scriptFileName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.e1b665e2-3cff-488a-a3d5-f8b6e8c89637.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="77334c3f-dcdb-4ae2-b24d-928bad31edd1">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>timeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c06d5a28-1b95-434a-88a4-5ff4696ce513.77334c3f-dcdb-4ae2-b24d-928bad31edd1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="493b3228-9b64-4ec7-90e7-83a2e6d8e658">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>databasePoolingProperties</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="79dc0d53-7906-4769-ba5b-3f584046d725">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resultSetType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>6dd95e78-acc1-4d5a-9c24-754d3f2d6ba8</refId>
+        <refName>SQL Result Set Type</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="498f0571-e45c-4d7d-a571-a9dc5de19351">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>resultSetConcurrency</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <link>
+        <refId>7c3318c3-1e87-45b2-ab55-d902f0afef3f</refId>
+        <refName>SQL Result Set Concurrency</refName>
+      </link>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="5e3353f2-1145-4af8-a835-feb1b7323028">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="c7c8b73b-aa3f-4861-9273-86c07d932b96">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="2094eb7c-8a92-4045-af51-1981c3552328">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="18c27832-e224-4307-bbc5-a529a28f47a2">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="9e95e78b-d0ea-4462-8e30-3e13b06f5d1f">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="44f88638-0b1a-480c-afa3-52eba9400957">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="ea43f475-ced2-4a85-ba98-d9b3136953b9">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6397d16a-72bc-4118-8b21-7338a0a313d5">
+    <baseIcon>database_green.png</baseIcon>
+    <basePath>/Databases/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="b69098af-c0f6-4e9d-9b47-c4164f04cac5">
+        <baseIcon>copy2.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-sql-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.sql.SQLScript</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

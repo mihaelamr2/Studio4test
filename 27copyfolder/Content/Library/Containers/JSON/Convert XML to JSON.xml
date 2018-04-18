@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="d003e496-2b9d-4a91-951f-36983a657dcf">
+  <descriptionCdata><![CDATA[d003e496-2b9d-4a91-951f-36983a657dcf.593da8c8-127f-48df-a56e-13913f1649c4.prompt=The XML document as String\:
+d003e496-2b9d-4a91-951f-36983a657dcf.description=<pre>\nConverts a XML document to a JSON array or a JSON object.\n\nInputs\:\n    xml - The XML document (in the form of a String).\n    textElementsName - specify custom property name for text elements. This will be used for elements that have attributes and text content.\nDefault value\: _text\n    includeRootElement - The flag for including the xml root in the resulted JSON.\nDefault value\: true\n    includeAttributes - The flag for including XML attributes in the resulted JSON (\nDefault value\: true\n    prettyPrint - The flag for formatting the resulted XML.\nDefault value\: true\n    parsingFeatures - The list of XML parsing features separated by new line (CRLF). The feature name - value must be separated by empty space. Setting specific features this field could be used to avoid XML security issues like "XML Entity Expansion injection" and "XML External Entity injection". To avoid aforementioned security issues we strongly recommend to set this input to the following values\: \nhttp\://apache.org/xml/features/disallow-doctype-decl true \nhttp\://xml.org/sax/features/external-general-entities false \nhttp\://xml.org/sax/features/external-parameter-entities false \nWhen the "http\://apache.org/xml/features/disallow-doctype-decl" feature is set to "true" the parser will throw a FATAL ERROR if the incoming document contains a DOCTYPE declaration.  \nWhen the "http\://xml.org/sax/features/external-general-entities" feature is set to "false" the parser will not include external general entities. \nWhen the "http\://xml.org/sax/features/external-parameter-entities" feature is set to "false" the parser will not include external parameter entities or the external DTD subset. \nIf any of the validations fails, the operation will fail with an error message describing the problem. \nDefault value\:\nhttp\://apache.org/xml/features/disallow-doctype-decl true\nhttp\://xml.org/sax/features/external-general-entities false\nhttp\://xml.org/sax/features/external-parameter-entities false\n\nResults\:\n    returnResult - This is the primary output. The resulted JSON Document or JSON objects in form of a String.\n    returnCode - 0 for success; -1 for failure.\n    namespacesPrefixes - The list of tag prefixes separated by delimiter.\n    namespacesUris - The corresponding list of namespaces Uris separated by delimiter. (They can be used as input for Convert JSON to XML Operation)\n\t\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n\nExamples\:\n1. xml\=<root>\n  <name>John</name>\n  <age>100</age>\n  <retired>true</retired>  \n</root> and the other values with their default values you will get\n\nreturnResult\={\n  "root"\: {\n    "name"\: "John",\n    "age"\: "100",\n    "retired"\: "true"\n  }\n}\nnamespacesPrefixes \=\nnamespacesUris \=\nreturnCode\: 0\n\n2. xml \= <root xmlns\:f\="http\://java.sun.com/jsf/core" xmlns\:ui\="urn\:x-hp\:2012\:software\:eve\:uibinding" id\="Page1">\n<ui\:position><x>1</x><y>2</y></ui\:position>\n<f\:properties>\n<f\:property><key1>value1</key1></f\:property>\n<f\:property><key2>value2</key2></f\:property>\n</f\:properties>\n<details>\n<item id\="1"><type>size</type><height>10</height><width>10</width></item>\n<item id\="2"><type>color</type><name>blue</name></item>\n</details>\n</root> and the other values with their default values you will get\n\nreturnResult \=\n{\n  "root"\: {\n    "@id"\: "Page1",\n    "ui\:position"\: {\n      "x"\: "1",\n      "y"\: "2"\n    },\n    "f\:properties"\: {\n      "f\:property"\: [\n        { "key1"\: "value1" },\n        { "key2"\: "value2" }\n      ]\n    },\n    "details"\: {\n      "item"\: [\n        {\n          "@id"\: "1",\n          "type"\: "size",\n          "height"\: "10",\n          "width"\: "10"\n        },\n        {\n          "@id"\: "2",\n          "type"\: "color",\n          "name"\: "blue"\n        }\n      ]\n    }\n  }\n}\nnamespacesPrefixes \= f,ui\nnamespacesUris \= http\://java.sun.com/jsf/core,urn\:x-hp\:2012\:software\:eve\:uibinding\nreturnCode\: 0\n\n3. \nxml \= <td id\="1">Apples</td>\ntextElementsName\=_text\n\nreturnResult \= \n{\n  "td"\: {\n    "@id"\: "1",\n    "_text"\: "Apples"\n}\n\nNotes\:\n1. The XML document must be well formed.\n2. The xml's attributes are prefixed with '@' in the resulted JSON.\n3. The textElementsName will be used when an element from the xml input has attribute and text.\n</pre>\n
+]]></descriptionCdata>
+  <annotation>d003e496-2b9d-4a91-951f-36983a657dcf.description</annotation>
+  <name>Convert XML to JSON</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="593da8c8-127f-48df-a56e-13913f1649c4">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>xml</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>d003e496-2b9d-4a91-951f-36983a657dcf.593da8c8-127f-48df-a56e-13913f1649c4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="cc410aea-55ff-42c8-a49d-6f97aa398fa4">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>textElementsName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>_text</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="979844db-8f0f-43ce-810e-f580ef4e27f0">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>includeRootElement</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>true</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f611e2f0-1f46-4e70-8029-f8e7804dafe7">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>includeAttributes</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>true</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="61acf688-df2e-4579-b406-427ff162c287">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>prettyPrint</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>true</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="380eb5a0-1e81-42c3-a835-7e5ac14004e1">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>parsingFeatures</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>http://apache.org/xml/features/disallow-doctype-decl true
+http://xml.org/sax/features/external-general-entities false
+http://xml.org/sax/features/external-parameter-entities false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="87c69da4-ad17-4538-a950-7b4b8087f2be">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="1235701b-dc36-473b-81e3-6d3f27898ba6">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="2f0001d9-9660-44d5-a860-40e21dbf9223">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="876361aa-8890-4853-807a-1b727a8ecf46">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="fad24e0e-900f-4e45-94ce-683e48ccde4f">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="15b120e0-5f0e-4a24-878d-5467034aff7a">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b4aae602-2736-4e36-ad8b-051f7a158cd9">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="75c09be1-cae8-4f85-9ac5-60451fc9b295">
+    <baseIcon>text_msg.png</baseIcon>
+    <basePath>/E-mail/</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-base-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>Convert XML to Json</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

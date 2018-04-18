@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="ad0f47e2-1762-427d-9f3d-42a9a71e9bbe">
+  <descriptionCdata><![CDATA[ad0f47e2-1762-427d-9f3d-42a9a71e9bbe.description=This trims values from a list.  The values trimmed are equally distributed from the high and low ends of the list.  The number of elements trimmed is dictated by the percentage that is passed in.  If the percentage would indicate an odd number of elements the number trimmed is lowered by one so that the same number are taken from both ends.\n\nDeprecated in favor of operation with the same name.\n\nInputs\:\n\nlist\: a sorted list of numbers\ndelimiter\: the list delimiter\npct\: the percentage of elements to trim\n\nResult\: \nThe trimmed list separated by the same delimiter\n\nResponses\:\nsuccess - if we trimmed the list\nfailure - if the list was empty or an entry was not a number
+]]></descriptionCdata>
+  <annotation>ad0f47e2-1762-427d-9f3d-42a9a71e9bbe.description</annotation>
+  <name>Trim List</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="94946c66-f39a-4564-9f1a-be7e2d3bf7fc">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>list</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="3e8d0df3-ac97-433c-a3d1-e676e612b7c6">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="88418c27-d921-46ec-ab90-84eee3dcc910">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>pct</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="a9a9ecd8-27a6-45b9-926e-029c0578bbde">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${list}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="5e54b7f7-dccb-42c6-b543-1b701da6def9">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${delimiter}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="849f486e-c376-4d01-a86b-89f54191a87b">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${pct}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="f47e1e4c-6919-46fd-8120-251363cebc0c">
+    <annotation></annotation>
+    <name>Operation Trim List (76955ec9-f332-45dd-a48d-0014d027cef3)</name>
+    <script>scriptletResult = &quot;&quot;;
+scriptletResponse = &quot;failure&quot;;
+
+// parse the list
+items = list.split(delimiter);
+nums = new Array;
+
+// turn it into an arry of numbers for efficiency
+total = strToNum(items,nums);
+
+if (total != 0) {
+
+   // how many elements do we need to trim?
+   trim = java.lang.Math.rint(total * (parseInt(pct)/100));
+
+   // if it is odd make it even;
+   if (trim % 2 == 1) trim--;
+
+   // now divide it by two since that is where we will start in the list...
+   trim /= 2;
+
+   // and we will end that many before the end...
+   total -= trim;
+
+  // now create a new list
+   for (i = trim; i &lt; total; i++) {
+      if (i != trim) scriptletResult += delimiter;
+      scriptletResult += nums[i];
+   }
+}
+
+scriptletResponse = &quot;success&quot;;
+
+function sortNumber(a,b) {
+   return (a - b);
+}
+
+function strToNum(items,nums) {
+   error = &quot;false&quot;;
+   for (total = 0; total &lt; 1000; total++) {
+      if (items[total] == null) break;
+      if (items[total].match(/[^0-9.]/)) {
+         error = &quot;true&quot;;
+         break;
+      }
+      nums[total] = java.lang.Double.parseDouble(items[total]);
+   }
+   if (error == &quot;true&quot;) return 0;
+   return total;
+}
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="d661abf6-07eb-4c5e-8262-8bdb1c70699a">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="f513e51d-1853-4e9c-aad1-eacea6dcecd3">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="18452347-2853-4756-a5d5-075c26e4b46f">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="54406e21-1a95-4c71-86b6-2f57505f067b">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3a09ea7e-5d0b-46a3-bbe2-8df11f17961f">
+        <baseIcon>cut.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

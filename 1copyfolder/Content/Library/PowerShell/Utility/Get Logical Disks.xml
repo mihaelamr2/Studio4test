@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="c1b857a2-1d09-48c9-83a7-cd31891f703b">
+  <descriptionCdata><![CDATA[c1b857a2-1d09-48c9-83a7-cd31891f703b.3a05b207-2234-41ea-b755-b5134b7cfc53.prompt=Host\:
+c1b857a2-1d09-48c9-83a7-cd31891f703b.de39a4e8-9b15-48ae-8b01-7ba0f88b694b.prompt=Username\:
+c1b857a2-1d09-48c9-83a7-cd31891f703b.description=<pre>\nGenerates a list of partitions in the target Windows computer.\n\nInputs\:\nhost \t- Hostname or IP address of the target computer.\nusername \t- Username to use for WMI impersonation on the host for this operation (can be left blank).\npassword \t- Password of the user.\n\nResponses\:\nsuccess \t- Operation completed successfully.\nfailure \t- Something went wrong.\n\nResult\:\nThe list of partitions.\n\nExtra Results\:\nreturnCode \t- The operation return code.\nexception \t- If something went wrong, the error message.\n</pre>
+c1b857a2-1d09-48c9-83a7-cd31891f703b.eec0fdab-7718-4078-a82c-c5e2817957d4.prompt=Password\:
+]]></descriptionCdata>
+  <annotation>c1b857a2-1d09-48c9-83a7-cd31891f703b.description</annotation>
+  <name>Get Logical Disks</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="3a05b207-2234-41ea-b755-b5134b7cfc53">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>host</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c1b857a2-1d09-48c9-83a7-cd31891f703b.3a05b207-2234-41ea-b755-b5134b7cfc53.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="de39a4e8-9b15-48ae-8b01-7ba0f88b694b">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>username</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c1b857a2-1d09-48c9-83a7-cd31891f703b.de39a4e8-9b15-48ae-8b01-7ba0f88b694b.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="eec0fdab-7718-4078-a82c-c5e2817957d4">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>password</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>c1b857a2-1d09-48c9-83a7-cd31891f703b.eec0fdab-7718-4078-a82c-c5e2817957d4.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="b5ad3737-2059-42c3-a8f1-d4433961fa07">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="d0e517f8-95e3-4194-bba7-22935923ca51">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="c4d6cec6-6d36-4299-b7ef-a260a010fc6d">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="a48ffa40-8650-472b-910e-15a50841d2cd">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="b7513ba1-dc73-4fc0-a00a-4071a0789a21">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="671d7884-a26a-46bf-bc45-8cf508fbebe1">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a7593e90-5a55-4559-9c7c-3bb5de1d21d9">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="659d1700-27ab-4eb3-b259-12a7d3605f9a">
+    <baseIcon>diskdrive.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="6834e76f-b0fe-4ff6-bb46-824c915a91d7">
+        <baseIcon>receive.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-dotnet-web-actions-powershell-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>dotNETWebActions_PowerShell.GetLogicalDisks</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideNRAS}</overrideGroupAlias>
+</operation>

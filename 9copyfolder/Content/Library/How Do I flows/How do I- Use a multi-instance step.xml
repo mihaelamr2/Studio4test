@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="3d5fa891-93fd-45f3-a708-7351b1a86f63">
+  <descriptionCdata><![CDATA[3d5fa891-93fd-45f3-a708-7351b1a86f63.0b253904-fed1-4acd-b80f-4ef7257343c2.callout=STEP 2. The "Display Message" step displays a message for each folder that the "FS Create Directory" step creates. \n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.16fa528f-974f-4938-9b67-d3580c9d1fd3.description=The "FS Create Directory" step creates a folder. In this flow, the "FS Create Directory" step is a multi-instance step, which gets its input from a list of folders entered at a user prompt.  and creates the folders in the list simultaneously. If a folder in the list already exists, the step fails and returns to the "FS Create Directory" step to try to create the next folder in the list. When the "FS Create Directory" step has processed all of the folders in the input list, it transitions to the "Display Message" step.\n\nStep Inputs\:\n"path" - The path of the folder to create. In this flow, the "FS Create Directory" step is a multi-instance step, so "path" gets its input from a list which you specify at a user prompt. To specify that the input\u2019s value is a list, the "List of Values" option has been selected from the "Input Type" box. The "Input Delimiter" box has a default value of comma (,).\n\nStep Results\:\nThe folders created by this step.\n\nStep Responses\:\n"success" - The folder was created. The step connects back to the "FS Create Directory" step.\n"failure" - The folder could not be created. The step connects back to the 'FS Create Directory' step.\n'group done' - The multi-instance 'FS Create Directory' step has finished processing the values in the 'path' input list. The flow transitions to the 'Display Message' step.\n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.49e9bf6f-5853-433d-b84f-252f0103bda8.callout=STEP 1. The "FS Create Directory" step is a multi-instance step that processes the items in a list simultaneously. In  this flow, the multi-instance "FS Create Directory" step simultaneously creates three folders that you specify at a user prompt.\n\n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.570dfe0a-f5cc-41d0-b6aa-b124e06e2ddb.callout=STEP 0. BEFORE TESTING OR RUNNING THIS FLOW\:\nThe folders in the list used by the "FS Create Directory" step are specified by you at a user prompt. For the flow to succeed, you need to make sure that these folders do not already exist. If one or more of them do exist on your machine, delete them before running this flow.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.6e785e3d-1ea9-4111-b69a-fec52d74a154.transition.description=The multi-instance step "FS Create Directory" has created a folder. The flow transitions back to the "FS Create Directory" step to attempt to create the next folder in the input list.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.98cb6b3f-4a5a-4552-b785-b8eaf7b6c73a.transition.description=The "FS Create Directory" has finished orcessing the list of folders. The flow transitions to the "Resolved\: success" step and ends successfully.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.a2e994fd-1e19-45da-bf05-a1a5e01b930c.transition.description=The "Display Message" step has displayed a message to the user. The flow transitions back to the "FS Create Directory" step to attempt to create the next folder in the input list.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.a8b92455-b72e-4a71-9d83-e75e47818bcd.prompt=This multi-instance step creates a list of folders.\n\nEnter a list of folders, separated by commas, for the step to create.\n(Examples\: for Windows, "C\:/dir1,C\:\\dir2,C\:\\dir3" and for Linux, "/tmp/dir1,/tmp/dir2,/tmp/dir3".)
+3d5fa891-93fd-45f3-a708-7351b1a86f63.b43d7bda-ce6b-4f1c-b5af-917751227546.callout=The "How do I\: Use a multi-instance step" flow shows how to use a multi-instance step  to operate on each item in a list of values simultaneously. In this case, the flow has a multi-instance step.that creates a folder for each item in its input list. \nMulti-instance steps have many practical uses including running an operating system health check or installing a software update on multiple machines.\n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.c595db02-66b1-47f5-96a9-298dc16f5f1f.callout=Understanding data movement. How each of the flow's steps gets the data it needs to do its work  is crucial to understanding how to harness the flow's techniques for your own purposes. Data can be assigned from user input when the flow runs, from step results, or from flow variables. \nData movement in this How Do I flow is detailed on the Description tab of the flow's Properties sheet and of each step's Inspector. To open the flow's Properties sheet, click the Properties tab at the lower-left of the flow canvas. To open a step's Inspector, double-click the step.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.d4c9b084-ff34-47e2-a228-68723683ebd7.description=This step provides a message to the user. This step is actually a subflow. To learn about the steps contained in the subflow, right-click the step, click "Open Subflow," and then study the subflow's diagram and properties page, and the Inspectors of the subflow's steps. On the subflow's Properties sheet, you can see the flow inputs on which the step's inputs are based.\n\nStep Inputs\:\n"message" -  The message to send the user. In this flow, the "message" input gets its value from the constant "The folder ${path} was created successfully."\n\nStep Responses\:\n"success" - The step was able to display the message. The flow transitions to the "Resolved\: success" step and ends successfully.\n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.dc49495b-f21c-4fe8-b971-cb4168826520.transition.description=The multi-instance step "FS Create Directory" has failed to create a folder. The flow transitions back to the "FS Create Directory" step to attempt to create the next folder in the input list.
+3d5fa891-93fd-45f3-a708-7351b1a86f63.description=The "How do I\: Use a multi-instance step" flow demonstrates how to a use multi-instance\nstep, which operates on a list of values at the same time. To make a step into a multi-instance \nstep, you right-click the step and then select "Toggle Multi-instance", then provide an input \nlist with more than one value. To provide the input with multiple values, you specify that the \ninput\u2019s value is a list, then provide the list to the input. All of the transitions must connect  back \nto the multi-instance step except for the "group done" transition. \n\n<pre>\nThis flow was created using the following default OO operations\:\n-  "FS Create Directory" from the Library/Operations/FileSystem/Cross Platform folder.\n-  "Display Message" from the Library/Utility Operations folder.\n\nThe flow contains the following steps\:\n\n1. The "FS Create Directory" step  has been changed to a multi-instance step with an input list that \ncontains multiple values. The step creates thefolders in the list until the list is finished, then the \n"group done" transition proceeds to the next step.\n      Input\: "path"\n      Gets value from\: user prompt\n      Places result in\:  flow variable "path"\n          \n2. The "Display Message" step displays a message to the user.\n      Input\:  "message"\n      Gets value from\: constant\n          "The folder ${path} was created successfully."\n</pre>\n
+3d5fa891-93fd-45f3-a708-7351b1a86f63.e1da81c5-5189-46bf-9bd5-fa27d0c16808.description=End Branch
+3d5fa891-93fd-45f3-a708-7351b1a86f63.e3b9d658-89fb-4f4b-83b9-53250645ecbb.prompt=This multi-instance step creates a list of folders.\n\nEnter a list of folders, separated by commas, for the step to create.\n(Examples\: for Windows, "C\:/dir1,C\:\\dir2,C\:\\dir3" and for Linux, "/tmp/dir1,/tmp/dir2,/tmp/dir3".)
+]]></descriptionCdata>
+  <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.description</annotation>
+  <name>How do I- Use a multi-instance step</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="a9ef3670-acd1-4b7c-aa11-5edc5c63bd41">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="a2c0a74f-1703-4cfe-abbe-663621a55d57">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="2929781f-79d2-43a1-9c31-142dfa19fcce">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="c595db02-66b1-47f5-96a9-298dc16f5f1f">
+      <text>3d5fa891-93fd-45f3-a708-7351b1a86f63.c595db02-66b1-47f5-96a9-298dc16f5f1f.callout</text>
+      <bounds>
+        <x>2.0</x>
+        <y>3.0</y>
+        <width>823.0</width>
+        <height>67.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="570dfe0a-f5cc-41d0-b6aa-b124e06e2ddb">
+      <text>3d5fa891-93fd-45f3-a708-7351b1a86f63.570dfe0a-f5cc-41d0-b6aa-b124e06e2ddb.callout</text>
+      <bounds>
+        <x>1.0</x>
+        <y>136.0</y>
+        <width>819.0</width>
+        <height>55.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="0b253904-fed1-4acd-b80f-4ef7257343c2">
+      <text>3d5fa891-93fd-45f3-a708-7351b1a86f63.0b253904-fed1-4acd-b80f-4ef7257343c2.callout</text>
+      <bounds>
+        <x>514.0</x>
+        <y>258.0</y>
+        <width>240.0</width>
+        <height>56.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>d4c9b084-ff34-47e2-a228-68723683ebd7</refId>
+      </step>
+    </callout>
+    <callout id="49e9bf6f-5853-433d-b84f-252f0103bda8">
+      <text>3d5fa891-93fd-45f3-a708-7351b1a86f63.49e9bf6f-5853-433d-b84f-252f0103bda8.callout</text>
+      <bounds>
+        <x>5.0</x>
+        <y>233.0</y>
+        <width>206.0</width>
+        <height>110.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>8818ff66-5fbb-45d2-8968-a628b103a446</refId>
+      </step>
+    </callout>
+    <callout id="b43d7bda-ce6b-4f1c-b5af-917751227546">
+      <text>3d5fa891-93fd-45f3-a708-7351b1a86f63.b43d7bda-ce6b-4f1c-b5af-917751227546.callout</text>
+      <bounds>
+        <x>1.0</x>
+        <y>75.0</y>
+        <width>820.0</width>
+        <height>56.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <multiInstanceStep id="8818ff66-5fbb-45d2-8968-a628b103a446">
+      <annotation></annotation>
+      <name>Multi Instance FS Create Directory</name>
+      <bounds>
+        <x>211.0</x>
+        <y>191.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>true</isParallelStep>
+      <isSingleResponse>true</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>false</checkPointStep>
+      <historyCheckPointStep>false</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <scriptlet id="67483fc1-c6e3-4d88-ad50-2e17d207c9e2">
+        <annotation></annotation>
+        <name>Step Multi Instance FS Create Directory in Flow How do I- Use a multi-instance step (1d1a9582-4092-483d-8a68-53d800421a2d)</name>
+        <script>global_names = scriptletBranchContext.getGlobalVarNames();
+var curName;
+var curVal;
+for(var i in global_names){
+curName = global_names[i];
+curVal = scriptletBranchContext.get(curName);
+scriptletContext.putGlobal(curName,curVal);
+}</script>
+        <type>RHINO</type>
+      </scriptlet>
+      <bindings>
+        <userInputBinding id="e3b9d658-89fb-4f4b-83b9-53250645ecbb">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>true</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>path</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <record>false</record>
+          <prompt>3d5fa891-93fd-45f3-a708-7351b1a86f63.e3b9d658-89fb-4f4b-83b9-53250645ecbb.prompt</prompt>
+          <isMultiSelect>true</isMultiSelect>
+          <sourceDelimiter>|</sourceDelimiter>
+        </userInputBinding>
+      </bindings>
+      <transitions>
+        <transition id="98cb6b3f-4a5a-4552-b785-b8eaf7b6c73a">
+          <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.98cb6b3f-4a5a-4552-b785-b8eaf7b6c73a.transition.description</annotation>
+          <name>done</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>done</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>7012fc8c-049a-47ad-bb65-cab0d2d75a84</refId>
+          </destination>
+          <source>
+            <refId>8818ff66-5fbb-45d2-8968-a628b103a446</refId>
+          </source>
+          <positions>
+            <point>
+              <x>471.0</x>
+              <y>334.0</y>
+            </point>
+            <point>
+              <x>458.0</x>
+              <y>498.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>635.646863547902</x>
+            <y>-27.568582823340236</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <doneResponse>
+        <refId>e1da81c5-5189-46bf-9bd5-fa27d0c16808</refId>
+      </doneResponse>
+      <steps>
+        <step id="16fa528f-974f-4938-9b67-d3580c9d1fd3">
+          <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.16fa528f-974f-4938-9b67-d3580c9d1fd3.description</annotation>
+          <name>FS Create Directory</name>
+          <bounds>
+            <x>341.0</x>
+            <y>251.0</y>
+          </bounds>
+          <layer>-1</layer>
+          <hideInbound>false</hideInbound>
+          <addResultToRunContext>false</addResultToRunContext>
+          <isCriticalStep>false</isCriticalStep>
+          <isNonBlocking>false</isNonBlocking>
+          <isParallelStep>false</isParallelStep>
+          <isSingleResponse>false</isSingleResponse>
+          <recordInHistory>false</recordInHistory>
+          <recordRawOutput>false</recordRawOutput>
+          <recordPrimaryOutput>false</recordPrimaryOutput>
+          <checkPointStep>true</checkPointStep>
+          <historyCheckPointStep>true</historyCheckPointStep>
+          <scriptResultStep>false</scriptResultStep>
+          <userPrompt></userPrompt>
+          <bindings>
+            <userInputBinding id="a8b92455-b72e-4a71-9d83-e75e47818bcd">
+              <annotation></annotation>
+              <toContextKey></toContextKey>
+              <fromContextKey>path</fromContextKey>
+              <assignFromContext>true</assignFromContext>
+              <assignToContext>false</assignToContext>
+              <inputType>STRING</inputType>
+              <isList>true</isList>
+              <required>true</required>
+              <isPersisted>true</isPersisted>
+              <inputSymbol>path</inputSymbol>
+              <listDelimiter>,</listDelimiter>
+              <record>false</record>
+              <prompt>3d5fa891-93fd-45f3-a708-7351b1a86f63.a8b92455-b72e-4a71-9d83-e75e47818bcd.prompt</prompt>
+              <isMultiSelect>true</isMultiSelect>
+              <sourceDelimiter>|</sourceDelimiter>
+            </userInputBinding>
+          </bindings>
+          <transitions>
+            <transition id="6e785e3d-1ea9-4111-b69a-fec52d74a154">
+              <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.6e785e3d-1ea9-4111-b69a-fec52d74a154.transition.description</annotation>
+              <name>success</name>
+              <command>NEXT</command>
+              <linkMode>false</linkMode>
+              <responseSymbol>success</responseSymbol>
+              <shouldHandoff>false</shouldHandoff>
+              <transitionValue>0.0</transitionValue>
+              <destination>
+                <refId>d4c9b084-ff34-47e2-a228-68723683ebd7</refId>
+              </destination>
+              <source>
+                <refId>16fa528f-974f-4938-9b67-d3580c9d1fd3</refId>
+              </source>
+              <positions/>
+              <labelPosition>
+                <x>570.4972242473067</x>
+                <y>12.661404131441977</y>
+              </labelPosition>
+            </transition>
+            <transition id="dc49495b-f21c-4fe8-b971-cb4168826520">
+              <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.dc49495b-f21c-4fe8-b971-cb4168826520.transition.description</annotation>
+              <name>failure</name>
+              <command>NEXT</command>
+              <linkMode>false</linkMode>
+              <responseSymbol>failure</responseSymbol>
+              <shouldHandoff>false</shouldHandoff>
+              <transitionValue>0.0</transitionValue>
+              <destination>
+                <refId>e1da81c5-5189-46bf-9bd5-fa27d0c16808</refId>
+              </destination>
+              <source>
+                <refId>16fa528f-974f-4938-9b67-d3580c9d1fd3</refId>
+              </source>
+              <positions/>
+              <labelPosition>
+                <x>206.76567656766488</x>
+                <y>21.000000000000014</y>
+              </labelPosition>
+            </transition>
+          </transitions>
+          <properties/>
+          <opRef>
+            <refId>612400c6-c7fd-4922-93a2-d43b5f09cc26</refId>
+          </opRef>
+          <assignments>
+            <flowVariableAssignment id="37c84eed-95aa-4e11-abad-5bd389d8fd9a">
+              <annotation></annotation>
+              <name>assignment</name>
+              <action>OVERWRITE</action>
+              <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+              <contextKey>returnResult</contextKey>
+              <expression id="403d0ec9-7683-4bc4-b051-271e8ea1cf95">
+                <annotation></annotation>
+                <name>Result Field: Result</name>
+                <fieldName>Result</fieldName>
+                <sourceType>RAWRESULT</sourceType>
+                <filters/>
+              </expression>
+            </flowVariableAssignment>
+          </assignments>
+          <throttleSize>0</throttleSize>
+        </step>
+        <endBranchStep id="e1da81c5-5189-46bf-9bd5-fa27d0c16808">
+          <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.e1da81c5-5189-46bf-9bd5-fa27d0c16808.description</annotation>
+          <name>End Branch</name>
+          <bounds>
+            <x>0.0</x>
+            <y>0.0</y>
+          </bounds>
+          <layer>-1</layer>
+          <hideInbound>false</hideInbound>
+          <addResultToRunContext>false</addResultToRunContext>
+          <isCriticalStep>false</isCriticalStep>
+          <isNonBlocking>false</isNonBlocking>
+          <isParallelStep>false</isParallelStep>
+          <isSingleResponse>false</isSingleResponse>
+          <recordInHistory>false</recordInHistory>
+          <recordRawOutput>true</recordRawOutput>
+          <recordPrimaryOutput>true</recordPrimaryOutput>
+          <checkPointStep>true</checkPointStep>
+          <historyCheckPointStep>true</historyCheckPointStep>
+          <scriptResultStep>false</scriptResultStep>
+          <userPrompt></userPrompt>
+          <bindings/>
+          <transitions>
+            <transition id="5896263c-3a43-4486-8c2c-fb4f6c7d4e42">
+              <annotation></annotation>
+              <name>End Branch</name>
+              <command>NEXT</command>
+              <linkMode>false</linkMode>
+              <responseSymbol>success</responseSymbol>
+              <shouldHandoff>false</shouldHandoff>
+              <transitionValue>0.0</transitionValue>
+              <destination>
+                <refId>e1da81c5-5189-46bf-9bd5-fa27d0c16808</refId>
+              </destination>
+              <source>
+                <refId>e1da81c5-5189-46bf-9bd5-fa27d0c16808</refId>
+              </source>
+              <positions/>
+            </transition>
+          </transitions>
+          <properties/>
+        </endBranchStep>
+        <step id="d4c9b084-ff34-47e2-a228-68723683ebd7">
+          <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.d4c9b084-ff34-47e2-a228-68723683ebd7.description</annotation>
+          <name>Display Message</name>
+          <bounds>
+            <x>404.0</x>
+            <y>251.0</y>
+          </bounds>
+          <layer>-1</layer>
+          <hideInbound>false</hideInbound>
+          <addResultToRunContext>false</addResultToRunContext>
+          <isCriticalStep>false</isCriticalStep>
+          <isNonBlocking>false</isNonBlocking>
+          <isParallelStep>false</isParallelStep>
+          <isSingleResponse>false</isSingleResponse>
+          <recordInHistory>false</recordInHistory>
+          <recordRawOutput>false</recordRawOutput>
+          <recordPrimaryOutput>false</recordPrimaryOutput>
+          <checkPointStep>true</checkPointStep>
+          <historyCheckPointStep>true</historyCheckPointStep>
+          <scriptResultStep>false</scriptResultStep>
+          <userPrompt></userPrompt>
+          <bindings>
+            <staticBinding id="234c17c6-385a-4a16-aad8-1965046db206">
+              <annotation></annotation>
+              <assignFromContext>true</assignFromContext>
+              <assignToContext>false</assignToContext>
+              <inputType>STRING</inputType>
+              <isList>false</isList>
+              <required>true</required>
+              <isPersisted>true</isPersisted>
+              <inputSymbol>message</inputSymbol>
+              <listDelimiter>,</listDelimiter>
+              <value>The folder ${path} was created successfully.</value>
+              <record>false</record>
+            </staticBinding>
+            <staticBinding id="13707b86-ba92-482d-b350-fb9cafa8f25f">
+              <annotation></annotation>
+              <assignFromContext>true</assignFromContext>
+              <assignToContext>true</assignToContext>
+              <inputType>STRING</inputType>
+              <isList>false</isList>
+              <required>false</required>
+              <isPersisted>true</isPersisted>
+              <inputSymbol>title</inputSymbol>
+              <listDelimiter>,</listDelimiter>
+              <value>Status Message</value>
+              <record>false</record>
+            </staticBinding>
+          </bindings>
+          <transitions>
+            <transition id="a2e994fd-1e19-45da-bf05-a1a5e01b930c">
+              <annotation>3d5fa891-93fd-45f3-a708-7351b1a86f63.a2e994fd-1e19-45da-bf05-a1a5e01b930c.transition.description</annotation>
+              <name>success</name>
+              <command>NEXT</command>
+              <linkMode>false</linkMode>
+              <responseSymbol>success</responseSymbol>
+              <shouldHandoff>false</shouldHandoff>
+              <transitionValue>0.0</transitionValue>
+              <destination>
+                <refId>e1da81c5-5189-46bf-9bd5-fa27d0c16808</refId>
+              </destination>
+              <source>
+                <refId>d4c9b084-ff34-47e2-a228-68723683ebd7</refId>
+              </source>
+              <positions/>
+              <labelPosition>
+                <x>398.98322913800735</x>
+                <y>7.716179851332035</y>
+              </labelPosition>
+            </transition>
+          </transitions>
+          <properties/>
+          <opRef>
+            <refId>434e6fa2-26bc-4e84-9e1f-0aa6946cf920</refId>
+          </opRef>
+          <assignments/>
+          <throttleSize>0</throttleSize>
+        </step>
+      </steps>
+      <startSteps>
+        <refId>16fa528f-974f-4938-9b67-d3580c9d1fd3</refId>
+      </startSteps>
+      <lanes>
+        <parallelLane id="8cd69ccf-106b-4e3d-aa3b-5f69d2a258e0">
+          <name>Multi Instance Lane</name>
+          <bounds>
+            <x>0.0</x>
+            <y>0.0</y>
+            <width>273.0</width>
+            <height>140.0</height>
+          </bounds>
+          <parallelSteps>
+            <refId>16fa528f-974f-4938-9b67-d3580c9d1fd3</refId>
+            <refId>d4c9b084-ff34-47e2-a228-68723683ebd7</refId>
+          </parallelSteps>
+          <parallelStartStep>
+            <refId>16fa528f-974f-4938-9b67-d3580c9d1fd3</refId>
+          </parallelStartStep>
+        </parallelLane>
+      </lanes>
+      <callouts/>
+      <assignments>
+        <flowVariableAssignment id="dff8c35e-7f9f-43ec-9e5b-9ba9a7fce1ce">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>returnResult</contextKey>
+          <expression id="6f4eb7a4-d0c1-482c-bbe0-0d15f576c48d">
+            <annotation></annotation>
+            <name>returnResult</name>
+            <fieldName>returnResult</fieldName>
+            <sourceType>AVAILABLE_RESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </multiInstanceStep>
+    <returnStep id="7012fc8c-049a-47ad-bb65-cab0d2d75a84">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>231.0</x>
+        <y>396.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="ba2944f2-b3a3-48df-9f18-f726bf2489f4">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>7012fc8c-049a-47ad-bb65-cab0d2d75a84</refId>
+          </destination>
+          <source>
+            <refId>7012fc8c-049a-47ad-bb65-cab0d2d75a84</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>8818ff66-5fbb-45d2-8968-a628b103a446</startSteps>
+</flow>

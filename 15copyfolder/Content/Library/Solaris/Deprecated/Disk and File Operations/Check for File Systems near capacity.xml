@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="4a7cb4d9-5ee4-4e58-8f9c-98cc19f2ceff">
+  <descriptionCdata><![CDATA[4a7cb4d9-5ee4-4e58-8f9c-98cc19f2ceff.description=\nChecks to see if any filesystems are at or near capacity.\nNOTE\: The data input expects a specific format. It MUST be the output of the Get Filesystem List operator.\n\ninputs\:\ndata - the output of the operation 'Get File System List.'\n\nResponses\:\nsuccess - The operation succeeded.\n\nresult\:\nA human-readable message detailing the state of the file systems.\n      
+]]></descriptionCdata>
+  <annotation>4a7cb4d9-5ee4-4e58-8f9c-98cc19f2ceff.description</annotation>
+  <name>Check for File Systems near capacity</name>
+  <categories/>
+  <inputs>
+    <resultBinding id="c53db88d-3708-47c9-b56e-f8ac17f04f13">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>data</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+    </resultBinding>
+    <staticBinding id="fa167554-afef-41c5-9613-1028bc81dd0b">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${data}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="5da4c0d6-493f-45f2-b2ca-c9fa5c98893f">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in2}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="86f0aae7-58d5-4692-959c-2107a1792fea">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in3}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4dc57283-abdb-464e-9ca3-15be7ea92ff5">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_4</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${in4}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="dc72511a-b700-46c1-8b0f-d813889ca40f">
+    <annotation></annotation>
+    <name>Operation Check for File Systems near capacity (df797348-b6bf-44fe-9891-a31b858ccaf0)</name>
+    <script>// data is formatted in two columns: % mountname
+// the first row is a header
+lines = data.split(/\s+/);
+output = &quot;no data found&quot;;
+
+// the largest file system will be in lines[1]
+if (lines != null)
+{
+   output = &quot;All files systems have capacity&quot;;
+   if (lines[1] &gt; 90) output = &quot;One or more file systems is nearing capacity&quot;;
+}
+
+scriptletResult=output;
+</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="2a6707b7-68fc-485a-8bee-36ed5fb63dc5">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="e3255f5b-1983-4df7-b852-8174ad5a28f3">
+    <annotation></annotation>
+    <name>Field 1</name>
+    <fieldName>Field_1</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="fe0c9da6-d29e-45a3-a5e2-991dcc7ec115">
+    <baseIcon>harddisk.png</baseIcon>
+    <basePath>Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="91625b25-1894-4c7c-ac33-1029bb351fdb">
+        <baseIcon>warning.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>

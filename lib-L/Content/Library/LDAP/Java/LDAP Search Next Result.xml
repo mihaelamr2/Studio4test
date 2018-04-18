@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="8c5f46e4-2a79-4ca3-8b59-171881178fdb">
+  <descriptionCdata><![CDATA[8c5f46e4-2a79-4ca3-8b59-171881178fdb.b513baa6-c5ed-4498-ba41-41291fb08e26.prompt=Enter Distinguished Name(DN)\:
+8c5f46e4-2a79-4ca3-8b59-171881178fdb.description=<pre>Retrieves the next value from the collection.  This collection is populated by the LDAPSearch operation.\n\nInput Parameters\:\nDN - the DN parameter used in the LDAPSearch operation.  This becomes the key used to find the result set\n\nResponses\:\nvalue retrieved - the next value in the collection was retrieved and stored in the returnResult result\nno more values - no more values remain in the collection\n</pre>
+]]></descriptionCdata>
+  <annotation>8c5f46e4-2a79-4ca3-8b59-171881178fdb.description</annotation>
+  <name>LDAP Search Next Result</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="b513baa6-c5ed-4498-ba41-41291fb08e26">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>DN</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>8c5f46e4-2a79-4ca3-8b59-171881178fdb.b513baa6-c5ed-4498-ba41-41291fb08e26.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="bcaf82fb-cf3f-4320-9a6e-02aa1c712382">
+      <annotation></annotation>
+      <name>value retrieved</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="6a95fec2-0e07-448a-990a-5833628aa211">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="e9bbbb6a-21fd-4856-8605-254277872cc4">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="3bcba6ec-8597-4488-82fa-027ae4e40883">
+      <annotation></annotation>
+      <name>no more values</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>NO_ACTION_TAKEN</type>
+      <matchRules>
+        <expression id="ba3b29d9-539d-4dea-a3fe-386a9e607fab">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <containsEvaluator id="3a5fbc76-3010-4550-941e-e39ea2cc88b7">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <ignoreCase>true</ignoreCase>
+            <matchType>EXACT_MATCH</matchType>
+          </containsEvaluator>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="27648562-fb13-45ef-b9b4-8d5624611b1b">
+    <annotation></annotation>
+    <name>returnCode</name>
+    <fieldName>returnCode</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="71b2b344-1ce7-49a6-a520-1c6ca47cc09c">
+    <baseIcon>text_tree.png</baseIcon>
+    <basePath>/Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="e341908a-b6e6-4775-b1b0-8d50324f0d55">
+        <baseIcon>view.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <plugin>
+    <groupId>com.hp.oo</groupId>
+    <artifactId>oo-ldap-legacy-plugin</artifactId>
+    <version>1.12.1-SNAPSHOT</version>
+    <actionName>com.iconclude.content.actions.ldap.LDAPSearchNextResult</actionName>
+  </plugin>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+  <overrideGroupAlias>${overrideJRAS}</overrideGroupAlias>
+</operation>
