@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow id="8d9f5c69-96f8-448b-a8ba-443d0da1ed70">
+  <descriptionCdata><![CDATA[8d9f5c69-96f8-448b-a8ba-443d0da1ed70.0276dcbc-0bf8-491f-a2e6-376f77f07c61.callout=STEP 1. The "Counter" step counts from 1 to 5, each time making the current number  available as a step result in the flow variable "counter", which the "Display Message"  step uses for its operation. The  "Display Message" step then transitions back to the "Counter" step. When the "Counter" step is done counting, the "no more" response transitions to the "Resolved\:success" step.\n
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.0abed5c0-1aad-4d0b-aa20-91879fa2026e.transition.description=The counter has not exceeded its maximum value of 5. The flow transitions to the "Counter" step.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.145895f8-986c-4629-8894-bc372c1268cf.callout=The "How do I\: Reference flow variables" flow shows how to reference flow variables so you can include dynamically changing data that comes from a step's results. In this case, the "Counter" and "Display Message" steps form a loop that continues as the "Counter" step counts from 1 to 5. Each time the "Counter" step increments the count by 1, the count  is made available to the "Display Message" step in a flow variable.. The "Display Message" step then references this flow variable in message it displays to the user. When the count exceeds 5, the flow ends successfully.\nYou can use references to flow variables for many purposes including user notifications, transition descriptions, and specifying constant lists of input values for  operations. 
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.3333943e-6113-4ce0-8310-74e980a7ca10.transition.description=The counter has exceeded its maximum value of 5. The flow transitions to the "Resolved\:success" step and ends successfully.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.66689d87-33ee-45db-9918-182d095591df.transition.description=The "Counter" step has more numbers to count. The flow transitions to the "Display Message" step.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.675b1071-8236-45a9-af9f-538146cfa38a.description=The "Counter" step counts from one number to another number and makes the result available  for the next step's input.\n\nStep Inputs\:\n"from" - The number at which to start counting. In this flow, the "from" input gets its value from the constant "1".\n"to" - The number to count to. In this flow, the "to" input gets its value from the constant "5".\n"incrementBy" - The number to increment by while counting. If unspecified, this is "1". If you wanted to count 2,4,6,8, this would be 2. In this flow, the "incrementBy" input is left unspecified.\n"reset" - If true, then the counter will restart counting from the beginning. In this flow, the "reset" input gets its value from the constant "false".\n\nNote\: The "from" and "to" values must be between -9223372036854775808 and 9223372036854775807.\n\nStep Results\:\n"counter" - As long as the  step's response is "has more" (see below), the result field "counter" gets its value from the step's default flow variable "Result" which contains the number that was just counted. The "Display Message" step needs the current number in "counter" to reference in the message it displays, and since the "Counter" step's flow variable "counter" contains the number,  you don't have to explicitly do anything to make the current number available to the "Display Message" step.\n\nNote\: The primary result is "resultString", but "Resul"t can also be used. "result" (all lower case) should not be used as it is the response code.\n\nStep Responses\:\n"has more" - The "Counter" step has not yet finished  counting to 5. The flow transitions to the "Display Message" step.\n"no more" - The "Counter" step has finished counting to 5. The flow transitions to the "Resolved\:success" step and the flow ends successfully.\n"failure" - A problem occurred with the "Counter" step. The flow transitions to the "Error\:failure" step.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.beefc55c-745b-4ec1-9278-83e9d635ee68.transition.description=The "Counter" step has failed. The flow transitions to the "Error\:failure" step and ends unsuccessfully.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5.description=This step provides a message to the user. This step is actually a subflow. To learn about the steps contained in the subflow, right-click the step, click "Open Subflow," and then study the subflow's diagram and properties page, and the Inspectors of the subflow's steps. On the subflow's Properties sheet, you can see the flow inputs on which the step's inputs are based.\n\nStep Inputs\:\n"message" -  The message to send the user. In this flow, the \u201Cmessage\u201D input gets its value from the constant "The counter is now at ${counter}."  The reference "${counter}" gets its value from the "Counter" step's "counter" flow variable. This flow variable contains the current number retrieved from the "Counter" step.\n\nStep Responses\:\n"success" - The step was able to display the message. The flow transitions back to the "Counter" step.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.c9e00465-c068-4640-80a4-1124887f0fc1.callout=Understanding data movement. How each of the flow's steps gets the data it needs to do its work is crucial to understanding how to harness the flow's techniques for your own purposes. Data can be assigned from user input when the flow runs, from step results, or from flow variables. \nData movement in this How Do I flow is detailed on the Description tab of the flow's Properties sheet and of each step's Inspector. To open the flow's Properties sheet, click the Properties tab at the lower-left of the flow canvas. To open a step's Inspector, double-click the step.
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.d494c229-6227-4c53-a502-5574c61c2ea5.callout=STEP 2. The "Display Message" step gets the current number from the "Counter" step's "counter" flow variable and references it with the syntax "${counter}" to display the message \u201CThe counter is now at ${counter}.\u201D\n
+8d9f5c69-96f8-448b-a8ba-443d0da1ed70.description=The "How do I\: Reference flow variables" flow demonstrates how to reference a flow variable to access dynamically changing data. In this case, the flow counts from 1 through 5, each time referencing the flow variable containing the current count value in a message it displays to the user.\nFlow variable references come in handy in a number of situations. For instance, you can reference a flow variable in a transition description, so that the flow variable's current value will appear in the flow's summary description when a user runs the flow in Central. You can also use flow variable references in constant value single inputs or input lists.\n\n<pre>\nThis flow was created using the following default OO operations\:\n- "Counter" from the Library/Utility Operations/Looping folder.\n- "Display Message" from the Library/Utility Operations folder.\n\nThis flow contains the following steps\:\n\n1. The "Counter" step counts from one number to another number and makes the result available  for the next step's input.       \n     Input\: "from"\n     Gets value from\:  constant "1"\n     Places result in\:  flow variable  "from"  \n \n     Input\: "to"\n     Gets value from\:  constant "5"\n     Places result in\:  flow variable  "to"  \n \n     Input\: "incrementBy"\n     Gets value from\:  flow variable "incrementBy"  (defaults to 1)\n     Places result in\:  flow variable "incrementBy" \n\n     Input\: "reset"\n     Gets value from\:  constant value "false"\n     Places result in\:  default flow variable "Result" \n\n2. The Display Message step displays a message to the user.\n     Input\: "message"\n     Gets value from\: constant "The counter is now at  ${counter}." \n     Places result in\:  flow variable "message"\n\n</pre>
+]]></descriptionCdata>
+  <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.description</annotation>
+  <name>How do I- Reference flow variables</name>
+  <categories/>
+  <inputs/>
+  <possibleResponses>
+    <opResponse id="ffb73d2d-0d9e-4a64-b662-feb88e8b999d">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>false</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="7aba11ba-f8ea-4784-8b35-191a5da261f4">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="dd3c4876-1d67-4d13-bb0a-b78fc51e0b8e">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="1b2074c9-a9e0-4ba0-9309-dadb9317baa9">
+    <baseIcon>flow.png</baseIcon>
+    <basePath>System</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <callouts>
+    <callout id="0276dcbc-0bf8-491f-a2e6-376f77f07c61">
+      <text>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.0276dcbc-0bf8-491f-a2e6-376f77f07c61.callout</text>
+      <bounds>
+        <x>3.0</x>
+        <y>214.0</y>
+        <width>414.0</width>
+        <height>82.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>675b1071-8236-45a9-af9f-538146cfa38a</refId>
+      </step>
+    </callout>
+    <callout id="d494c229-6227-4c53-a502-5574c61c2ea5">
+      <text>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.d494c229-6227-4c53-a502-5574c61c2ea5.callout</text>
+      <bounds>
+        <x>4.0</x>
+        <y>330.0</y>
+        <width>403.0</width>
+        <height>56.0</height>
+      </bounds>
+      <layer>-1</layer>
+      <step>
+        <refId>c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5</refId>
+      </step>
+    </callout>
+    <callout id="145895f8-986c-4629-8894-bc372c1268cf">
+      <text>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.145895f8-986c-4629-8894-bc372c1268cf.callout</text>
+      <bounds>
+        <x>3.0</x>
+        <y>76.0</y>
+        <width>819.0</width>
+        <height>98.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+    <callout id="c9e00465-c068-4640-80a4-1124887f0fc1">
+      <text>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.c9e00465-c068-4640-80a4-1124887f0fc1.callout</text>
+      <bounds>
+        <x>3.0</x>
+        <y>4.0</y>
+        <width>820.0</width>
+        <height>67.0</height>
+      </bounds>
+      <layer>-1</layer>
+    </callout>
+  </callouts>
+  <checkPointFlow>true</checkPointFlow>
+  <compatibleRuntimeContext>false</compatibleRuntimeContext>
+  <historyCheckPointFlow>true</historyCheckPointFlow>
+  <steps>
+    <step id="675b1071-8236-45a9-af9f-538146cfa38a">
+      <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.675b1071-8236-45a9-af9f-538146cfa38a.description</annotation>
+      <name>Counter</name>
+      <bounds>
+        <x>429.0</x>
+        <y>198.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <staticBinding id="900d1d78-5ce0-442b-a2da-48e74991c988">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>from</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>1</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="cb0d5ee9-5283-4ef9-bd4b-e91070297456">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>to</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>5</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="eb5367bc-222c-46f0-ab1d-fd16300565c5">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>incrementBy</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="e1e3711b-36fe-441b-98e7-27981e47ba05">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>false</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>reset</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>false</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="3333943e-6113-4ce0-8310-74e980a7ca10">
+          <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.3333943e-6113-4ce0-8310-74e980a7ca10.transition.description</annotation>
+          <name>no more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>no more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e1ac0774-7d58-407f-88f5-19fe95c505f0</refId>
+          </destination>
+          <source>
+            <refId>675b1071-8236-45a9-af9f-538146cfa38a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>399.0</x>
+              <y>249.0</y>
+            </point>
+            <point>
+              <x>558.0</x>
+              <y>249.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>534.3356949470326</x>
+            <y>-12.741558287029138</y>
+          </labelPosition>
+        </transition>
+        <transition id="beefc55c-745b-4ec1-9278-83e9d635ee68">
+          <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.beefc55c-745b-4ec1-9278-83e9d635ee68.transition.description</annotation>
+          <name>failure</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5c352f51-3dcd-4d90-9abe-454ff808c171</refId>
+          </destination>
+          <source>
+            <refId>675b1071-8236-45a9-af9f-538146cfa38a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>529.7116564417178</x>
+              <y>282.0</y>
+            </point>
+            <point>
+              <x>567.0</x>
+              <y>298.0</y>
+            </point>
+            <point>
+              <x>674.0</x>
+              <y>414.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>246.8591665768633</x>
+            <y>-19.122518120145788</y>
+          </labelPosition>
+        </transition>
+        <transition id="66689d87-33ee-45db-9918-182d095591df">
+          <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.66689d87-33ee-45db-9918-182d095591df.transition.description</annotation>
+          <name>has more</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>has more</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5</refId>
+          </destination>
+          <source>
+            <refId>675b1071-8236-45a9-af9f-538146cfa38a</refId>
+          </source>
+          <positions>
+            <point>
+              <x>544.8680981595091</x>
+              <y>282.0</y>
+            </point>
+            <point>
+              <x>519.0</x>
+              <y>308.0</y>
+            </point>
+            <point>
+              <x>517.0</x>
+              <y>324.0</y>
+            </point>
+            <point>
+              <x>520.0</x>
+              <y>414.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>512.312487585811</x>
+            <y>-15.964414260392191</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>c62eeb58-f329-4ae3-b336-54bdc5c9f3d6</refId>
+      </opRef>
+      <assignments>
+        <flowVariableAssignment id="b46ab6f5-b2a1-4e48-951a-fa913d23eb19">
+          <annotation></annotation>
+          <name>assignment</name>
+          <action>OVERWRITE</action>
+          <assignmentTargetType>FLOW_VARIABLE</assignmentTargetType>
+          <contextKey>counter</contextKey>
+          <expression id="de0c0707-6140-4851-982a-1e2af97ee7ac">
+            <annotation></annotation>
+            <name>Result Field: Result</name>
+            <fieldName>Result</fieldName>
+            <sourceType>RAWRESULT</sourceType>
+            <filters/>
+          </expression>
+        </flowVariableAssignment>
+      </assignments>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="e1ac0774-7d58-407f-88f5-19fe95c505f0">
+      <annotation></annotation>
+      <name>Resolved : success</name>
+      <bounds>
+        <x>583.0</x>
+        <y>198.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="c6158285-86ed-460f-a956-91d0b7e4c20a">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>e1ac0774-7d58-407f-88f5-19fe95c505f0</refId>
+          </destination>
+          <source>
+            <refId>e1ac0774-7d58-407f-88f5-19fe95c505f0</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>RESOLVED</returnStepType>
+      <assignments/>
+    </returnStep>
+    <step id="c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5">
+      <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5.description</annotation>
+      <name>Display Message</name>
+      <bounds>
+        <x>429.0</x>
+        <y>346.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings>
+        <staticBinding id="ca5fea5c-4877-4ca7-a1a4-a39768d01635">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notifyData</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The counter is now at ${counter}.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="d0d1396f-180a-48f2-97c6-c2329324720e">
+          <annotation></annotation>
+          <toContextKey></toContextKey>
+          <fromContextKey></fromContextKey>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notifyMethod</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>display</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="f8db0a2a-9095-49b6-b9d0-001db58c5dd7">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>subject</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Counter value</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="30c7f2a9-a275-48af-ab0f-84e5d77dac64">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>destination</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="2ef1fe1d-8abb-466b-a46b-c2ac7ee00927">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>notificationServer</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0a440cb7-617b-484a-b21b-f934304871b5">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>from</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="36d8a7b6-d18b-4229-9661-68441c31d9cd">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>serverPort</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="83cf3f9b-ae13-4138-a322-83a0f4c4c899">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>htmlEmail</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value></value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="de7ff43f-1103-4277-ad7a-b9e2499f1c2a">
+          <annotation></annotation>
+          <assignFromContext>false</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>true</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>message</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>The counter is now at ${counter}.</value>
+          <record>false</record>
+        </staticBinding>
+        <staticBinding id="0640da1c-439e-48d7-94fd-b00983a1d9ba">
+          <annotation></annotation>
+          <assignFromContext>true</assignFromContext>
+          <assignToContext>true</assignToContext>
+          <inputType>STRING</inputType>
+          <isList>false</isList>
+          <required>false</required>
+          <isPersisted>true</isPersisted>
+          <inputSymbol>title</inputSymbol>
+          <listDelimiter>,</listDelimiter>
+          <value>Status Message</value>
+          <record>false</record>
+        </staticBinding>
+      </bindings>
+      <transitions>
+        <transition id="0abed5c0-1aad-4d0b-aa20-91879fa2026e">
+          <annotation>8d9f5c69-96f8-448b-a8ba-443d0da1ed70.0abed5c0-1aad-4d0b-aa20-91879fa2026e.transition.description</annotation>
+          <name>success</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>success</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>675b1071-8236-45a9-af9f-538146cfa38a</refId>
+          </destination>
+          <source>
+            <refId>c0f7cf7e-689c-46bd-aa43-9c0b07b2a0c5</refId>
+          </source>
+          <positions>
+            <point>
+              <x>541.9511278195489</x>
+              <y>370.0</y>
+            </point>
+            <point>
+              <x>434.0</x>
+              <y>309.0</y>
+            </point>
+            <point>
+              <x>520.0</x>
+              <y>266.0</y>
+            </point>
+          </positions>
+          <labelPosition>
+            <x>496.645049991155</x>
+            <y>-27.553242686497317</y>
+          </labelPosition>
+        </transition>
+      </transitions>
+      <properties/>
+      <opRef>
+        <refId>434e6fa2-26bc-4e84-9e1f-0aa6946cf920</refId>
+      </opRef>
+      <assignments/>
+      <throttleSize>0</throttleSize>
+    </step>
+    <returnStep id="5c352f51-3dcd-4d90-9abe-454ff808c171">
+      <annotation></annotation>
+      <name>Error : failure</name>
+      <bounds>
+        <x>583.0</x>
+        <y>346.0</y>
+      </bounds>
+      <layer>-1</layer>
+      <hideInbound>false</hideInbound>
+      <addResultToRunContext>false</addResultToRunContext>
+      <isCriticalStep>false</isCriticalStep>
+      <isNonBlocking>false</isNonBlocking>
+      <isParallelStep>false</isParallelStep>
+      <isSingleResponse>false</isSingleResponse>
+      <recordInHistory>false</recordInHistory>
+      <recordRawOutput>false</recordRawOutput>
+      <recordPrimaryOutput>false</recordPrimaryOutput>
+      <checkPointStep>true</checkPointStep>
+      <historyCheckPointStep>true</historyCheckPointStep>
+      <scriptResultStep>false</scriptResultStep>
+      <userPrompt></userPrompt>
+      <bindings/>
+      <transitions>
+        <transition id="2b1c5224-99b4-4256-aec9-f61a3972a407">
+          <annotation></annotation>
+          <name>return</name>
+          <command>NEXT</command>
+          <linkMode>false</linkMode>
+          <responseSymbol>failure</responseSymbol>
+          <shouldHandoff>false</shouldHandoff>
+          <transitionValue>0.0</transitionValue>
+          <destination>
+            <refId>5c352f51-3dcd-4d90-9abe-454ff808c171</refId>
+          </destination>
+          <source>
+            <refId>5c352f51-3dcd-4d90-9abe-454ff808c171</refId>
+          </source>
+          <positions/>
+        </transition>
+      </transitions>
+      <properties/>
+      <returnStepType>ERROR</returnStepType>
+      <assignments/>
+    </returnStep>
+  </steps>
+  <startSteps>675b1071-8236-45a9-af9f-538146cfa38a</startSteps>
+</flow>
